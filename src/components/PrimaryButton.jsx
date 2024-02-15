@@ -2,8 +2,10 @@ export default function PrimaryButton({
 	className = "",
 	disabled,
 	children,
+	size = "md",
 	...props
 }) {
+	// sizes for button "md|lg|sm|xl|xs"
 	return (
 		<button
 			{...props}
