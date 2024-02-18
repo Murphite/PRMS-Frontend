@@ -1,0 +1,98 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.AdminPage{
+    display: flex;
+    gap:40px;
+    overflow-y: hidden;
+}
+
+.Admin{
+    width: 50%;
+    height:100dvh;
+    
+    padding: 151px, 149px, 187px, 149px;
+     background: #009688;
+
+}
+
+.Admin .Intro{
+    width: Hug (516px);
+  
+    padding-top: 90px;
+    left: 149px;
+    gap: 16px;
+    
+
+
+}
+.Admin .Intro .Words{
+font-family: Roboto;
+font-size: 40px;
+font-weight: 500;
+line-height: 60px;
+letter-spacing: 0em;
+text-align: center;
+color: white;
+
+}
+
+.Admin .Intro .WordsTwo{
+    font-family: Roboto;
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: center;
+color: white;
+}
+
+.images-design{
+    background-color: #009688;
+    padding: 90px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.AdminLogin{
+    width:40%;
+    background-color: white;
+}
+
+.AdminLogin .sign-in{
+    font-family: Roboto;
+font-size: 40px;
+font-weight: 500;
+line-height: 60px;
+letter-spacing: 0em;
+text-align: center;
+color: black;
+padding-top: 90px;
+
+
+}
+
+.cred input{
+   color: black;
+   font-family: Roboto;
+  padding:  8px, 24px, 8px, 24px;
+  radius: 8px;
+ background-color: transparent;
+  outline: none;
+ width: 100%;
+}
+
+.container{
+    
+    padding: 20px;
+}
+
+.cred{
+    border: 1px solid #009688;
+    background-color: rgba(192, 249, 249, 0.452) 
+}
+
+.cred input::placeholder{
+    color: black;
+}

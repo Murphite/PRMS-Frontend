@@ -1,8 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 
 import Login from "../pages/auth/Login";
-import Index from "../pages/Index";
 import Register from "../pages/auth/Register";
+import { AdminLogin } from "../pages/adminLogin/adminlogin";
+import { ResetPassword } from "../pages/resetPassword/ResetPassword";
+import Index from "../pages/Index";
+
 
 export default function Router() {
 	return (
@@ -10,6 +13,11 @@ export default function Router() {
 			<Route path="/" element={<Index />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/register" element={<Register />} />
+			<Route path="/admin-login" element={<AdminLogin/>} />
+			<Route path="/reset-password" element={<ResetPassword/>} />
+
+			
 		</Routes>
 	);
 }
+
