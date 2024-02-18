@@ -6,7 +6,7 @@ export default function GuestLayout({ children }) {
 	return (
 		<div className="flex flex-col items-center min-h-screen pt-6 bg-gray-100 sm:justify-center sm:pt-0">
 			<div>
-				<Link href="/">
+				<Link to="/">
 					<ApplicationLogo />
 				</Link>
 			</div>
