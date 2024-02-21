@@ -2,9 +2,9 @@ import { Routes, Route } from "react-router-dom";
 
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
-import { AdminLogin } from "../pages/adminLogin/adminlogin";
-import Adminsignup from "../pages/adminsignup";
+import AdminLogin from "../pages/auth/AdminLogin";
 import Index from "../pages/Index";
+import AdminSignUp from "./../pages/auth/AdminSignUp";
 
 export default function Router() {
 	return (
@@ -12,9 +12,8 @@ export default function Router() {
 			<Route path="/" element={<Index />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/register" element={<Register />} />
-			<Route path="/admin-login" element={<AdminLogin/>} />
-			<Route path="/adminsignup" element={<Adminsignup />} />
+			<Route path="/admin-login" element={<AdminLogin />} />
+			<Route path="/admin-signup" element={<AdminSignUp />} />
 		</Routes>
 	);
 }
-
