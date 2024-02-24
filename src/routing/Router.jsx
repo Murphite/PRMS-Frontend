@@ -6,6 +6,8 @@ import AdminLogin from "../pages/auth/AdminLogin";
 import Index from "../pages/Index";
 import AdminSignUp from "./../pages/auth/AdminSignUp";
 import ForgotPassword from "../pages/auth/ForgotPassword";
+import PasswordResetModal from "../pages/SuccessNotification/PasswordResetModal";
+import EmailVerificationModal from "../pages/SuccessNotification/EmailVerificationModal";
 
 export default function Router() {
 	return (
@@ -16,6 +18,8 @@ export default function Router() {
 			<Route path="/admin-login" element={<AdminLogin />} />
 			<Route path="/admin-signup" element={<AdminSignUp />} />
 			<Route path="/forgot-password" element={<ForgotPassword/>}/>
+			<Route path="/passwordresetmodal" element={<PasswordResetModal/>}/>
+			<Route path="/emailverificationmodal" element={<EmailVerificationModal/>}/>
 		</Routes>
 	);
 }
