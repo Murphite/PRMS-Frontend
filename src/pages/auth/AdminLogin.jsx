@@ -50,7 +50,7 @@ const AdminLogin = () => {
 								placeholder="Olad Hospital"
 								value={hospital}
 								required
-								class=" placeholder:text-black  font-[roboto] p-[8px 24px] rounded-[8px] bg-transparent outline-none w-full"
+								className=" placeholder:text-black  font-[roboto] p-[8px 24px] rounded-[8px] bg-transparent outline-none w-full"
 							/>
 							<MdKeyboardArrowDown
 								cursor={"pointer"}
@@ -83,7 +83,7 @@ const AdminLogin = () => {
 						<input
 							type="email"
 							placeholder="Dianapana@gmail.com"
-							class="bg-transparent font-[roboto] focus:outline-none w-full  placeholder:text-black"
+							className="bg-transparent font-[roboto] focus:outline-none w-full  placeholder:text-black"
 							required
 						/>
 					</div>
@@ -96,7 +96,7 @@ const AdminLogin = () => {
 								type={passwordType}
 								placeholder="***************"
 								required
-								class="bg-transparent font-[roboto] focus:outline-none w-full placeholder:text-black"
+								className="bg-transparent font-[roboto] focus:outline-none w-full placeholder:text-black"
 							/>
 							{passwordType !== "text" ? (
 								<FaEyeSlash
