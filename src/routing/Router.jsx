@@ -16,8 +16,6 @@ export default function Router() {
       <Route path="/register" element={<Register />} />
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/admin-signup" element={<AdminSignUp />} />
-      <Route path="/navbar" element={<NavBar />} />
-      <Route path="/navbarLogin" element={<NavBarLogIn />} />
     </Routes>
   );
 }
