@@ -30,10 +30,10 @@ export const signUp = async (firstName, lastName, email, password) => {
 
 export const verifyEmail = async (email) => {
 	try {
-			const res = await axiosApi.post(`/auth/email-verification`, { email });
+			const res = await axiosApi.get(`/auth/email-verification?email=${email}`);
 
 			return res.data;
 	} catch (error) {
-		return error;
+			return error;
 	}
 };
