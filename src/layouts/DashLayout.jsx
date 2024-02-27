@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Sidebar from "../components/Sidebar";
 
-const DashLayout = () => {
-  return (
-    <div>DashLayout</div>
-  )
-}
+const DashLayout = ({ children }) => {
+    return (
+        <div>
+            <Sidebar />
 
-export default DashLayout
+            <div>{children}</div>
+        </div>
+    );
+};
+
+export default DashLayout;
