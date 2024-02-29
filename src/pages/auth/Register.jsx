@@ -11,12 +11,14 @@ export default function Register() {
 	const [data, setData] = useState({
 		firstName: "",
 		lastName: "",
+		phoneNumber:"",
 		email: "",
 		password: "",
 	});
 	const [errors, setErrors] = useState({
 		firstName: "",
 		lastName: "",
+		phoneNumber:"",
 		email: "",
 		password: "",
 	});
@@ -33,6 +35,7 @@ export default function Register() {
 		const res = await signUp(
 			data.firstName,
 			data.lastName,
+			data.phoneNumber,
 			data.email,
 			data.password
 		);
@@ -75,6 +78,23 @@ export default function Register() {
 					/>
 
 					<InputError message={errors.lastName} className="mt-2" />
+				</div>
+
+				<div className="mt-4">
+					<InputLabel htmlFor="phoneNumber" value="Phone Number" />
+
+					<TextInput
+						id="phoneNumber"
+						type="text"
+						name="phonenumber"
+						value={data.phoneNumber}
+						className="block w-full mt-1"
+						autoComplete="phone number"
+						isFocused={true}
+						onChange={handleChange}
+					/>
+
+					<InputError message={errors.phoneNumber} className="mt-2" />
 				</div>
 
 				<div className="mt-4">
