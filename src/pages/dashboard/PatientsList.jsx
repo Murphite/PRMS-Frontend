@@ -1,6 +1,4 @@
 import React from 'react';
-import DoctorSidebar from '../../components/DoctorSidebar';
-import Header from '../../components/Header';
 import PlusImg from '../../assets/images/plus.png';
 import UserImg from '../../assets/images/user.png';
 import CalImg from '../../assets/images/calendar-tick.png';
@@ -65,9 +63,8 @@ let data = [
 const PatientsList = () => {
   return (
     <section className='grid grid-cols-[20%_80%]'>
-      <DoctorSidebar/>
+      <div></div>
       <div className='py-6 px-10'>
-        <Header/>
         <div className='w-11/12 flex justify-end mt-8'>
           <button className='w-36 bg-[#009688] py-3 px-4 flex justify-between rounded-3xl'>
             <img className='h-5' src={PlusImg} alt="plus" />
