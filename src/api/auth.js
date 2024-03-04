@@ -28,12 +28,12 @@ export const signUp = async (firstName, lastName, email, password) => {
 	}
 };
 
-export const verifyEmail = async (email) => {
-	try {
-			const res = await axiosApi.get(`/auth/email-verification?email=${email}`);
+export const verifyEmail = async (email, token) => {
+  try {
+    const res = await axiosApi.get(`/auth/confirm-email?email=${email}&token=${token}`);
 
-			return res.data;
-	} catch (error) {
-			return error;
-	}
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
