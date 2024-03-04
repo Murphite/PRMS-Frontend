@@ -29,13 +29,13 @@ export const signUp = async (firstName, lastName, email, password) => {
 };
 
 export const forgotPassword = async (email) => {
-	try {
-	  const res = await axiosApi.post(`/auth/forgot-password`, {
-		email,
-	  });
-  
-	  return res.data;
-	} catch (error) {
-	  return error;
-	}
+    try {
+        const res = await axiosApi.post(`/auth/forgot-password`, {
+            email,
+        });
+       
+        return res.data;
+    } catch (error) {
+        return error;
+    }
 };
