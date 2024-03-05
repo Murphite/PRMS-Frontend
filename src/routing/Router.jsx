@@ -25,7 +25,7 @@ export default function Router() {
             <Route path="/email-verification" element={<EmailVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/signup" element={<RegularSignUp />} />
-            <Route path="/email-verificationStatus" element={<EmailVerificationStatus />} />
+            <Route path="/confirm-email" element={<EmailVerificationStatus />} />
         </Routes>
     );
 }
