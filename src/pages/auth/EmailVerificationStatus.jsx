@@ -17,14 +17,14 @@ const EmailVerification = ({ email, token }) => {
 
                 if (res.success) {
                     console.log("Email verified successfully!");
+                    setVerificationStatus({ isLoading: false, error: null, success: true });
                 } else {
                     console.error("Verification failed:", res.error);
+                    setVerificationStatus({ isLoading: false, error: res.error, success: false });
                 }
-
-                setVerificationStatus({ isLoading: false, error: null });
             } catch (error) {
                 console.error("Error verifying email:", error);
-                setVerificationStatus({ isLoading: false, error });
+                setVerificationStatus({ isLoading: false, error, success: false });
             }
         };
 
@@ -41,13 +41,17 @@ const EmailVerification = ({ email, token }) => {
                         className="h-[131px] mx-auto"
                     />
                     <h2 className="text-2xl font-semibold text-center pt-9 font-roboto">
-                        Email Verification Sent!
+                        {verificationStatus.success ? "Email Verified Successfully!" : "Email Verification Failed!"}
                     </h2>
-                    <p className="pt-5 text-center font-roboto">
-                        We have sent a verification email to {email}. <br /> Please
-                        check your inbox and follow the instruction to reset your
-                        password
-                    </p>
+                    {verificationStatus.success ? (
+                        <p className="pt-5 text-center font-roboto">
+                            Your email ({email}) has been verified successfully.
+                        </p>
+                    ) : (
+                        <p className="pt-5 text-center font-roboto text-red-500">
+                            Email verification was not successful.
+                        </p>
+                    )}
                     <div className="flex justify-center pt-5">
                         <button
                             className="w-full px-5 py-3 font-bold text-white bg-teal-500 rounded-full hover:bg-teal-600 focus:outline-none focus:shadow-outline"

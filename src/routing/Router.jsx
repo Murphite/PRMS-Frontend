@@ -10,7 +10,7 @@ import PasswordReset from "../pages/auth/PasswordReset";
 import EmailVerification from "../pages/auth/EmailVerification";
 import ResetPassword from "../pages/auth/ResetPassword";
 import RegularSignUp from "../pages/auth/RegularSignUp";
-import EmailVerificationStatus from "../pages/auth/REmailVerificationStatus";
+import EmailVerificationStatus from "../pages/auth/EmailVerificationStatus";
 
 export default function Router() {
     return (
