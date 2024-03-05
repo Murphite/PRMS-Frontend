@@ -10,6 +10,7 @@ import PasswordReset from "../pages/auth/PasswordReset";
 import EmailVerification from "../pages/auth/EmailVerification";
 import ResetPassword from "../pages/auth/ResetPassword";
 import RegularSignUp from "../pages/auth/RegularSignUp";
+import EmailVerificationStatus from "../pages/auth/REmailVerificationStatus";
 
 export default function Router() {
     return (
@@ -24,6 +25,7 @@ export default function Router() {
             <Route path="/email-verification" element={<EmailVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/signup" element={<RegularSignUp />} />
+            <Route path="/email-verificationStatus" element={<EmailVerificationStatus />} />
         </Routes>
     );
 }
