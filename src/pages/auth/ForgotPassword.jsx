@@ -6,10 +6,9 @@ import TextInput from "../../components/TextInput";
 import { forgotPassword } from "../../api/auth";
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -21,18 +20,16 @@ const ForgotPassword = () => {
             const response = await forgotPassword(email);
 
             if (response.success) {
-                setSuccess(true);
-            } else {
-                setSuccess(false);
-                setError(response.error || "Password reset failed.");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            setError("An unexpected error occurred.");
-        } finally {
-            setLoading(false);
-        }
-    };
+      } else {
+        setError(response.error || "Password reset failed.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
     return (
         <section className="w-full h-screen grid grid-cols-[60%_40%]">
@@ -54,11 +51,6 @@ const ForgotPassword = () => {
             <div className="flex flex-col items-center mt-16">
                 <h2 className="text-3xl font-bold">Forgot Password</h2>
                 <div className="w-full px-4">
-                    {success && (
-                        <p className="text-green-600 font-bold mb-4">
-                            Password reset email sent successfully!
-                        </p>
-                    )}
                     {error && (
                         <p className="text-red-600 font-bold mb-4">{error}</p>
                     )}
