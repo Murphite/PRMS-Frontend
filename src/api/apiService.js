@@ -18,7 +18,7 @@ axiosApi.interceptors.response.use(
 		if (error.response?.status === 401) {
 			localStorage.removeItem("accessToken");
 			localStorage.removeItem("authUserData");
-			window.location = "/";
+			window.location = "/login";
 			return Promise.reject(new Error("Unauthorized"));
 		}
 
