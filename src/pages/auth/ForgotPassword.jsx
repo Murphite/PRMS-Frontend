@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "@nextui-org/react";
 import image from "../../assets/images/frame.png";
-import Container from "../../components/Container";
 import TextInput from "../../components/TextInput";
 import { forgotPassword } from "../../api/auth";
 
@@ -19,9 +17,9 @@ const ForgotPassword = () => {
 
             const response = await forgotPassword(email);
 
-            if (response.success) {
+            if (response) {
             } else {
-                setError(response.error || "Password reset failed.");
+                setError("Password reset failed.");
             }
         } catch (error) {
             console.error("Error:", error);
