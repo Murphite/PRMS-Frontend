@@ -10,6 +10,7 @@ import PasswordReset from "../pages/auth/PasswordReset";
 import EmailVerification from "../pages/auth/EmailVerification";
 import ResetPassword from "../pages/auth/ResetPassword";
 import RegularSignUp from "../pages/auth/RegularSignUp";
+import PatientsList from "../pages/dashboard/PatientsList";
 import EmailVerificationStatus from "../pages/auth/EmailVerificationStatus";
 import RegularLogin from "../pages/auth/RegularLogin";
 
@@ -28,6 +29,8 @@ export default function Router() {
             <Route path="/signup" element={<RegularSignUp />} />
             <Route path="/confirm-email" element={<EmailVerificationStatus />} />
             <Route path= "/login-regular" element ={<RegularLogin/>} />
+
+            <Route path="/dashboard/patients" element={<PatientsList/>}/>
         </Routes>
     );
 }
