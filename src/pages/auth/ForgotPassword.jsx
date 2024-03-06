@@ -1,10 +1,34 @@
-import React from "react";
-import { Input } from "@nextui-org/react";
+import React, { useState } from "react";
 import image from "../../assets/images/frame.png";
-import Container from "../../components/Container";
 import TextInput from "../../components/TextInput";
+import { forgotPassword } from "../../api/auth";
 
 const ForgotPassword = () => {
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            setLoading(true);
+            setError(null);
+
+            const response = await forgotPassword(email);
+
+            if (response) {
+            } else {
+                setError("Password reset failed.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            setError("An unexpected error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <section className="w-full h-screen grid grid-cols-[60%_40%]">
             <div className="flex flex-col items-center justify-center bg-color">
@@ -25,30 +49,31 @@ const ForgotPassword = () => {
             <div className="flex flex-col items-center mt-16">
                 <h2 className="text-3xl font-bold">Forgot Password</h2>
                 <div className="w-full px-4">
-                    <form className="w-full mt-4">
-                        <div className="mt-4 ">
-                            {/* <label
-                            className="mx-3 absolute text-xs text-[#009688] font-bold"
-                            for="email"
-                        >
-                            Email
-                        </label> */}
+                    {error && (
+                        <p className="text-red-600 font-bold mb-4">{error}</p>
+                    )}
+                    <form className="w-full mt-4" onSubmit={handleFormSubmit}>
+                        <div className="mt-4">
                             <TextInput
                                 className="w-full"
                                 variant="bordered"
                                 color="success"
                                 label="Email"
                                 placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
-                            {/* <input
-                            className="bg-color/[.08] h-[30px] w-[400px] py-5 px-3 text-xs font-bold border border-[#009688] focus:outline-none rounded-md"
-                            type="email"
-                        /> */}
                         </div>
                         <br />
                         <span className="flex justify-center mt-6">
-                            <button className="w-64 px-10 py-2 text-white bg-color rounded-xl">
-                                CONTINUE
+                            <button
+                                type="submit"
+                                className={`w-64 px-10 py-2 text-white bg-color rounded-xl ${
+                                    loading && "opacity-50 cursor-not-allowed"
+                                }`}
+                                disabled={loading}
+                            >
+                                {loading ? "LOADING..." : "CONTINUE"}
                             </button>
                         </span>
                     </form>
