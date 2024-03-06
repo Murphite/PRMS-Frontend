@@ -27,3 +27,13 @@ export const signUp = async (firstName, lastName, email, password) => {
 		return error;
 	}
 };
+
+export const verifyEmail = async (email, token) => {
+  try {
+    const res = await axiosApi.get(`/auth/confirm-email?email=${email}&token=${token}`);
+
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
