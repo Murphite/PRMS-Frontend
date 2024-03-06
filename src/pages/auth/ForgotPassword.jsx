@@ -6,9 +6,9 @@ import TextInput from "../../components/TextInput";
 import { forgotPassword } from "../../api/auth";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -20,16 +20,16 @@ const ForgotPassword = () => {
             const response = await forgotPassword(email);
 
             if (response.success) {
-      } else {
-        setError(response.error || "Password reset failed.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setError("An unexpected error occurred.");
-    } finally {
-      setLoading(false);
-    }
-  };
+            } else {
+                setError(response.error || "Password reset failed.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            setError("An unexpected error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <section className="w-full h-screen grid grid-cols-[60%_40%]">
