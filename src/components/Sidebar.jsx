@@ -29,8 +29,8 @@ const Sidebar = () => {
     ];
 
     return (
-        <aside className="p-4 w-64">
-            <div className="border-b-2 px-2 border-b-gray-200 mb-6 pb-4">
+        <aside className="w-64 h-screen p-4 overflow-y-auto bg-white">
+            <div className="px-2 pb-4 mb-6 border-b-2 border-b-gray-200">
                 <img src={HomeImg} alt="Home Logo" />
             </div>
 
