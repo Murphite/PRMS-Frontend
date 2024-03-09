@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { axiosApi } from "./apiService";
-import { useNavigate } from "react-router-dom";
 
 export const login = async (email, password) => {
     try {
@@ -23,6 +21,30 @@ export const signUp = async (firstName, lastName, email, password) => {
             email,
             password,
         });
+
+        return res.data;
+    } catch (error) {
+        return error;
+    }
+};
+
+export const forgotPassword = async (email) => {
+    try {
+        const res = await axiosApi.post(`/auth/forgot-password`, {
+            email,
+        });
+
+        return res.data;
+    } catch (error) {
+        return error;
+    }
+};
+
+export const verifyEmail = async (email, token) => {
+    try {
+        const res = await axiosApi.get(
+            `/auth/confirm-email?email=${email}&token=${token}`,
+        );
 
         return res.data;
     } catch (error) {
