@@ -13,6 +13,7 @@ import RegularSignUp from "../pages/auth/RegularSignUp";
 import PatientsList from "../pages/dashboard/PatientsList";
 import EmailVerificationStatus from "../pages/auth/EmailVerificationStatus";
 import RegularLogin from "../pages/auth/RegularLogin";
+import CreatePatient from "../pages/dashboard/CreatePatient";
 
 export default function Router() {
     return (
@@ -34,6 +35,7 @@ export default function Router() {
             <Route path="/login" element={<RegularLogin />} />
 
             <Route path="/dashboard/patients" element={<PatientsList />} />
+            <Route path="/dashboard/patients/new" element={<CreatePatient />} />
         </Routes>
     );
 }

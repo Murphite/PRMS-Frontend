@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 
 const DashLayout = ({ children }) => {
     return (
-        <div>
+        <div className="flex bg-gray-100">
             <Sidebar />
 
             <div>{children}</div>
