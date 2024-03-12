@@ -1,121 +1,361 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import profile from "../../assets/vectors/profile.svg";
+import flag from "../../assets/vectors/Group.svg";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
 import GuestLayout from "../../layouts/GuestLayout";
 import InputError from "../../components/InputError";
-import InputLabel from "../../components/InputLabel";
-import PrimaryButton from "../../components/PrimaryButton";
-import TextInput from "../../components/TextInput";
-import { signUp } from "../../api/auth";
+import TextInput from "../../components/TextInput"
+
 
 export default function Register() {
-	const [data, setData] = useState({
-		firstName: "",
-		lastName: "",
-		email: "",
-		password: "",
-	});
+    const [data, setData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        street: "",
+        city: "",
+        state: "",
+        country: "",
+        latitude: "",
+        longitude: ""
+    });
+
 	const [errors, setErrors] = useState({
-		firstName: "",
-		lastName: "",
-		email: "",
-		password: "",
-	});
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        street: "",
+        city: "",
+        state: "",
+        country: ""
+    });
 
-	const handleChange = e => {
-		const name = e.target.name;
-		const value = e.target.value;
+	const [showCountry, setShowCountry] = useState(false);
 
-		setData({ ...data, [name]: value });
-	};
+    const [selectCountry, setSelectCountry] = useState(flag);
 
-	const submit = async e => {
-		e.preventDefault();
-		const res = await signUp(
-			data.firstName,
-			data.lastName,
-			data.email,
-			data.password
+	const [passwordType, setPasswordType] = useState("password");
+    
+	const [confirmPasswordType, setConfirmPasswordType] =
+        useState("confirmPassword");
+
+    useEffect(() => {
+        // Fetch user's current location using Google Geolocation API
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    fetchAddressFromCoordinates(latitude, longitude);
+                },
+                error => {
+                    console.error('Error getting geolocation:', error);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }, []);
+
+    const fetchAddressFromCoordinates = (latitude, longitude) => {
+        const geocoder = new window.google.maps.Geocoder();
+        const latlng = new window.google.maps.LatLng(latitude, longitude);
+        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+            if (status === window.google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    const addressComponents = results[0].address_components;
+                    let addressData = {};
+                    for (let i = 0; i < addressComponents.length; i++) {
+                        const component = addressComponents[i];
+                        switch (component.types[0]) {
+                            case 'street_number':
+                                addressData.street = component.long_name;
+                                break;
+                            case 'route':
+                                addressData.street += ' ' + component.long_name;
+                                break;
+                            case 'locality':
+                                addressData.city = component.long_name;
+                                break;
+                            case 'administrative_area_level_1':
+                                addressData.state = component.long_name;
+                                break;
+                            case 'country':
+                                addressData.country = component.long_name;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    setData({ ...data, ...addressData, latitude, longitude });
+                }
+            } else {
+                console.error('Geocoder failed due to: ' + status);
+            }
+        });
+    };
+
+	const [countryFlags, setCountryFlag] = useState([]);
+    async function getCountryFlags() {
+        const response = await fetch("https://restcountries.com/v3.1/all");
+        const data = await response.json();
+
+        if (response.ok) {
+            setCountryFlag(data);
+        }
+    }
+    useEffect(() => {
+        getCountryFlags();
+    }, []);
+
+    const handleChange = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setData({ ...data, [name]: value });
+    };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        console.log(data);
+        // Call your API endpoint with form data including latitude and longitude
+    };
+
+    return (
+			<div className="flex overflow-y-hidden AdminPage gap-x-40px">
+				<div className="Admin w-2.5/5 p-[151px 149px 187px 149px] bg-teal-600">
+					<div className="Intro w-[516px]   pt-[99px] mx-auto gap-x-4">
+						<p className="Words font-medium text-3xl tracking-normal text-center leading-[60px] text-white ">
+							Start Your Wellness Journey!
+						</p>
+						<p className="WordsTwo text-base font-normal leading-6 tracking-normal text-center text-white ">
+							Ready for a healthier and happier you? Join us now!
+							Create your account <br /> for personalized health
+							insights, activity tracking, nutrition guidance, <br />{" "}
+							mental wellness support, and more. Your well-being
+							starts here.
+						</p>
+					</div>
+					<img
+						className="w-4/5 p-24 mx-auto bg-teal-600 images-design "
+						src={profile}
+					/>
+				</div>
+				<div className="AdminLogin w-[50%] bg-white">
+					<p className="sign-in text-3xl font-medium leading-15 tracking-normal text-center text-black pt-24 ">
+						Create Account
+					</p>
+					<GuestLayout>
+						<form onSubmit={handleSubmit}>
+							<div className="container p-5">
+								<div className="cred px-[24px] border border-solid border-teal-600 py-[0px] w-full my-[20px] rounded-[8px] relative bg-teal-100 bg-opacity-50">
+									<label className="text-[#009688] block pb-1">
+										First name
+									</label>
+									<div className="flex items-center justify-between ">
+										<TextInput
+											id="firstName"
+											type="text"
+											placeholder="Enter your First Name"
+											required
+											className="bg-transparent focus:outline-none w-full"
+											autoComplete="first name"
+											onChange={handleChange}
+										/>
+										<InputError message={errors.firstName} className="mt-2" />
+									</div>
+								</div>
+								<div className="cred px-[24px] border border-solid border-teal-600 py-[0px] w-full my-[20px] rounded-[8px] relative bg-teal-100 bg-opacity-50">
+									<label className="text-[#009688] block pb-1">
+										Last Name
+									</label>
+									<div className="flex items-center justify-between ">
+										<TextInput
+											id="lastName"
+											type="text"
+											placeholder="Enter your First Name"
+											required
+											className="bg-transparent focus:outline-none w-full"
+											autoComplete="last name"
+											onChange={handleChange}
+										/>
+										<InputError message={errors.lastName} className="mt-2" /> 
+									</div>
+								</div>
+								
+								
+								<div className="cred px-[24px] py-[2px]  border border-solid border-teal-600 w-full my-[10px] rounded-[8px] bg-teal-100 bg-opacity-50">
+									<label className="text-[#009688] block pb-1">
+										Email
+									</label>
+									<TextInput
+										id="email"
+										type="email"
+										placeholder="xyz@gmail.com"
+										className="bg-transparent focus:outline-none w-full"
+										required
+										onChange={handleChange}
+									/>
+								</div>
+								<div className="flex items-center gap-2">
+									<div className="relative flex items-center gap-4 border border-solid border-teal-600 rounded-[8px] py-[8px] px-2 bg-teal-100 bg-opacity-50">
+										<img
+											src={selectCountry}
+											className="w-[50px] h-[25px]"
+										/>
+										<IoIosArrowDown
+											onClick={() => setShowCountry(!showCountry)}
+										/>
+										{showCountry && (
+											<div className="absolute top-[50px] left-0 h-[300px] overflow-y-scroll w-[60px]">
+												{countryFlags &&
+													countryFlags.map((flag) => (
+														<>
+															<img
+																src={flag.flags.svg}
+																alt=""
+																onClick={() => {
+																	setSelectCountry(
+																		flag.flags.svg,
+																	);
+																	setShowCountry(false);
+																}}
+																className="w-[40px] h-[50px] my-2 cursor-pointer"
+															/>
+														</>
+													))}
+											</div>
+										)}
+									</div>
+									<input className="border border-solid border-teal-600 rounded-[8px] py-[8px] px-[24px] w-full bg-teal-100 bg-opacity-50" />
+								</div>
+
+								<div className="cred px-[24px] border border-solid border-teal-600 py-[0px] w-full my-[20px] rounded-[8px] relative bg-teal-100 bg-opacity-50">
+									<label className="text-[#009688] block pb-1">
+										Street
+									</label>
+									<div className="flex items-center justify-between ">
+										<TextInput
+											id="street"
+											type="text"
+											placeholder="Enter your Street Name"
+											required
+											className="bg-transparent focus:outline-none w-full"
+											autoComplete="street name"
+											onChange={handleChange}
+										/>
+										<InputError message={errors.street} className="mt-2" /> 
+									</div>
+								</div>
+
+								<div className="cred px-[24px] border border-solid border-teal-600 py-[0px] w-full my-[20px] rounded-[8px] relative bg-teal-100 bg-opacity-50">
+									<label className="text-[#009688] block pb-1">
+										City
+									</label>
+									<div className="flex items-center justify-between ">
+										<TextInput
+											id="city"
+											type="text"
+											placeholder="Enter your City"
+											required
+											className="bg-transparent focus:outline-none w-full"
+											autoComplete="city name"
+											onChange={handleChange}
+										/>
+										<InputError message={errors.city} className="mt-2" /> 
+									</div>
+								</div>
+
+								<div className="cred px-[24px] border border-solid border-teal-600 py-[0px] w-full my-[20px] rounded-[8px] relative bg-teal-100 bg-opacity-50">
+									<label className="text-[#009688] block pb-1">
+										State
+									</label>
+									<div className="flex items-center justify-between ">
+										<TextInput
+											id="state"
+											type="text"
+											placeholder="Enter your Street Name"
+											required
+											className="bg-transparent focus:outline-none w-full"
+											autoComplete="state"
+											onChange={handleChange}
+										/>
+										<InputError message={errors.state} className="mt-2" /> 
+									</div>
+								</div>
+
+								<div className="cred px-[24px] border border-solid border-teal-600 bg-teal-100 bg-opacity-50 py-[2px] w-full my-[20px] rounded-[8px]">
+									<label className="text-[#009688] block pb-1">
+										Password
+									</label>
+									<div className="flex items-center justify-between">
+										<TextInput
+											type={passwordType}
+											placeholder="***************"
+											required
+											className="bg-transparent focus:outline-none w-full"
+										/>
+										{passwordType !== "text" ? (
+											<FaEyeSlash
+												cursor={"pointer"}
+												fontSize={"20px"}
+												onClick={() => setPasswordType("text")}
+											/>
+										) : (
+											<FaEye
+												cursor={"pointer"}
+												fontSize={"20px"}
+												onClick={() => setPasswordType("password")}
+											/>
+										)}
+									</div>
+								</div>
+								<div className="cred px-[24px] border border-solid border-teal-600 bg-teal-100 bg-opacity-50 py-[2px] w-full my-[20px] rounded-[8px]">
+									<label className="text-[#009688] block pb-1">
+										Confirm Password
+									</label>
+									<div className="flex items-center justify-between">
+										<TextInput
+											type={confirmPasswordType}
+											placeholder="***************"
+											required
+											className="bg-transparent focus:outline-none w-full"
+										/>
+										{confirmPasswordType !== "text" ? (
+											<FaEyeSlash
+												cursor={"pointer"}
+												fontSize={"20px"}
+												onClick={() =>
+													setConfirmPasswordType("text")
+												}
+											/>
+										) : (
+											<FaEye
+												cursor={"pointer"}
+												fontSize={"20px"}
+												onClick={() =>
+													setConfirmPasswordType(
+														"confirmPassword",
+													)
+												}
+											/>
+										)}
+									</div>
+								</div>
+								<div className="text-center w-[70%] mx-auto mt-10">
+									<button className="bg-[#009688] py-2 px-[20px] w-full text-white rounded-full font-[roboto]">
+										Create Account
+									</button>
+								</div>
+							</div>
+						</form>
+					</GuestLayout>
+				</div>
+			</div>
+		
 		);
-
-		console.log(res);
-	};
-
-	return (
-		<GuestLayout>
-			<form onSubmit={submit}>
-				<div className="mt-4">
-					<InputLabel htmlFor="firstName" value="First Name" />
-
-					<TextInput
-						id="firstName"
-						type="text"
-						name="firstName"
-						value={data.firstName}
-						className="block w-full mt-1"
-						autoComplete="first name"
-						isFocused={true}
-						onChange={handleChange}
-					/>
-
-					<InputError message={errors.firstName} className="mt-2" />
-				</div>
-
-				<div className="mt-4">
-					<InputLabel htmlFor="lastName" value="Last Name" />
-
-					<TextInput
-						id="lastName"
-						type="text"
-						name="lastName"
-						value={data.lastName}
-						className="block w-full mt-1"
-						autoComplete="last name"
-						isFocused={true}
-						onChange={handleChange}
-					/>
-
-					<InputError message={errors.lastName} className="mt-2" />
-				</div>
-
-				<div className="mt-4">
-					<InputLabel htmlFor="email" value="Email" />
-
-					<TextInput
-						id="email"
-						type="email"
-						name="email"
-						value={data.email}
-						className="block w-full mt-1"
-						autoComplete="username"
-						isFocused={true}
-						onChange={handleChange}
-					/>
-
-					<InputError message={errors.email} className="mt-2" />
-				</div>
-
-				<div className="mt-4">
-					<InputLabel htmlFor="password" value="Password" />
-
-					<TextInput
-						id="password"
-						type="password"
-						name="password"
-						value={data.password}
-						className="block w-full mt-1"
-						autoComplete="current-password"
-						onChange={handleChange}
-					/>
-
-					<InputError message={errors.password} className="mt-2" />
-				</div>
-
-				<div className="flex items-center justify-end my-4">
-					<PrimaryButton className="ms-4" disabled={false}>
-						Sign Up
-					</PrimaryButton>
-				</div>
-			</form>
-		</GuestLayout>
-	);
 }
