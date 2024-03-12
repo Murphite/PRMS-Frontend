@@ -19,7 +19,7 @@ const AdminLogin = () => {
 
     const adminLogin = async (email, password) => {
         try {
-            const res = await axiosApi.post(`/auth/admin-login`, {
+            const res = await axiosApi.post(`/auth/login`, {
                 email,
                 password,
             });
@@ -134,7 +134,9 @@ const AdminLogin = () => {
                                     type={passwordType}
                                     placeholder="***************"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
                                     required
                                     className="w-full bg-transparent focus:outline-none placeholder:text-black"
                                 />
