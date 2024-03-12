@@ -14,6 +14,8 @@ import PatientsList from "../pages/dashboard/PatientsList";
 import EmailVerificationStatus from "../pages/auth/EmailVerificationStatus";
 import RegularLogin from "../pages/auth/RegularLogin";
 import CreatePatient from "../pages/dashboard/CreatePatient";
+import DashBoardPage from "../pages/dashboard/dashBoardPage";
+
 
 export default function Router() {
     return (
@@ -36,6 +38,7 @@ export default function Router() {
 
             <Route path="/dashboard/patients" element={<PatientsList />} />
             <Route path="/dashboard/patients/new" element={<CreatePatient />} />
+             <Route path="/dashboard" element={<DashBoardPage/>} />
         </Routes>
     );
 }
