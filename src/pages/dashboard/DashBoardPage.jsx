@@ -19,43 +19,64 @@ const dashBoardPage = () => {
                 </div>
                 <div className=" mt-[2rem] flex relative  space-x-16 ml-16">
                     <div className=" cursor-pointer">
-                        <img src="src/assets/images/Tab 01.png" onClick={"#"} />
-                    </div>
-                    <div className=" cursor-pointer">
                         <img
-                            src="src/assets/images/Tab 02 (1).png"
+                            src="src/assets/vectors/Tab 01.svg"
                             onClick={"#"}
                         />
                     </div>
                     <div className=" cursor-pointer">
-                        <img src="src/assets/images/Tab 03.png" onClick={"#"} />
+                        <img
+                            src="src/assets/vectors/Tab 02.svg"
+                            onClick={"#"}
+                        />
                     </div>
                     <div className=" cursor-pointer">
-                        <img src="src/assets/images/Tab 04.png" onClick={"#"} />
+                        <img
+                            src="src/assets/vectors/Tab 03.svg"
+                            onClick={"#"}
+                        />
                     </div>
                     <div className=" cursor-pointer">
-                        <img src="src/assets/images/Tab 05.png" onClick={"#"} />
+                        <img
+                            src="src/assets/vectors/Tab 04.svg"
+                            onClick={"#"}
+                        />
                     </div>
                     <div className=" cursor-pointer">
-                        <img src="src/assets/images/Tab 06.png" onClick={"#"} />
+                        <img
+                            src="src/assets/vectors/Tab 05.svg"
+                            onClick={"#"}
+                        />
                     </div>
                     <div className=" cursor-pointer">
-                        <img src="src/assets/images/Tab 07.png" onClick={"#"} />
+                        <img
+                            src="src/assets/vectors/Tab 06.svg"
+                            onClick={"#"}
+                        />
                     </div>
                     <div className=" cursor-pointer">
-                        <img src="src/assets/images/Tab 08.png" onClick={"#"} />
+                        <img
+                            src="src/assets/vectors/Tab 07.svg"
+                            onClick={"#"}
+                        />
+                    </div>
+                    <div className=" cursor-pointer">
+                        <img
+                            src="src/assets/vectors/Tab 08.svg"
+                            onClick={"#"}
+                        />
                     </div>
                 </div>
                 <div className=" flex space-x-10 mt-10 ml-32 ">
                     <div className=" cursor-pointer">
                         <img
-                            src="src/assets/images/Frame 1000001042.png"
+                            src="src/assets/vectors/Frame 1000001042.svg"
                             onClick={"#"}
                         />
                     </div>
                     <div className=" cursor-pointer">
                         <img
-                            src="src/assets/images/Frame 1000001043.png"
+                            src="src/assets/vectors/Frame 1000001043.svg"
                             onClick={"#"}
                         />
                     </div>

@@ -4,11 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
-
 const CarouselComponents = () => {
     const settings = {
-        
         infinite: true,
         speed: 400,
         width: 700,
@@ -39,19 +36,18 @@ const CarouselComponents = () => {
 
     return (
         <div>
-            
             <Slider {...settings}>
                 <div className="w-[44rem]">
-                  <img src="src/assets/images/c1.png"/>
+                    <img src="src/assets/vectors/caro1.svg" />
                 </div>
                 <div className="w-[44rem]">
-                <img src="src/assets/images/c2.png"/>
+                    <img src="src/assets/vectors/caro2.svg" />
                 </div>
                 <div className="w-[44rem]">
-                <img src="src/assets/images/c3.png"/>
+                    <img src="src/assets/vectors/caro3.svg" />
                 </div>
                 <div className="w-[44rem]">
-                <img src="src/assets/images/c4.png"/>
+                    <img src="src/assets/vectors/caro4.svg" />
                 </div>
             </Slider>
         </div>
