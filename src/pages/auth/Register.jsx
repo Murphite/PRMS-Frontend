@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import profile from "../../assets/vectors/profile.svg";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import GuestLayout from "../../layouts/GuestLayout";
 import InputError from "../../components/InputError";
 import TextInput from "../../components/TextInput"
 
@@ -11,6 +10,7 @@ export default function Register() {
         firstName: "",
         lastName: "",
         email: "",
+		phoneNumber: "",
         password: "",
         confirmPassword: "",
         street: "",
@@ -178,6 +178,20 @@ export default function Register() {
 										id="email"
 										type="email"
 										placeholder="xyz@gmail.com"
+										className="bg-transparent focus:outline-none w-full"
+										required
+										onChange={handleChange}
+									/>
+								</div>
+
+								<div className="cred px-[24px] py-[2px]  border border-solid border-teal-600 w-full my-[10px] rounded-[8px] bg-teal-100 bg-opacity-50">
+									<label className="text-[#009688] block pb-1">
+										Phone Number
+									</label>
+									<TextInput
+										id="phoneNumber"
+										type="phoneNumber"
+										placeholder="Phone Number"
 										className="bg-transparent focus:outline-none w-full"
 										required
 										onChange={handleChange}
