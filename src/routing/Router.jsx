@@ -7,13 +7,26 @@ import Index from "../pages/Index";
 import AdminSignUp from "./../pages/auth/AdminSignUp";
 
 export default function Router() {
-  return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/admin-login" element={<AdminLogin />} />
-      <Route path="/admin-signup" element={<AdminSignUp />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Index />} />
+            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/admin-signup" element={<AdminSignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
+            <Route path="/email-verification" element={<EmailVerification />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/signup" element={<RegularSignUp />} />
+            <Route
+                path="/confirm-email"
+                element={<EmailVerificationStatus />}
+            />
+            <Route path="/login" element={<RegularLogin />} />
+
+            <Route path="/dashboard/patients" element={<PatientsList />} />
+            <Route path="/dashboard/patients/new" element={<CreatePatient />} />
+        </Routes>
+    );
 }
