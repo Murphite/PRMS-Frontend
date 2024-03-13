@@ -13,6 +13,7 @@ export default function Register() {
 		lastName: "",
 		phoneNumber:"",
 		email: "",
+		username: "",
 		password: "",
 	});
 	const [errors, setErrors] = useState({
@@ -20,6 +21,7 @@ export default function Register() {
 		lastName: "",
 		phoneNumber:"",
 		email: "",
+		username: "",
 		password: "",
 	});
 
@@ -37,6 +39,7 @@ export default function Register() {
 			data.lastName,
 			data.phoneNumber,
 			data.email,
+			data.username,
 			data.password
 		);
 
@@ -106,12 +109,29 @@ export default function Register() {
 						name="email"
 						value={data.email}
 						className="block w-full mt-1"
-						autoComplete="username"
+						autoComplete="email"
 						isFocused={true}
 						onChange={handleChange}
 					/>
 
 					<InputError message={errors.email} className="mt-2" />
+				</div>
+
+				<div className="mt-4">
+					<InputLabel htmlFor="username" value="username" />
+
+					<TextInput
+						id="email"
+						type="email"
+						name="email"
+						value={data.username}
+						className="block w-full mt-1"
+						autoComplete="username"
+						isFocused={true}
+						onChange={handleChange}
+					/>
+
+					<InputError message={errors.username} className="mt-2" />
 				</div>
 
 				<div className="mt-4">
