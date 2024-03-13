@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import profile from "../../assets/vectors/profile.svg";
-import flag from "../../assets/vectors/Group.svg";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
 import GuestLayout from "../../layouts/GuestLayout";
 import InputError from "../../components/InputError";
 import TextInput from "../../components/TextInput"
@@ -35,9 +33,6 @@ export default function Register() {
         country: ""
     });
 
-	const [showCountry, setShowCountry] = useState(false);
-
-    const [selectCountry, setSelectCountry] = useState(flag);
 
 	const [passwordType, setPasswordType] = useState("password");
     
@@ -100,19 +95,6 @@ export default function Register() {
         });
     };
 
-	const [countryFlags, setCountryFlag] = useState([]);
-    async function getCountryFlags() {
-        const response = await fetch("https://restcountries.com/v3.1/all");
-        const data = await response.json();
-
-        if (response.ok) {
-            setCountryFlag(data);
-        }
-    }
-    useEffect(() => {
-        getCountryFlags();
-    }, []);
-
     const handleChange = e => {
         const name = e.target.name;
         const value = e.target.value;
@@ -149,7 +131,7 @@ export default function Register() {
 					<p className="sign-in text-3xl font-medium leading-15 tracking-normal text-center text-black pt-24 ">
 						Create Account
 					</p>
-					<GuestLayout>
+					<>
 						<form onSubmit={handleSubmit}>
 							<div className="container p-5">
 								<div className="cred px-[24px] border border-solid border-teal-600 py-[0px] w-full my-[20px] rounded-[8px] relative bg-teal-100 bg-opacity-50">
@@ -200,38 +182,6 @@ export default function Register() {
 										required
 										onChange={handleChange}
 									/>
-								</div>
-								<div className="flex items-center gap-2">
-									<div className="relative flex items-center gap-4 border border-solid border-teal-600 rounded-[8px] py-[8px] px-2 bg-teal-100 bg-opacity-50">
-										<img
-											src={selectCountry}
-											className="w-[50px] h-[25px]"
-										/>
-										<IoIosArrowDown
-											onClick={() => setShowCountry(!showCountry)}
-										/>
-										{showCountry && (
-											<div className="absolute top-[50px] left-0 h-[300px] overflow-y-scroll w-[60px]">
-												{countryFlags &&
-													countryFlags.map((flag) => (
-														<>
-															<img
-																src={flag.flags.svg}
-																alt=""
-																onClick={() => {
-																	setSelectCountry(
-																		flag.flags.svg,
-																	);
-																	setShowCountry(false);
-																}}
-																className="w-[40px] h-[50px] my-2 cursor-pointer"
-															/>
-														</>
-													))}
-											</div>
-										)}
-									</div>
-									<input className="border border-solid border-teal-600 rounded-[8px] py-[8px] px-[24px] w-full bg-teal-100 bg-opacity-50" />
 								</div>
 
 								<div className="cred px-[24px] border border-solid border-teal-600 py-[0px] w-full my-[20px] rounded-[8px] relative bg-teal-100 bg-opacity-50">
@@ -353,7 +303,7 @@ export default function Register() {
 								</div>
 							</div>
 						</form>
-					</GuestLayout>
+					</>
 				</div>
 			</div>
 		
