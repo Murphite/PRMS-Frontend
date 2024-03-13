@@ -24,6 +24,10 @@ export const signUp = async (firstName, lastName, phoneNumber, email, username, 
 			password,
 		});
 
+		if(res.data !== null)
+		{
+			res.data.
+		}
 		return res.data;
 	} catch (error) {
 		return error;

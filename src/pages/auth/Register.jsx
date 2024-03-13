@@ -84,15 +84,15 @@ export default function Register() {
 				</div>
 
 				<div className="mt-4">
-					<InputLabel htmlFor="phoneNumber" value="Phone Number" />
+					<InputLabel htmlFor="phoneNumber" value="PhoneNumber" />
 
 					<TextInput
 						id="phoneNumber"
 						type="text"
-						name="phonenumber"
+						name="phoneNumber"
 						value={data.phoneNumber}
 						className="block w-full mt-1"
-						autoComplete="phone number"
+						autoComplete="phone Number"
 						isFocused={true}
 						onChange={handleChange}
 					/>
@@ -121,9 +121,9 @@ export default function Register() {
 					<InputLabel htmlFor="username" value="username" />
 
 					<TextInput
-						id="email"
-						type="email"
-						name="email"
+						id="username"
+						type="username"
+						name="username"
 						value={data.username}
 						className="block w-full mt-1"
 						autoComplete="username"
