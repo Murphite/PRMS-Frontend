@@ -5,9 +5,6 @@ import Register from "../pages/auth/Register";
 import AdminLogin from "../pages/auth/AdminLogin";
 import Index from "../pages/Index";
 import AdminSignUp from "./../pages/auth/AdminSignUp";
-import NavBar from "../components/NavBar";
-import NavBarLogIn from "../components/NavBarLogIn";
-
 export default function Router() {
   return (
     <Routes>

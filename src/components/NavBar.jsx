@@ -1,138 +1,152 @@
 import React, { useState } from "react";
 import {
-  AppBar,
-  Button,
-  Tab,
   Tabs,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import DrawerComp from "./HomeDrawer";
+  Tab,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@nextui-org/react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+} from "@nextui-org/react";
 
-const NavBar = () => {
-  const [value, setValue] = useState();
-  const theme = useTheme();
-  console.log(theme);
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-  console.log(isMatch);
+export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuItems = ["Home", "About", "Why Us", "Sign in", "Log Out"];
 
   return (
-    <React.Fragment>
-      <AppBar
-        position="sticky"
-        sx={{
-          background: "#FFFFFF",
-          paddingTop: "5px",
-          paddingLeft: "20px",
-          paddingRight: "20px",
-        }}
+    <Navbar
+      position="sticky"
+      style={{
+        background: "#FFFFFF",
+        paddingTop: "5px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Add box-shadow
+        borderRadius: "10px", // Add border-radius
+      }}
+      onMenuOpenChange={setIsMenuOpen}
+    >
+      <NavbarBrand>
+        <p className="font-bold text-inherit">
+          <img
+            src="/Images/HealthLogo.png"
+            alt="health-logo"
+            style={{ width: "50px", height: "auto" }}
+          />
+        </p>
+      </NavbarBrand>
+
+      {/* Render NavbarMenuToggle only in mobile view */}
+      <NavbarMenuToggle
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        className="sm:hidden"
+      />
+
+      {/* Conditionally render NavbarMenu based on menu state */}
+      {isMenuOpen ? (
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item}-${index}`}>
+              <Link
+                color={index === menuItems.length - 1 ? "danger" : "foreground"}
+                className="w-full"
+                href="#"
+                size="lg"
+              >
+                {item}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
+      ) : null}
+
+      <div
+        className="hidden sm:flex items-center" // Use flexbox to align items horizontally and center Tabs
+        style={{ flex: "3", justifyContent: "center" }} // Add flex: 1 to allow Tabs to take up remaining space
       >
-        <Toolbar>
-          <Typography>
-            <img
-              src="/Images/HealthLogo.png"
-              alt="health-logo"
-              style={{ width: "50px", height: "auto" }} // Adjust the width as needed
-            />
-          </Typography>
+        {/* Display Tabs component */}
+        <Tabs
+          aria-label="Options"
+          variant="underlined"
+          classNames={{
+            tabList: "gap-6 w-full relative rounded-none p-0 border-divider",
+            cursor: "w-full bg-[#009688]",
+            tabContent: "group-data-[selected=true]:text-[#009688]",
+          }}
+        >
+          <Tab
+            title={
+              <div className="space-x-2">
+                <span>Home</span>
+              </div>
+            }
+          />
+          <Tab
+            title={
+              <div className="space-x-2">
+                <span>About</span>
+              </div>
+            }
+          />
+          <Tab
+            title={
+              <div className="space-x-2">
+                <span>Why Us</span>
+              </div>
+            }
+          />
+        </Tabs>
+      </div>
 
-          {isMatch ? (
-            <>
-              <DrawerComp />
-            </>
-          ) : (
-            <>
-              <Tabs
-                sx={{
-                  marginLeft: "auto",
-                  "& .MuiTabs-indicator": {
-                    backgroundColor: "#009688", // Indicator color
-                  },
-                }}
-                value={value}
-                onChange={(e, value) => setValue(value)}
-              >
-                <Tab
-                  sx={{
-                    textTransform: "none", // Prevent text transformation
-                    color: "#0D2B46", // Text color
-                    "&.Mui-selected": {
-                      color: "#009688", // Selected text color
-                    },
-                  }}
-                  label="Home"
-                />
-                <Tab
-                  sx={{
-                    textTransform: "none", // Prevent text transformation
-                    color: "#0D2B46", // Text color
-                    "&.Mui-selected": {
-                      color: "#009688", // Selected text color
-                    },
-                  }}
-                  label="About"
-                />
-                <Tab
-                  sx={{
-                    textTransform: "none", // Prevent text transformation
-                    color: "#0D2B46", // Text color
-                    "&.Mui-selected": {
-                      color: "#009688", // Selected text color
-                      textTransform: "none", // Prevent text transformation
-                    },
-                  }}
-                  label="Why Us"
-                />
-              </Tabs>
+      {/* Buttons at the end */}
+      <NavbarContent className="hidden sm:flex items-center">
+        <NavbarItem>
+          <Button
+            radius="full"
+            variant="bordered"
+            style={{
+              color: "#009688",
+              width: "90px",
+              border: "1px solid #009688",
+              backgroundColor: "transparent",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#00695c";
+              e.target.style.color = "#FFFFFF";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "transparent";
+              e.target.style.color = "#009688";
+            }}
+          >
+            Log in
+          </Button>
+        </NavbarItem>
 
-              <Button
-                sx={{
-                  marginLeft: "auto",
-                  borderRadius: "20px",
-                  backgroundColor: "#FFFFFF",
-                  textSize: "20px",
-                  color: "#009688",
-                  border: "1px solid #009688",
-                  textTransform: "none", // Prevent text transformation
-                  width: "100px",
-                  height: "40px",
-                  boxShadow: "none", // Remove shadow
-                  "&:hover": {
-                    backgroundColor: "#009688", // Change background color on hover
-                    color: "#FFFFFF", // Change text color on hover
-                  },
-                }}
-                variant="contained"
-              >
-                Log in{" "}
-              </Button>
-              <Button
-                sx={{
-                  marginLeft: "10px",
-                  borderRadius: "20px",
-                  backgroundColor: "#009688",
-                  textSize: "20px",
-                  textTransform: "none", // Prevent text transformation
-                  width: "100px",
-                  height: "40px",
-                  boxShadow: "none", // Remove shadow
-                  "&:hover": {
-                    backgroundColor: "#009688", // Change background color on hover
-                    color: "#FFFFFF", // Change text color on hover
-                  },
-                }}
-                variant="contained"
-              >
-                Sign up{" "}
-              </Button>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </React.Fragment>
+        <NavbarItem>
+          <Button
+            radius="full"
+            className="bg-gradient-to-tr text-white shadow-lg"
+            style={{
+              backgroundColor: "#009688",
+              width: "90px",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#00695c",
+              },
+            }}
+          >
+            Sign Up
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
   );
-};
-
-export default NavBar;
+}

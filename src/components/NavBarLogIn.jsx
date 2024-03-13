@@ -1,135 +1,110 @@
-import React, { useState } from "react";
-import { Notifications } from "@mui/icons-material";
-import SearchIcon from "@mui/icons-material/Search";
-import PlaceIcon from "@mui/icons-material/Place";
+import React from "react";
+import SearchIcon from "../assets/vectors/search-normal.svg";
+import LocationIcon from "../assets/vectors/location.svg";
+import NotificationIcon from "../assets/vectors/Notification.svg";
 import {
-  AppBar,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Input,
+  DropdownItem,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
   Avatar,
-  Badge,
-  Box,
-  InputBase,
-  styled,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+} from "@nextui-org/react";
 
-const StyledToolbar = styled(Toolbar)({
-  display: "flex",
-  justifyContent: "space-between",
-});
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "20px",
-  backgroundColor: "#F3F4F6",
-  "&:hover": {
-    backgroundColor: "#e0e0e0",
-  },
-  marginLeft: 0,
-  width: "35%", // Increase width of the search input
-}));
-
-const SearchIconWrapper = styled(Box)({
-  position: "absolute",
-  top: "50%",
-  left: "8px",
-  transform: "translateY(-50%)",
-});
-
-const SearchInput = styled(InputBase)(({ theme }) => ({
-  paddingLeft: "32px", // Adjust padding to accommodate the icon
-  flex: 1,
-  fontSize: "14px", // Reduce font size of the placeholder
-}));
-
-const Icons = styled(Box)(({ theme }) => ({
-  display: "none",
-  alignItems: "center",
-  gap: "20px",
-  [theme.breakpoints.up("sm")]: {
-    display: "flex",
-  },
-}));
-
-const UserBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-  [theme.breakpoints.up("sm")]: {
-    display: "none",
-  },
-}));
-
-const NavBarLogIn = () => {
-  const [open, setOpen] = useState(false);
+export default function App() {
   return (
-    <AppBar
+    <Navbar
       position="sticky"
-      sx={{
+      style={{
         background: "#FFFFFF",
+        paddingTop: "10px",
+        paddingBottom: "10px",
         paddingLeft: "20px",
         paddingRight: "20px",
-        padding: "20px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Add box-shadow
+        borderRadius: "10px", // Add border-radius
       }}
     >
-      <StyledToolbar>
-        <Typography
-          variant="h6"
-          sx={{
-            display: { xs: "none", sm: "block", color: "gray" },
-            fontFamily: "Roboto",
-            lineHeight: "24px",
-            fontSize: "16px",
-            fontWeight: "400",
-          }}
-        >
-          Location
-          <Typography
-            variant="h6"
-            sx={{
-              display: { xs: "none", sm: "block", color: "#374151" },
-              fontFamily: "Roboto",
-              lineHeight: "30px",
-              fontSize: "20px",
-              fontWeight: "600",
-            }}
-          >
-            <PlaceIcon sx={{ color: "gray" }} />
-            Ikorodu, Lagos
-          </Typography>
-        </Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon sx={{ color: "gray" }} />
-          </SearchIconWrapper>
-          <SearchInput
-            placeholder="Search doctor, hospitals..."
-            sx={{ width: "calc(100% - 32px)", height: "50px" }} // Increase width of the input
-          />
-        </Search>
-        <Icons>
-          <Badge badgeContent={0} color="error">
-            <Notifications sx={{ color: "gray" }} />
-          </Badge>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            onClick={(e) => setOpen(true)}
-          />
-        </Icons>
-        <UserBox onClick={(e) => setOpen(true)}>
-          <Badge badgeContent={0} color="error">
-            <Notifications sx={{ color: "gray" }} />
-          </Badge>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          />
-          <Typography variant="span">John</Typography>
-        </UserBox>
-      </StyledToolbar>
-    </AppBar>
-  );
-};
+      <NavbarContent>
+        <NavbarItem>
+          <NavbarBrand>
+            <div
+              className="pb-1"
+              style={{
+                fontFamily: "Roboto",
+                lineHeight: "24px",
+                fontSize: "16px",
+                fontWeight: "400",
+              }}
+            >
+              <p className="text-inherit ml-0" style={{ fontSize: "18px" }}>
+                Location
+              </p>
+              <div className="flex items-center">
+                <img src={LocationIcon} alt="Location Icon" />
+                <p className="font-bold text-inherit ml-0">Ikorodu, Lagos</p>
+              </div>
+            </div>
+          </NavbarBrand>
+        </NavbarItem>
+      </NavbarContent>
 
-export default NavBarLogIn;
+      <NavbarContent
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "10px",
+        }}
+      >
+        <Input
+          classNames={{
+            base: "max-w-full sm:max-w-[20rem] h-10",
+            mainWrapper: "h-full",
+            input: "text-small",
+            inputWrapper:
+              "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+          }}
+          placeholder="Search doctor, hospitals, clinics..."
+          size="sm"
+          startContent={<img src={SearchIcon} alt="Search Icon" />}
+          type="search"
+          style={{ width: "100%" }}
+        />
+
+        <img src={NotificationIcon} alt="Notification Icon" />
+
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Avatar
+              as="button"
+              className="transition-transform"
+              color="secondary"
+              name="Jason Hughes"
+              size="sm"
+              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold">zoey@example.com</p>
+            </DropdownItem>
+            <DropdownItem key="profile_details">Profile Details</DropdownItem>
+            <DropdownItem key="dashboard">Dashboard</DropdownItem>
+            <DropdownItem key="appointment">Appointment</DropdownItem>
+            <DropdownItem key="doctors">Doctors</DropdownItem>
+            <DropdownItem key="map">Map</DropdownItem>
+            <DropdownItem key="Favorite">Favorite</DropdownItem>
+            <DropdownItem key="logout" color="danger">
+              Log Out
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </NavbarContent>
+    </Navbar>
+  );
+}
