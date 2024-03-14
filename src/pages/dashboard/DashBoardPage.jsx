@@ -29,7 +29,7 @@ const dashBoardPage = () => {
                     >
                         <ul>
                             {categories.map((category) => (
-                                <li key={category.id}>{category.name}</li>
+                                <li key={category.id}>{category.name} {category.imageUrl}</li>
                             ))}
                         </ul>
                         See all
