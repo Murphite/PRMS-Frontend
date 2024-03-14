@@ -1,21 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "../../components/CarouselComponents";
 import Sidebar from "../../components/Sidebar";
-import CarouselComponents from "../../components/CarouselComponents";
+import { getCategories } from "../../api/dashboard";
 
 const dashBoardPage = () => {
+    const [categories, setCategories] = useState([]);
+
+    const handleButtonClick = async () => {
+        try {
+            const data = await getCategories();
+            setCategories(data);
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    };
     return (
         <div className=" flex">
             <Sidebar />
-            <div className=" w-[80rem] h-[63rem] mt-24 border border-solid border-teal-600 ">
+            <div className=" w-[80rem] h-[63rem] mt-24">
                 <div className=" ml-72 justify-items-center">
                     <Carousel />
                 </div>
                 <div className=" mt-[1rem] flex space-x-[67rem]">
-                    <p className=" font-bold cursor-pointer ml-5">
-                        Categories{" "}
+                    <p className=" font-bold cursor-pointer ml-5">Categories</p>
+                    <p
+                        className="text-gray-500 cursor-pointer ml-5"
+                        onClick={handleButtonClick}
+                    >
+                        <ul>
+                            {categories.map((category) => (
+                                <li key={category.id}>{category.name}</li>
+                            ))}
+                        </ul>
+                        See all
                     </p>
-                    <p className="text-gray-500 cursor-pointer ml-5">See all</p>
                 </div>
                 <div className=" mt-[2rem] flex relative  space-x-16 ml-16">
                     <div className=" cursor-pointer">
@@ -79,6 +97,13 @@ const dashBoardPage = () => {
                             src="src/assets/vectors/Frame 1000001043.svg"
                             onClick={"#"}
                         />
+                    </div>
+                </div>
+
+                <div className="  mt-14">
+                    <div className="flex space-x-[65rem]">
+                        <p className=" font-bold">Nearby Medical Centre</p>
+                        <p className="text-gray-500 cursor-pointer">see all </p>
                     </div>
                 </div>
             </div>
