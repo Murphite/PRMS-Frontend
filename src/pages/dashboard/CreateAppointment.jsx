@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import nextIcon from "../../assets/vectors/nextBlackIcon.svg";
 import previousIcon from "../../assets/vectors/previousBlackIcon.svg";
 import NavBar from "../../components/NavBarLogIn";
+import Container from "../../components/Container";
 
 export default function CreateAppointment() {
     const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
