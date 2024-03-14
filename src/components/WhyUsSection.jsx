@@ -35,16 +35,20 @@ export default function WhyUsSection() {
     const whylist = whyusList;
     return (
         <Container>
-            <section className="space-y-5 lg:flex justify-evenly lg:mb-10">
-                <img
-                    src={purpledoctor}
-                    alt="doctor dressed in purple"
-                    className=""
-                />
-                <div className="space-y-4 lg:pl-3">
-                    <h2 className="text-3xl font-bold lg:text-5xl">
-                        Why You Choose Us?
-                    </h2>
+            <section className="space-y-5 flex flex-col lg:flex lg:flex-row justify-evenly lg:py-14">
+                <div className="">
+                    <img
+                        src={purpledoctor}
+                        alt="doctor dressed in purple"
+                        className=""
+                    />
+                </div>
+                <div className="space-y-4 md:flex flex-col lg:pl-3">
+                    <div className="flex items-start">
+                        <h2 className="text-3xl font-bold lg:text-5xl">
+                            Why You Choose Us?
+                        </h2>
+                    </div>
                     <div>
                         {whylist.length > 0 ? (
                             <>
