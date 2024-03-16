@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import emailVerificationImage from "../../assets/images/image001.png";
 import { verifyEmail } from "../../api/auth";
 
-const EmailVerification = ({ email, token }) => {
+const EmailVerification = () => {
+    const email = "";
+    const token = "";
     const [verificationStatus, setVerificationStatus] = useState({
         isLoading: true,
         error: null,
@@ -17,14 +19,26 @@ const EmailVerification = ({ email, token }) => {
 
                 if (res.success) {
                     console.log("Email verified successfully!");
-                    setVerificationStatus({ isLoading: false, error: null, success: true });
+                    setVerificationStatus({
+                        isLoading: false,
+                        error: null,
+                        success: true,
+                    });
                 } else {
                     console.error("Verification failed:", res.error);
-                    setVerificationStatus({ isLoading: false, error: res.error, success: false });
+                    setVerificationStatus({
+                        isLoading: false,
+                        error: res.error,
+                        success: false,
+                    });
                 }
             } catch (error) {
                 console.error("Error verifying email:", error);
-                setVerificationStatus({ isLoading: false, error, success: false });
+                setVerificationStatus({
+                    isLoading: false,
+                    error,
+                    success: false,
+                });
             }
         };
 
@@ -41,7 +55,9 @@ const EmailVerification = ({ email, token }) => {
                         className="h-[131px] mx-auto"
                     />
                     <h2 className="text-2xl font-semibold text-center pt-9 font-roboto">
-                        {verificationStatus.success ? "Email Verified Successfully!" : "Email Verification Failed!"}
+                        {verificationStatus.success
+                            ? "Email Verified Successfully!"
+                            : "Email Verification Failed!"}
                     </h2>
                     {verificationStatus.success ? (
                         <p className="pt-5 text-center font-roboto">
@@ -61,7 +77,9 @@ const EmailVerification = ({ email, token }) => {
                             }}
                             disabled={verificationStatus.isLoading}
                         >
-                            {verificationStatus.isLoading ? "Verifying..." : "CONTINUE"}
+                            {verificationStatus.isLoading
+                                ? "Verifying..."
+                                : "CONTINUE"}
                         </button>
                     </div>
                 </div>

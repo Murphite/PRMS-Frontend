@@ -15,6 +15,7 @@ import EmailVerificationStatus from "../pages/auth/EmailVerificationStatus";
 import RegularLogin from "../pages/auth/RegularLogin";
 import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
+import ViewPatient from "../pages/admin/ViewPatient";
 
 export default function Router() {
     return (
@@ -41,6 +42,8 @@ export default function Router() {
                 path="/dashboard/create-appointment"
                 element={<CreateAppointment />}
             />
+
+            <Route path="/admin/patient/:id" element={<ViewPatient />} />
         </Routes>
     );
 }
