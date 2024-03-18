@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "../../components/CarouselComponents";
 import Sidebar from "../../components/Sidebar";
-import { getCategories } from "../../api/dashboard";
+// import { getCategories } from "../../api/dashboard";
+
 
 const dashBoardPage = () => {
     const [categories, setCategories] = useState([]);
 
-    const handleButtonClick = async () => {
+    const getCategories = async () => {
         try {
-            const data = await getCategories();
-            setCategories(data);
+            const res = await fetch("https://localhost:7183/api/v1/category");
+            const data = await res.json();
+            setCategories(data.data)
+            console.log(data);
         } catch (error) {
             console.error("Error fetching categories:", error);
         }
     };
+
+    useEffect(()=>{
+        getCategories()
+    },[])
     return (
         <div className=" flex">
             <Sidebar />
@@ -25,17 +32,21 @@ const dashBoardPage = () => {
                     <p className=" font-bold cursor-pointer ml-5">Categories</p>
                     <p
                         className="text-gray-500 cursor-pointer ml-5"
-                        onClick={handleButtonClick}
+                        onClick={getCategories}
                     >
-                        <ul>
+                        <ul class= "flex space-x-10 mt-10 ml-32">
                             {categories.map((category) => (
-                                <li key={category.id}>{category.name} {category.imageUrl}</li>
+                                <li key={category.id}>
+                                    <img src={category.imageUrl}/>
+                                    <p>{category.name}</p>
+                                    
+                                </li>
                             ))}
                         </ul>
                         See all
                     </p>
                 </div>
-                <div className=" mt-[2rem] flex relative  space-x-16 ml-16">
+                {/* <div className=" mt-[2rem] flex relative  space-x-16 ml-16">
                     <div className=" cursor-pointer">
                         <img
                             src="src/assets/vectors/Tab 01.svg"
@@ -84,7 +95,7 @@ const dashBoardPage = () => {
                             onClick={"#"}
                         />
                     </div>
-                </div>
+                </div> */}
                 <div className=" flex space-x-10 mt-10 ml-32 ">
                     <div className=" cursor-pointer">
                         <img
