@@ -57,12 +57,12 @@ const CreatePatient = () => {
     return (
         <div>
             <div>
-                <div className="relative mt-32  flex">
+                <div className="relative flex mt-32">
                     <div className="flex justify-center w-full text-lg">
                         <div className="relative flex items-center">
                             <div>
                                 <svg
-                                    className="bg-teal-400 border w-12 aspect-square leading-none flex justify-center items-center rounded-full"
+                                    className="flex items-center justify-center w-12 leading-none bg-teal-400 border rounded-full aspect-square"
                                     viewBox="0 0 22 22"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,7 @@ const CreatePatient = () => {
                         <div className="relative flex items-center">
                             {formStage > 1 ? (
                                 <svg
-                                    className="bg-teal-400 border w-12 aspect-square leading-none flex justify-center items-center rounded-full"
+                                    className="flex items-center justify-center w-12 leading-none bg-teal-400 border rounded-full aspect-square"
                                     viewBox="0 0 22 22"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,7 @@ const CreatePatient = () => {
                                 }`}
                             />
                             <div className="absolute text-center -bottom-12 -left-12">
-                                <p className="text-sm text-gray-400 ml-5">
+                                <p className="ml-5 text-sm text-gray-400">
                                     MEDICAL HISTORY
                                 </p>
                             </div>
@@ -126,7 +126,7 @@ const CreatePatient = () => {
                         <div className="relative flex items-center">
                             {formStage > 2 ? (
                                 <svg
-                                    className="bg-teal-400 border w-12 aspect-square leading-none flex justify-center items-center rounded-full"
+                                    className="flex items-center justify-center w-12 leading-none bg-teal-400 border rounded-full aspect-square"
                                     viewBox="0 0 22 22"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@ const CreatePatient = () => {
                                 </p>
                             )}
                             <div className="absolute text-center -bottom-12 -left-12">
-                                <p className="text-sm text-gray-400 ml-10">
+                                <p className="ml-10 text-sm text-gray-400">
                                     OTHERS
                                 </p>
                             </div>
