@@ -1,24 +1,38 @@
 import { Input, Button } from "@nextui-org/react";
 
 import heroimage from "../assets/images/heroimage.png";
+import underline from "../assets/vectors/underline.svg";
+import Container from "./Container";
 
 export default function HeroSection() {
     return (
-        <section className="space-y-5 flex flex-col py-10 lg:flex lg:flex-row justify-evenly lg:mb-10 lg:px-10">
-            <div className=" space-y-3 lg:flex flex-col items-start justify-center basis-1/2 md:max-w-xl lg:space-y-8">
-                <h1 className=" text-3xl font-bold lg:text-6xl">
-                    Find & Search Your{" "}
-                    <span className=" text-teal-600">Favourite</span> Doctor
-                </h1>
-                <p>Your Personal Wellness Companion for a Healthier Tomorrow</p>
-                <div>
-                    <SearchInput />
+        <Container>
+            <section className="space-y-5 flex flex-col py-10 lg:flex lg:flex-row justify-evenly lg:mb-10 lg:px-10">
+                <div className=" space-y-3 lg:flex flex-col items-start justify-center basis-1/2 md:max-w-xl lg:space-y-8">
+                    <h1 className=" text-3xl font-bold lg:text-6xl">
+                        Find & Search Your{" "}
+                        <span className=" text-teal-600 underline underline-offset-auto">
+                            Favourite{" "}
+                            {/* <img
+                                src={underline}
+                                className="relative bottom-0 left-0 w-64 h-7"
+                            /> */}
+                        </span>{" "}
+                        Doctor
+                    </h1>
+                    <p>
+                        Your Personal Wellness Companion for a Healthier
+                        Tomorrow
+                    </p>
+                    <div>
+                        <SearchInput />
+                    </div>
                 </div>
-            </div>
-            <div className="">
-                <img src={heroimage} alt="Hero Image" />
-            </div>
-        </section>
+                <div className="">
+                    <img src={heroimage} alt="Hero Image" />
+                </div>
+            </section>
+        </Container>
     );
 }
 
