@@ -53,13 +53,15 @@ export const forgotPassword = async (email) => {
 // };
 
 export const verifyEmail = async (email, token) => {
-  try {
-    const res = await axiosApi.get(`/auth/confirm-email?email=${email}&token=${token}`);
+    try {
+        const res = await axiosApi.get(
+            `/auth/confirm-email?email=${email}&token=${token}`,
+        );
 
-    return res.data;
-  } catch (error) {
-    return error;
-  }
+        return res.data;
+    } catch (error) {
+        return error;
+    }
 };
 
 export const adminLogin = async (email, password) => {
@@ -67,6 +69,18 @@ export const adminLogin = async (email, password) => {
         const res = await axiosApi.post(`/auth/admin-login`, {
             email,
             password,
+        });
+        return res.data;
+    } catch (error) {
+        return error;
+    }
+};
+
+export const resetPassword = async (password, newpassword) => {
+    try {
+        const res = await axiosApi.post(`/auth/reset-password`, {
+            password,
+            newpassword,
         });
         return res.data;
     } catch (error) {
