@@ -1,7 +1,6 @@
 import { Input, Button } from "@nextui-org/react";
 
 import heroimage from "../assets/images/heroimage.png";
-import underline from "../assets/vectors/underline.svg";
 import Container from "./Container";
 
 export default function HeroSection() {
