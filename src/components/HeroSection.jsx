@@ -13,10 +13,6 @@ export default function HeroSection() {
                         Find & Search Your{" "}
                         <span className=" text-teal-600 underline underline-offset-auto">
                             Favourite{" "}
-                            {/* <img
-                                src={underline}
-                                className="relative bottom-0 left-0 w-64 h-7"
-                            /> */}
                         </span>{" "}
                         Doctor
                     </h1>
