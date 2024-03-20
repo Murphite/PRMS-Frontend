@@ -8,8 +8,8 @@
 //  const getCategories = async () => {
 //     try {
 //       const res = await axios.get('/category'); 
-//       console.log (res)
   
+//       console.log (res)
 //       return res.data;
 //     } catch (error) {
 //       throw error;

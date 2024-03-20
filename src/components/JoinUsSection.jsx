@@ -5,9 +5,13 @@ import Container from "./Container";
 export default function JoinUsSection() {
     return (
         <Container>
-            <section className="flex-row-reverse space-y-5 lg:flex justify-evenly">
-                <div className="flex items-center justify-start lg:basis-1/2">
-                    <img src={whitedoctor} alt="doctor dressed in white" />
+            <section className="flex-row-reverse space-y-5 py-5 lg:flex justify-evenly">
+                <div className="flex items-center lg:justify-end lg:basis-1/2">
+                    <img
+                        src={whitedoctor}
+                        alt="doctor dressed in white"
+                        className=" md:w-[530px] lg:w-full"
+                    />
                 </div>
                 <div className="space-y-4 text-gray-800 lg: basis-1/2 max-w-[502px]">
                     <h2 className="text-3xl font-bold lg:text-5xl">

@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "../../components/CarouselComponents";
 import Sidebar from "../../components/Sidebar";
-// import { getCategories } from "../../api/dashboard";
-
+import axios from "axios";
 
 const dashBoardPage = () => {
     const [categories, setCategories] = useState([]);
 
-    const getCategories = async () => {
+    async function fetchCategories() {
         try {
-            const res = await fetch("https://localhost:7183/api/v1/category");
-            const data = await res.json();
-            setCategories(data.data)
-            console.log(data);
+            const res = await axios.get(
+                "https://localhost:7183/api/v1/category",
+            );
+            if (res.status === 200) {
+                setCategories(res.data.data.slice(0, 7));
+                console.log(res.data);
+            }
         } catch (error) {
             console.error("Error fetching categories:", error);
         }
-    };
+    }
 
-    useEffect(()=>{
-        getCategories()
-    },[])
+    async function fetchAllCategories() {
+        try {
+            const res = await axios.get(
+                "https://localhost:7183/api/v1/category",
+            );
+            setCategories(res.data.data);
+            console.log(res.data);
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    }
+    useEffect(() => {
+        // Call fetchCategories function when the component mounts
+        fetchCategories();
+    }, []);
     return (
         <div className=" flex">
             <Sidebar />
@@ -30,72 +44,31 @@ const dashBoardPage = () => {
                 </div>
                 <div className=" mt-[1rem] flex space-x-[67rem]">
                     <p className=" font-bold cursor-pointer ml-5">Categories</p>
+
                     <p
-                        className="text-gray-500 cursor-pointer ml-5"
-                        onClick={getCategories}
+                        className=" font-bold cursor-pointer"
+                        onClick={fetchAllCategories}
                     >
-                        <ul class= "flex space-x-10 mt-10 ml-32">
-                            {categories.map((category) => (
-                                <li key={category.id}>
-                                    <img src={category.imageUrl}/>
-                                    <p>{category.name}</p>
-                                    
-                                </li>
-                            ))}
-                        </ul>
                         See all
                     </p>
                 </div>
-                {/* <div className=" mt-[2rem] flex relative  space-x-16 ml-16">
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 01.svg"
-                            onClick={"#"}
-                        />
+                {
+                    <div className=" grid grid-cols-7   gap-10 items-center mt-5">
+                        {categories.length > 0 &&
+                            categories.map((category) => (
+                                <div className=" flex flex-col items-center justify-center" key={category.id}>
+                                    <img
+                                        src={`https://localhost:7183${category.imageUrl}`}
+                                    />
+                                    <p className=" capitalize mt-1">
+                                        {category.name}
+                                    </p>
+                                </div>
+                            ))}
                     </div>
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 02.svg"
-                            onClick={"#"}
-                        />
-                    </div>
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 03.svg"
-                            onClick={"#"}
-                        />
-                    </div>
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 04.svg"
-                            onClick={"#"}
-                        />
-                    </div>
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 05.svg"
-                            onClick={"#"}
-                        />
-                    </div>
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 06.svg"
-                            onClick={"#"}
-                        />
-                    </div>
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 07.svg"
-                            onClick={"#"}
-                        />
-                    </div>
-                    <div className=" cursor-pointer">
-                        <img
-                            src="src/assets/vectors/Tab 08.svg"
-                            onClick={"#"}
-                        />
-                    </div>
-                </div> */}
+                }
+
+
                 <div className=" flex space-x-10 mt-10 ml-32 ">
                     <div className=" cursor-pointer">
                         <img
