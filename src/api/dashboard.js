@@ -1,14 +1,8 @@
 import { axiosApi } from "./apiService";
 
-export const getCategories = async (Id, Name, ImageUrl) => {
+export const getCategories = async () => {
     try {
-        const res = await axiosApi.get(`/category`, {
-            params: {
-                Id: Id,
-                Name: Name,
-                ImageUrl: ImageUrl,
-            },
-        });
+        const res = await axiosApi.get("/category");
 
         return res.data;
     } catch (error) {
