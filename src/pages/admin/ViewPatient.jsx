@@ -5,17 +5,30 @@ import PatientCard from "../../components/PatientCard";
 import DashLayout from "./../../layouts/DashLayout";
 
 import note from "../../assets/vectors/note.svg";
+import plus from "../../assets/vectors/plus.svg";
 import calendar from "../../assets/vectors/appointment-calendar.svg";
 import patientProfile from "../../assets/vectors/patient-profile.svg";
 import healthProfile from "../../assets/vectors/health-profile.svg";
 import { getPatientDetails } from "../../api/admin/patient";
 import { AppContext } from "../../context/AppContext";
+import { createPrescription } from "../../api/prescription";
+import ShowErrorList from "../../components/ShowErrorList";
 
 const ViewPatient = () => {
     const { id } = useParams();
     const { accessToken } = useContext(AppContext);
     const [patient, setPatient] = useState(null);
     // const [categories, setCategories] = useState([]);
+    const [showForm, setShowForm] = useState(false);
+    const [data, setData] = useState({
+        name: "",
+        dosage: "",
+        frequency: "",
+        diagnosis: "",
+        duration: "",
+        instruction: "",
+    });
+    const [errors, setErrors] = useState(null);
 
     useEffect(() => {
         async function fetchPatient() {
@@ -46,6 +59,25 @@ const ViewPatient = () => {
         // fetchCategories();
     }, []);
 
+    const handleChange = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value });
+    };
+
+    const submit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const res = await createPrescription(accessToken, id, data);
+
+            if (res.isSuccessful)
+                alert(res.message || "Prescription added successfully");
+
+            if (Object.keys(res?.errors)?.length > 0) {
+                setErrors(res.errors);
+            }
+        } catch (error) {}
+    };
+
     return (
         <DashLayout>
             <Container>
@@ -57,7 +89,7 @@ const ViewPatient = () => {
                 </div> */}
 
                 {patient !== null ? (
-                    <>
+                    <div className="pb-8">
                         <div className="flex justify-center mt-12">
                             <PatientCard
                                 date={patient.appointmentDate}
@@ -264,7 +296,152 @@ const ViewPatient = () => {
                                 </div>
                             </div>
                         </div>
-                    </>
+
+                        <div className="flex justify-end mt-5">
+                            <button
+                                className="flex items-center text-sm"
+                                onClick={() =>
+                                    setShowForm((prevState) => !prevState)
+                                }
+                            >
+                                <span>
+                                    <img
+                                        className="w-4 mr-1"
+                                        src={plus}
+                                        alt=""
+                                    />
+                                </span>
+                                Add Prescription
+                            </button>
+                        </div>
+
+                        {showForm && (
+                            <div className="w-64">
+                                {errors != null && (
+                                    <ShowErrorList errors={errors} />
+                                )}
+
+                                <form className="mt-2" onSubmit={submit}>
+                                    <div className="mb-2">
+                                        <label
+                                            className="block text-sm mb-1"
+                                            htmlFor="name"
+                                        >
+                                            {/* <img src={ } alt="" /> */}
+                                            <span>Name of Medication</span>
+                                        </label>
+                                        <input
+                                            id="name"
+                                            name="name"
+                                            type="text"
+                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            value={data.name}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-2">
+                                        <label
+                                            className="block text-sm mb-1"
+                                            htmlFor="dosage"
+                                        >
+                                            {/* <img src={ } alt="" /> */}
+                                            <span>Dosage</span>
+                                        </label>
+                                        <input
+                                            id="dosage"
+                                            name="dosage"
+                                            type="text"
+                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            value={data.dosage}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="mb-2">
+                                        <label
+                                            className="block text-sm mb-1"
+                                            htmlFor="diagnosis"
+                                        >
+                                            {/* <img src={ } alt="" /> */}
+                                            <span>Diagnosis</span>
+                                        </label>
+                                        <input
+                                            id="diagnosis"
+                                            name="diagnosis"
+                                            type="text"
+                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            value={data.diagnosis}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="mb-2">
+                                        <label
+                                            className="block text-sm mb-1"
+                                            htmlFor="frequency"
+                                        >
+                                            {/* <img src={ } alt="" /> */}
+                                            <span>Frequency</span>
+                                        </label>
+                                        <input
+                                            id="frequency"
+                                            name="frequency"
+                                            type="text"
+                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            value={data.frequency}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-2">
+                                        <label
+                                            className="block text-sm mb-1"
+                                            htmlFor="duration"
+                                        >
+                                            {/* <img src={ } alt="" /> */}
+                                            <span>Duration</span>
+                                        </label>
+                                        <input
+                                            id="duration"
+                                            name="duration"
+                                            type="text"
+                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            value={data.duration}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-2">
+                                        <label
+                                            className="block text-sm mb-1"
+                                            htmlFor="instruction"
+                                        >
+                                            {/* <img src={ } alt="" /> */}
+                                            <span>Instruction</span>
+                                        </label>
+                                        <textarea
+                                            cols={3}
+                                            id="instruction"
+                                            name="instruction"
+                                            type="text"
+                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            value={data.instruction}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className="flex justify-end">
+                                        <button
+                                            type="submit"
+                                            className="bg-teal-500 px-3 inline-flex items-center text-white py-2 rounded-md"
+                                        >
+                                            Add Prescription
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        )}
+                    </div>
                 ) : (
                     <div>Loading...</div>
                 )}
