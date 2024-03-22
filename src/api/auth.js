@@ -76,14 +76,15 @@ export const adminLogin = async (email, password) => {
     }
 };
 
-export const resetPassword = async (password, newpassword) => {
+export const resetPassword = async (email, token, newPassword) => {
     try {
         const res = await axiosApi.post(`/auth/reset-password`, {
-            password,
-            newpassword,
+            email,
+            token,
+            newPassword,
         });
         return res.data;
     } catch (error) {
-        return error;
+        return error.response.data;
     }
 };
