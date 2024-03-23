@@ -3,15 +3,19 @@ import JoinUsSection from "../components/JoinUsSection";
 import KeyFeatures from "../components/KeyFeatures";
 import SubscribeForm from "../components/SubscribeForm";
 import WhyUsSection from "../components/WhyUsSection";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const Index = () => {
     return (
         <div>
+            <NavBar />
             <HeroSection />
             <KeyFeatures />
             <WhyUsSection />
             <JoinUsSection />
             <SubscribeForm />
+            <Footer />
         </div>
     );
 };

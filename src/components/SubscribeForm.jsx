@@ -5,9 +5,9 @@ import Container from "./Container";
 export default function SubscribeForm() {
     return (
         <Container>
-            <div className=" flex flex-col sm:h-64 lg:h-80 bg-teal-600 justify-center align-bottom space-y-9 rounded-3xl sm:px-10 lg:px-28 sm:mt-8 md:mt-16">
+            <div className=" flex flex-col h-56 sm:h-64 lg:h-80 bg-teal-600 justify-center align-bottom space-y-9 rounded-3xl px-2 sm:px-10 lg:px-28 sm:mt-8 md:mt-16">
                 <div className=" text-white font-semibold text-2xl flex justify-center lg:text-4xl">
-                    <h2>Subscribe To Our Newsletter</h2>
+                    <h2 className="">Subscribe To Our Newsletter</h2>
                 </div>
                 <div className="flex w-full flex-wrap justify-center align-middle md:flex-nowrap mb-6 md:mb-unit-0">
                     <Input
