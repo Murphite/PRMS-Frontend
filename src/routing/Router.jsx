@@ -46,6 +46,7 @@ export default function Router() {
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
             <Route path="/dashboard" element={<DashBoardPage/>} />
+           
         </Routes>
     );
 }

@@ -57,7 +57,7 @@ const DashBoardPage = () => {
                                     key={category.id}
                                 >
                                     <img src={category.imageUrl} />
-                                    <p className=" capitalize mt-1">
+                                    <p className=" capitalize mt-1"> 
                                         {category.name}
                                     </p>
                                 </div>
