@@ -17,6 +17,7 @@ import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
 import DashBoardPage from "../pages/dashboard/dashBoardPage";
+import AdminSidebar from "../components/AdminSidebar";
 
 export default function Router() {
     return (
@@ -46,6 +47,7 @@ export default function Router() {
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
             <Route path="/dashboard" element={<DashBoardPage />} />
+            <Route path="/admin/dashboard/" element={<AdminSidebar />} />
         </Routes>
     );
 }
