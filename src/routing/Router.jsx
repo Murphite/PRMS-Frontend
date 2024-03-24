@@ -5,8 +5,6 @@ import Register from "../pages/auth/Register";
 import AdminLogin from "../pages/auth/AdminLogin";
 import Index from "../pages/Index";
 import AdminSignUp from "./../pages/auth/AdminSignUp";
-<<<<<<< HEAD
-=======
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import PasswordReset from "../pages/auth/PasswordReset";
 import EmailVerification from "../pages/auth/EmailVerification";
@@ -19,7 +17,6 @@ import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
 import DashBoardPage from "../pages/dashboard/dashBoardPage";
->>>>>>> 4db488f74f3c4a31350094f115953a8c0ea42181
 
 export default function Router() {
     return (
