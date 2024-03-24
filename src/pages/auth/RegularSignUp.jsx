@@ -10,6 +10,33 @@ const inputStyles = {
 };
 
 export default function RegularSignUp() {
+    const [data, setData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        confirmPassword: "",
+        street: "",
+        city: "",
+        state: "",
+        country: "",
+        latitude: "",
+        longitude: "",
+    });
+
+    const [errors, setErrors] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        street: "",
+        city: "",
+        state: "",
+        country: "",
+    });
+
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
         useState(false);
