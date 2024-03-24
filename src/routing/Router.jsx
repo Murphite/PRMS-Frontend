@@ -31,10 +31,10 @@ export default function Router() {
             <Route path="/email-verification" element={<EmailVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/signup" element={<RegularSignUp />} />
-             <Route
+            <Route
                 path="/confirm-email"
                 element={<EmailVerificationStatus />}
-            /> 
+            />
             <Route path="/login" element={<RegularLogin />} />
 
             <Route path="/dashboard/patients" element={<PatientsList />} />
@@ -45,8 +45,7 @@ export default function Router() {
             />
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
-            <Route path="/dashboard" element={<DashBoardPage/>} />
-           
+            <Route path="/dashboard" element={<DashBoardPage />} />
         </Routes>
     );
 }
