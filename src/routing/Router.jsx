@@ -17,6 +17,7 @@ import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
 import DashBoardPage from "../pages/dashboard/dashBoardPage";
+import PrescriptionOverviewTableAdmin from "../components/PrescriptionOverviewTableAdmin";
 
 export default function Router() {
     return (
