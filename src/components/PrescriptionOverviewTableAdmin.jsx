@@ -24,12 +24,12 @@ const PrescriptionOverviewTableAdmin = () => {
       <table className="w-full bg-gray-50">
         <thead>
           <tr>
-            <th className="px-4 py-2 text-center">DATE</th>
-            <th className="px-4 py-2 text-center">PATIENT NAME</th>
-            <th className="px-4 py-2 text-center">MEDICATION</th>
-            <th className="px-4 py-2 text-center">DOSAGE</th>
-            <th className="px-4 py-2 text-center">INSTRUCTIONS</th>
-            <th className="px-4 py-2 text-center">STATUS</th>
+          <th className="px-4 py-2 text-gray-400 text-center">DATE</th>
+            <th className="px-4 py-2 text-gray-400 text-center">PATIENT NAME</th>
+            <th className="px-4 py-2 text-gray-400 text-center">MEDICATION</th>
+            <th className="px-4 py-2 text-gray-400 text-center">DOSAGE</th>
+            <th className="px-4 py-2 text-gray-400 text-center">INSTRUCTIONS</th>
+            <th className="px-4 py-2 text-gray-400 text-center">STATUS</th>
           </tr>
         </thead>
         <tbody>
