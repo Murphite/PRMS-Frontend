@@ -39,7 +39,7 @@ const PrescriptionOverviewTableAdmin = () => {
             <td className="px-4 py-2 text-center">Amoxcillin</td>
             <td className="px-4 py-2 text-center">500mg</td>
             <td className="px-4 py-2 text-center">Take with food. Finish full course</td>
-            <td className={`px-4 py-2 font-bold ${getStatusColor('Confirmed')} text-center`}>Approved</td>
+            <td className={`px-4 py-2 font-bold ${getStatusColor('Approved')} text-center`}>Approved</td>
           </tr>
           <tr className="bg-gray-50 border-b border-gray-200">
           <td className="px-4 py-2 text-center">January 12, 2023</td>
@@ -47,7 +47,7 @@ const PrescriptionOverviewTableAdmin = () => {
             <td className="px-4 py-2 text-center">Ibruprofen</td>
             <td className="px-4 py-2 text-center">200mg</td>
             <td className="px-4 py-2 text-center">Take every 6 hours as needed f..</td>
-            <td className={`px-4 py-2 font-bold ${getStatusColor('Confirmed')} text-center`}>Rejected</td>
+            <td className={`px-4 py-2 font-bold ${getStatusColor('Rejected')} text-center`}>Rejected</td>
           </tr>
           <tr className="bg-white border-b border-gray-200">
           <td className="px-4 py-2 text-center">January 15, 2023</td>
@@ -55,7 +55,7 @@ const PrescriptionOverviewTableAdmin = () => {
             <td className="px-4 py-2 text-center">Metformin</td>
             <td className="px-4 py-2 text-center">1000mg</td>
             <td className="px-4 py-2 text-center">Take with meals. Monitor blood..</td>
-            <td className={`px-4 py-2 font-bold ${getStatusColor('Confirmed')} text-center`}>Pending Review</td>
+            <td className={`px-4 py-2 font-bold ${getStatusColor('Pending Review')} text-center`}>Pending Review</td>
           </tr>
           <tr className="bg-gray-50">
           <td className="px-4 py-2 text-center">January 18, 2023</td>
@@ -63,7 +63,7 @@ const PrescriptionOverviewTableAdmin = () => {
             <td className="px-4 py-2 text-center">Loratadine</td>
             <td className="px-4 py-2 text-center">10mg</td>
             <td className="px-4 py-2 text-center">Take once daily for allergies.</td>
-            <td className={`px-4 py-2 font-bold ${getStatusColor('Confirmed')} text-center`}>Approved</td>
+            <td className={`px-4 py-2 font-bold ${getStatusColor('Approved')} text-center`}>Approved</td>
           </tr>
         </tbody>
       </table>
