@@ -16,6 +16,7 @@ import RegularLogin from "../pages/auth/RegularLogin";
 import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
+import PhysicianDetails from "../pages/dashboard/PhysicianDetails";
 
 export default function Router() {
     return (
@@ -44,6 +45,7 @@ export default function Router() {
             />
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
+            <Route path="/physician/:id" element={<PhysicianDetails />} />
         </Routes>
     );
 }
