@@ -16,7 +16,8 @@ import RegularLogin from "../pages/auth/RegularLogin";
 import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
-import DashBoardPage from "../pages/dashboard/dashBoardPage";
+// import DashBoardPage from "../pages/dashboard/dashBoardPage";
+import FindDoctors from "../pages/dashboard/FindDoctors";
 
 export default function Router() {
     return (
@@ -31,10 +32,10 @@ export default function Router() {
             <Route path="/email-verification" element={<EmailVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/signup" element={<RegularSignUp />} />
-             <Route
+            <Route
                 path="/confirm-email"
                 element={<EmailVerificationStatus />}
-            /> 
+            />
             <Route path="/login" element={<RegularLogin />} />
 
             <Route path="/dashboard/patients" element={<PatientsList />} />
@@ -45,8 +46,8 @@ export default function Router() {
             />
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
-            <Route path="/dashboard" element={<DashBoardPage/>} />
-           
+            {/* <Route path="/dashboard" element={<DashBoardPage/>} /> */}
+            <Route path="/dashboard/finddoctors" element={<FindDoctors />} />
         </Routes>
     );
 }

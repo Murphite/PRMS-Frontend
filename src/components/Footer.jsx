@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 import twitter from "../assets/vectors/twitter-icon.svg";
 import linkedIn from "../assets/vectors/linkedIn-icon.svg";
 import facebook from "../assets/vectors/facebook-icon.svg";
@@ -7,7 +7,7 @@ import fingers from "../assets/vectors/2fingers-icon.svg";
 import dribble from "../assets/vectors/dribble-icon.svg";
 
 export default function Footer() {
-    const currentYear = dayjs();
+    // const currentYear = dayjs();
     const year = currentYear.year();
     return (
         <section className=" bg-teal-800 flex justify-center p-6">
