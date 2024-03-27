@@ -10,10 +10,10 @@ const GetMedical = () => {
         const fetchApplicationData = async () => {
             try {
                 const response = await getMedicationHistory();
-                setMedicalHistory(response.data);
-                console.log("response", response.data);
+                setMedicalHistory(response);
+                console.log("Response:", response);
             } catch (error) {
-                console.error("Error fetching application data:", error);
+                console.error("Error fetching medication history:", error);
             }
         };
 
