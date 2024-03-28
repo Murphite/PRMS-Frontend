@@ -7,7 +7,6 @@ import EmptyStarIcon from "../assets/vectors/find-doc-vectors/EmptyStarIcon.jpg"
 import FavoriteIcon from "../assets/vectors/find-doc-vectors/favorite.svg";
 import FilledFavoriteIcon from "../assets/vectors/find-doc-vectors/favorite-filled.svg";
 import LineIcon from "../assets/vectors/find-doc-vectors/Line.svg";
-import "./finddoctors-style.css";
 
 const DoctorCard = ({
     name,
@@ -29,7 +28,7 @@ const DoctorCard = ({
             return <img src={EmptyStarIcon} alt="Rating Icon" />;
         } else if (rating < 5) {
             return (
-                <div className="relative">
+                <div style={{ position: "relative" }}>
                     <img
                         src={FilledStarIcon}
                         alt="Star Icon"
@@ -60,7 +59,10 @@ const DoctorCard = ({
 
     return (
         <div className="block bg-white shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface p-4 rounded-lg">
-            <div className="flex border-white shadow-lg p-3 border-6 rounded-lg doctor-card">
+            <div
+                className="flex border-white shadow-lg p-3 border-6 rounded-lg"
+                style={{ position: "relative" }}
+            >
                 <div className="flex flex-col items-center justify-center min-w-[10px] lg:w-1/5 md:w-1/4 mr-4">
                     <div className="image">
                         <img
@@ -69,24 +71,18 @@ const DoctorCard = ({
                             alt="Doctor"
                         />
                     </div>
+                    <img
+                        src={isFavorite ? FilledFavoriteIcon : FavoriteIcon}
+                        alt="Favorite Icon"
+                        onClick={handleFavoriteClick}
+                        className="absolute top-2 right-2 cursor-pointer z-10"
+                    />
                 </div>
 
                 <div className="lg:w-4/5 md:w-3/4 flex flex-col leading-9">
-                    <div className="flex items-center justify-between">
-                        <p className="font-inter text-lg font-bold mb-2 doctor-name text-sm md:text-base lg:text-lg">
-                            {name}
-                        </p>
-                        <img
-                            style={{
-                                justifyContent: "flex-end",
-                                cursor: "pointer",
-                            }}
-                            src={isFavorite ? FilledFavoriteIcon : FavoriteIcon}
-                            alt="Favorite Icon"
-                            onClick={handleFavoriteClick}
-                            className="favorite-icon"
-                        />
-                    </div>
+                    <p className="font-inter text-lg font-bold mb-2 doctor-name text-sm md:text-base lg:text-lg">
+                        {name}
+                    </p>
                     <hr />
                     <p className="font-roboto font-normal text-base mt-2 text-sm md:text-base lg:text-lg">
                         {specialty}

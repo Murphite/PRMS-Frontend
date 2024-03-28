@@ -6,7 +6,7 @@ import RoutingIcon from "../assets/vectors/find-doc-vectors/routing2.svg";
 import FavoriteIcon from "../assets/vectors/find-doc-vectors/Favorite2.svg";
 import FilledFavoriteIcon from "../assets/vectors/find-doc-vectors/favorite-filled.svg";
 import EmptyStarIcon from "../assets/vectors/find-doc-vectors/EmptyStarIcon.jpg";
-import "./finddoctors-style.css";
+import NoImageAvailable from "../assets/vectors/find-doc-vectors/no-image-available.jpg"; // Import fallback image
 
 const MedicalCenterCard = ({
     imageSrc,
@@ -27,13 +27,45 @@ const MedicalCenterCard = ({
         return (meters / 1000).toFixed(2);
     };
 
+    const calculateTime = (distance) => {
+        // Assuming average speed of 60 km/hour
+        const averageSpeedKmPerHour = 60000;
+        const timeInHours = distance / averageSpeedKmPerHour;
+        // Convert hours to minutes
+        const timeInMinutes = timeInHours * 60;
+        // Round the time to the nearest integer
+        return Math.round(timeInMinutes);
+    };
+
     const properCase = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
 
+    // Function to check if the URL is valid or if imageSrc is empty or null
+    const isValidURL = (url) => {
+        if (!url || url.trim() === "") {
+            return false;
+        }
+        try {
+            new URL(url);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    };
+
     return (
         <div className="rounded overflow-hidden shadow-lg flex flex-col relative">
-            <img className="w-full" src={imageSrc} alt="" />
+            <img
+                className="w-full"
+                src={isValidURL(imageSrc) ? imageSrc : NoImageAvailable}
+                alt={
+                    isValidURL(imageSrc)
+                        ? "Medical Center"
+                        : "No Image Available"
+                }
+            />
+            {/* Use fallback image if imageSrc is not available */}
             <a href="#!" id="favoriteButton" onClick={handleFavoriteClick}>
                 <div
                     id="favoriteIcon"
@@ -90,8 +122,8 @@ const MedicalCenterCard = ({
                         <div className="flex items-center">
                             <img src={RoutingIcon} alt="Routing Icon" />
                             <p className="font-roboto font-normal text-base ms-2 whitespace-nowrap">
-                                {convertToKilometers(distance)} km/40min{" "}
-                                {/* Convert distance to kilometers */}
+                                {convertToKilometers(distance)} km/
+                                {calculateTime(distance)} min
                             </p>
                         </div>
                         <div className="flex items-center">

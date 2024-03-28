@@ -29,7 +29,7 @@ const FindDoctors = () => {
         }
 
         fetchData();
-    }, [accessToken]);
+    }, []);
 
     const handleFavoriteClick = () => {
         setIsFavorite(!isFavorite);
@@ -43,8 +43,32 @@ const FindDoctors = () => {
         setActiveButton(null); // Reset active button
     };
 
+    // Filter physicians based on selected category
+    const filteredPhysicians =
+        activeButton === null
+            ? physicians
+            : physicians.filter(
+                  (physician) =>
+                      physician.speciality &&
+                      physician.speciality.toLowerCase() ===
+                          categories[activeButton]?.name.toLowerCase(),
+              );
+
+    // Filter medical centers based on selected category
+    const filteredMedicalCenters =
+        activeButton === null
+            ? medicalCenters
+            : medicalCenters.filter(
+                  (medicalCenter) =>
+                      medicalCenter.categories &&
+                      medicalCenter.categories.includes(
+                          categories[activeButton]?.name,
+                      ),
+              );
+
     return (
         <div className="max-w-screen mx-auto p-6 sm:p-5 md:p-10">
+            {/* Category buttons */}
             <div className="flex justify-center mb-4 flex-wrap gap-4">
                 {/* "All" button */}
                 <CategoryCard
@@ -65,9 +89,7 @@ const FindDoctors = () => {
                         index={index}
                         activeButton={activeButton}
                         handleButtonClick={handleButtonClick}
-                        className={`category-button ${
-                            activeButton === index ? "clicked" : ""
-                        }`}
+                        className={`category-button ${activeButton === index ? "clicked" : ""}`}
                         onClick={() => handleButtonClick(index)}
                     />
                 ))}
@@ -75,7 +97,7 @@ const FindDoctors = () => {
 
             {/* Render doctor cards */}
             <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 gap-4">
-                {physicians.map((physician, index) => (
+                {filteredPhysicians.map((physician, index) => (
                     <DoctorCard
                         key={index}
                         name={`${physician.firstName} ${physician.middleName ? physician.middleName + " " : ""}${physician.lastName}`}
@@ -91,6 +113,7 @@ const FindDoctors = () => {
                 ))}
             </div>
 
+            {/* Nearby Medical Centers */}
             <div className="flex justify-between mt-6">
                 <div>
                     <p className="font-roboto text-lg font-bold mb-2">
@@ -106,7 +129,7 @@ const FindDoctors = () => {
 
             {/* Render medical center cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                {medicalCenters.map((medicalCenter, index) => (
+                {filteredMedicalCenters.map((medicalCenter, index) => (
                     <MedicalCenterCard
                         key={index}
                         name={medicalCenter.name}

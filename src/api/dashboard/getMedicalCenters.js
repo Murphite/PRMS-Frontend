@@ -1,10 +1,12 @@
 import { axiosApi } from "../apiService";
 
 export const getMedicalCentersDetails = async (token) => {
+    const localData = localStorage.getItem("accessToken");
+    console.log(localData)
     try {
         const res = await axiosApi.get(`/medical-centers`, {
             headers: {
-                Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2YTVlZTI5OS1lYzYxLTQ0OGUtOTE1OC02MGQxOThlMzUxMTQiLCJzdWIiOiI2YTVlZTI5OS1lYzYxLTQ0OGUtOTE1OC02MGQxOThlMzUxMTQiLCJuYW1lIjoiRmVsaXggTWVkaHVyc3QiLCJlbWFpbCI6IkZlbGl4MzBAaG90bWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsIm5iZiI6MTcxMTQ1NDk1MSwiZXhwIjoxNzEyMDU5NzUxLCJpYXQiOjE3MTE0NTQ5NTEsImlzcyI6IioiLCJhdWQiOiIqIn0.INWR01lrHvmoRJx1v6NjejviYI_yR70AOVvHsrH66eY`,
+                Authorization: `Bearer ${token}`,
             },
         });
 
