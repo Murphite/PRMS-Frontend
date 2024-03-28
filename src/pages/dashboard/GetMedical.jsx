@@ -7,11 +7,11 @@ const GetMedical = () => {
     const [medicalHistory, setMedicalHistory] = useState([]);
 
     useEffect(() => {
-        const fetchApplicationData = async () => {
+        async  function fetchApplicationData ()  {
             try {
                 const response = await getMedicationHistory();
-                setMedicalHistory(response);
-                console.log("Response:", response);
+                setMedicalHistory(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error("Error fetching medication history:", error);
             }
@@ -43,17 +43,22 @@ const GetMedical = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {medicalHistory.map((category) => (
+                           
+                           
+                            {medicalHistory.length > 0 &&
+                            medicalHistory.map((category) => (
                                 <tr key={category.id}>
                                     <td className="px-8 py-2 border border-gray-200">{category.dateCreated}</td> 
-                                    <td className="px-4 py-2 border border-gray-200">{category.physicianName}</td>
-                                    <td className="px-4 py-2 border border-gray-200">{category.medication}</td>
-                                    <td className="px-4 py-2 border border-gray-200">{category.dosage}</td>
-                                    <td className="px-4 py-2 border border-gray-200">{category.instructions}</td>
-                                    <td className="px-4 py-2 border border-gray-200">{category.status}</td>
+                                    <td className="px-4 py-2 border border-gray-200">{category.Physician}</td>
+                                    <td className="px-4 py-2 border border-gray-200">{category.Medication}</td>
+                                    <td className="px-4 py-2 border border-gray-200">{category.Dosage}</td>
+                                    <td className="px-4 py-2 border border-gray-200">{category.Instructions}</td>
+                                    <td className="px-4 py-2 border border-gray-200">{category.Status}</td>
                                     <td className="px-8 py-2 border border-gray-200 font-bold text-green-500 cursor-pointer " onClick={"#"}> View</td>
                                 </tr>
                             ))}
+                            
+
                         </tbody>
                     </table>
                 </div>
