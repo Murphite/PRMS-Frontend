@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 
-// import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import AdminLogin from "../pages/auth/AdminLogin";
 import Index from "../pages/Index";
@@ -33,7 +32,6 @@ export default function Router() {
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/email-verification" element={<EmailVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/signup" element={<RegularSignUp />} />
             <Route
                 path="/confirm-email"
                 element={<EmailVerificationStatus />}
