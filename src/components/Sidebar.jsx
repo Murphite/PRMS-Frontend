@@ -23,7 +23,12 @@ const Sidebar = () => {
                 comp: "/dashboard/create-appointment",
                 icon: CalImg,
             },
-            { id: 3, title: "Doctors", comp: "Doctors", icon: DocImg },
+            {
+                id: 3,
+                title: "Doctors",
+                comp: "/dashboard/physician",
+                icon: DocImg,
+            },
             { id: 4, title: "Map", comp: "Map", icon: MapImg },
             { id: 5, title: "Favorite", comp: "Favorite", icon: FavImg },
         ],

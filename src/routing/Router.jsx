@@ -47,10 +47,10 @@ export default function Router() {
                 element={<CreateAppointment />}
             />
             <Route
-                path="/dashboard/physician/:id"
+                path="/dashboard/physician/:physicianId"
                 element={<PhysicianDetails />}
             />
-            <Route path="/dashboard/finddoctors" element={<FindDoctors />} />
+            <Route path="/dashboard/physician" element={<FindDoctors />} />
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
         </Routes>
