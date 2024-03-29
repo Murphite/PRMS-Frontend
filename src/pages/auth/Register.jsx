@@ -222,6 +222,7 @@ export default function Register() {
                         <CustomInput
                             type={passwordType}
                             name="password"
+                            label="Password"
                             onChange={handleChange}
                             endContent={
                                 passwordType !== "text" ? (

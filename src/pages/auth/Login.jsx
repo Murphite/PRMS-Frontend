@@ -40,7 +40,7 @@ export default function Login() {
         }
 
         setAccessToken(res.data.token);
-        setAuthUserData(res.data.userInfo);
+        // setAuthUserData(res.data.userInfo);
         navigate("/dashboard");
     };
 
@@ -75,21 +75,6 @@ export default function Login() {
                         autoComplete="current-password"
                         onChange={handleChange}
                     />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) =>
-                                setData("remember", e.target.checked)
-                            }
-                        />
-                        <span className="text-sm text-gray-600 ms-2">
-                            Remember me
-                        </span>
-                    </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
