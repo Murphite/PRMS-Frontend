@@ -1,8 +1,8 @@
-import { axiosApi } from "../apiService";
+import { axiosApi } from "../api/apiService";
 
-export const getPatientDetails = async (token, patientId) => {
+export const getPhysicianDetails = async (token, physicianId) => {
     try {
-        const res = await axiosApi.get(`/admin/patient/${patientId}`, {
+        const res = await axiosApi.get(`/physician/${physicianId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

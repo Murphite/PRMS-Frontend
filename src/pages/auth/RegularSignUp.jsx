@@ -47,9 +47,9 @@ export default function RegularSignUp() {
         setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
 
     return (
-        <section className=" space-y-5 flex flex-col lg:flex-row ">
+        <section className="flex flex-col space-y-5 lg:flex-row">
             <div className=" flex flex-col w-full  space-y-6 bg-[#009688] p-5 lg:space-y-36 lg:flex-col-reverse lg:w-3/5 items-center justify-center h-full">
-                <div className=" flex flex-col items-center">
+                <div className="flex flex-col items-center ">
                     <img
                         src={adminimage}
                         alt="images of doctors"
@@ -57,7 +57,7 @@ export default function RegularSignUp() {
                     />
                 </div>
                 <div className="flex flex-col items-center space-y-4 text-gray-100 md:max-w-lg">
-                    <h2 className=" text-2xl text-center font-bold lg:text-4xl">
+                    <h2 className="text-2xl font-bold text-center lg:text-4xl">
                         Start Your Wellness Journey!
                     </h2>
                     <p className="text-center">
@@ -68,13 +68,14 @@ export default function RegularSignUp() {
                     </p>
                 </div>
             </div>
-            <div className=" py-6 px-3  mb-3 w-full items-center justify-center md:px-4 lg:w-2/5 lg:px-5">
+
+            <div className="items-center justify-center w-full px-3 py-6 mb-3 md:px-4 lg:w-2/5 lg:px-5">
                 <form action="" method="post" className="">
-                    <div className="w-full flex flex-col gap-2 lg:pt-20">
+                    <div className="flex flex-col w-full gap-2 lg:pt-20">
                         <h2 className="text-3xl font-medium lg:text-4xl lg:text-center lg:pb-8">
                             Create Account
                         </h2>
-                        <div className="flex w-full flex-wrap md:flex-nowrap mb-2 md:mb-6 gap-4">
+                        <div className="flex flex-wrap w-full gap-4 mb-2 md:flex-nowrap md:mb-6">
                             <Input
                                 size="sm"
                                 type="text"
@@ -83,7 +84,7 @@ export default function RegularSignUp() {
                                 classNames={inputStyles}
                             />
                         </div>
-                        <div className="flex w-full flex-wrap md:flex-nowrap mb-2 md:mb-6 gap-4">
+                        <div className="flex flex-wrap w-full gap-4 mb-2 md:flex-nowrap md:mb-6">
                             <Input
                                 size="sm"
                                 type="text"
@@ -92,7 +93,7 @@ export default function RegularSignUp() {
                                 color="success"
                             />
                         </div>
-                        <div className="flex w-full flex-wrap md:flex-nowrap mb-2 md:mb-6 gap-4">
+                        <div className="flex flex-wrap w-full gap-4 mb-2 md:flex-nowrap md:mb-6">
                             <Input
                                 size="sm"
                                 type="email"
@@ -102,7 +103,7 @@ export default function RegularSignUp() {
                             />
                         </div>
                         <PhoneNumberValidation />
-                        <div className="flex w-full flex-wrap md:flex-nowrap mb-2 md:mb-6 gap-4">
+                        <div className="flex flex-wrap w-full gap-4 mb-2 md:flex-nowrap md:mb-6">
                             <Input
                                 label="Password"
                                 endContent={
@@ -112,9 +113,9 @@ export default function RegularSignUp() {
                                         onClick={togglePasswordVisibility}
                                     >
                                         {isPasswordVisible ? (
-                                            <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                            <EyeSlashFilledIcon className="text-2xl pointer-events-none text-default-400" />
                                         ) : (
-                                            <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                            <EyeFilledIcon className="text-2xl pointer-events-none text-default-400" />
                                         )}
                                     </button>
                                 }
@@ -123,7 +124,7 @@ export default function RegularSignUp() {
                                 color="success"
                             />
                         </div>
-                        <div className="  flex w-full flex-wrap md:flex-nowrap mb-2 md:mb-6 gap-4">
+                        <div className="flex flex-wrap w-full gap-4 mb-2 md:flex-nowrap md:mb-6">
                             <Input
                                 label="Confirm Password"
                                 endContent={
@@ -135,9 +136,9 @@ export default function RegularSignUp() {
                                         }
                                     >
                                         {isConfirmPasswordVisible ? (
-                                            <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                            <EyeSlashFilledIcon className="text-2xl pointer-events-none text-default-400" />
                                         ) : (
-                                            <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                            <EyeFilledIcon className="text-2xl pointer-events-none text-default-400" />
                                         )}
                                     </button>
                                 }
@@ -153,7 +154,7 @@ export default function RegularSignUp() {
                         <div className="flex justify-center align-middle">
                             <Button
                                 radius="full"
-                                className=" bg-teal-600 text-white shadow-lg md:w-80 md:mt-6"
+                                className="text-white bg-teal-600 shadow-lg md:w-80 md:mt-6"
                             >
                                 CREATE ACCOUNT
                             </Button>
@@ -182,7 +183,7 @@ const PhoneNumberValidation = () => {
 
     return (
         <div className="">
-            <label className="flex w-full flex-wrap border-2 bg-teal-100 rounded-sm md:flex-wrap mb-2 md:mb-6 gap-4">
+            <label className="flex flex-wrap w-full gap-4 mb-2 bg-teal-100 border-2 rounded-sm md:flex-wrap md:mb-6">
                 <PhoneInput
                     country={"ng"}
                     value={phoneNumber}
