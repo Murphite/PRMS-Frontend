@@ -16,14 +16,15 @@ import RegularLogin from "../pages/auth/RegularLogin";
 import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
-import DashBoardPage from "../pages/dashboard/dashBoardPage";
+import DashBoardPage from "../pages/dashboard/DashBoardPage";
 import PhysicianDetails from "../pages/dashboard/PhysicianDetails";
 
 export default function Router() {
     return (
         <Routes>
             <Route path="/" element={<Index />} />
-            {/* <Route path="/login" element={<Login />} />  */}
+
+            <Route path="/login" element={<RegularLogin />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin-signup" element={<AdminSignUp />} />
@@ -36,22 +37,20 @@ export default function Router() {
                 path="/confirm-email"
                 element={<EmailVerificationStatus />}
             />
-            <Route path="/login" element={<RegularLogin />} />
 
+            <Route path="/dashboard" element={<DashBoardPage />} />
             <Route path="/dashboard/patients" element={<PatientsList />} />
             <Route path="/dashboard/patients/new" element={<CreatePatient />} />
             <Route
                 path="/dashboard/create-appointment"
                 element={<CreateAppointment />}
             />
-
-            <Route path="/admin/patient/:id" element={<ViewPatient />} />
-            <Route path="/dashboard" element={<DashBoardPage />} />
-
             <Route
                 path="/dashboard/physician/:id"
                 element={<PhysicianDetails />}
             />
+
+            <Route path="/admin/patient/:id" element={<ViewPatient />} />
         </Routes>
     );
 }
