@@ -8,7 +8,6 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import PasswordReset from "../pages/auth/PasswordReset";
 import EmailVerification from "../pages/auth/EmailVerification";
 import ResetPassword from "../pages/auth/ResetPassword";
-import RegularSignUp from "../pages/auth/RegularSignUp";
 import PatientsList from "../pages/dashboard/PatientsList";
 import EmailVerificationStatus from "../pages/auth/EmailVerificationStatus";
 import RegularLogin from "../pages/auth/RegularLogin";
