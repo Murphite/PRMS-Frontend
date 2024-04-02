@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Tabs,
     Tab,
@@ -14,6 +14,8 @@ import {
     Button,
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
+
+import logo from "../assets/images/Health.png";
 
 export default function App() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +38,7 @@ export default function App() {
             <NavbarBrand>
                 <p className="font-bold text-inherit">
                     <img
-                        src="/Images/HealthLogo.png"
+                        src={logo}
                         alt="health-logo"
                         style={{ width: "50px", height: "auto" }}
                     />
@@ -72,7 +74,7 @@ export default function App() {
             ) : null}
 
             <div
-                className="hidden sm:flex items-center" // Use flexbox to align items horizontally and center Tabs
+                className="items-center hidden sm:flex" // Use flexbox to align items horizontally and center Tabs
                 style={{ flex: "3", justifyContent: "center" }} // Add flex: 1 to allow Tabs to take up remaining space
             >
                 {/* Display Tabs component */}
@@ -111,7 +113,7 @@ export default function App() {
             </div>
 
             {/* Buttons at the end */}
-            <NavbarContent className="hidden sm:flex items-center">
+            <NavbarContent className="items-center hidden sm:flex">
                 <NavbarItem>
                     <Link to="/login">
                         {" "}
@@ -142,7 +144,7 @@ export default function App() {
                     <Link to="/signup">
                         <Button
                             radius="full"
-                            className="bg-gradient-to-tr text-white shadow-lg"
+                            className="text-white shadow-lg bg-gradient-to-tr"
                             style={{
                                 backgroundColor: "#009688",
                                 width: "90px",
