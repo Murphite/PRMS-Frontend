@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Tabs,
     Tab,
@@ -14,6 +14,8 @@ import {
     Button,
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
+
+import logo from "../assets/images/Health.png";
 
 export default function App() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +38,7 @@ export default function App() {
             <NavbarBrand>
                 <p className="font-bold text-inherit">
                     <img
-                        src="/Images/HealthLogo.png"
+                        src={logo}
                         alt="health-logo"
                         style={{ width: "50px", height: "auto" }}
                     />
