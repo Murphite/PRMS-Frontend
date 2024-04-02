@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import NavBar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import Container from "../components/Container";
 
 const DashLayout = ({ children }) => {
@@ -8,7 +8,7 @@ const DashLayout = ({ children }) => {
             <Sidebar />
 
             <div className="w-full">
-                <NavBar />
+                <Navbar />
                 <div className="mt-6">
                     <Container>{children}</Container>
                 </div>
