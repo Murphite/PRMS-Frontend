@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -9,10 +10,12 @@ import FavImg from "../assets/images/lovely.png";
 import ProfImg from "../assets/images/profile.png";
 import Logimg from "../assets/images/logout.png";
 import HomeImg from "../assets/images/Health.png";
+import { AppContext } from "../context/AppContext";
 
 const Sidebar = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { setAccessToken } = useContext(AppContext);
 
     const links = [
         [
@@ -37,6 +40,7 @@ const Sidebar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
+        setAccessToken("");
         navigate("/");
     };
 

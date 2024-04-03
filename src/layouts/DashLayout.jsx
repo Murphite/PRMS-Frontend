@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/DashNavbar";
 import Container from "../components/Container";
 
 const DashLayout = ({ children }) => {
