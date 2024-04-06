@@ -23,7 +23,7 @@ const Sidebar = () => {
             {
                 id: 2,
                 title: "Appointment",
-                comp: "/dashboard/create-appointment",
+                comp: "/dashboard/create-appointment/",
                 icon: CalImg,
             },
             {

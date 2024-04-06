@@ -1,6 +1,6 @@
 import { axiosApi } from "../api/apiService";
 
-export const getPhysicianDetails = async (token, physicianId) => {
+export const getSinglePhysicianDetails = async (token, physicianId) => {
     try {
         const res = await axiosApi.get(`/physician/${physicianId}`, {
             headers: {

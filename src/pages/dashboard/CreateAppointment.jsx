@@ -1,11 +1,31 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
+import { AppContext } from "../../context/AppContext";
+import { getSelectedPhysicianAppointmentList } from "../../api/dashboard/appointment";
 import nextIcon from "../../assets/vectors/nextBlackIcon.svg";
 import previousIcon from "../../assets/vectors/previousBlackIcon.svg";
 import DashLayout from "../../layouts/DashLayout";
 
 export default function CreateAppointment() {
+    const { id } = useParams();
+    const { accessToken } = useContext(AppContext);
+    const [existingDateTime, setExistingDateTime] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const AppRes = await getSelectedPhysicianAppointmentList(
+                accessToken,
+                id,
+            );
+            setExistingDateTime(AppRes.data);
+            console.log(AppRes.data);
+        }
+
+        fetchData();
+    }, []);
+
     const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
     const months = [
@@ -43,6 +63,8 @@ export default function CreateAppointment() {
         "05.00 PM",
         "05.30 PM",
     ];
+
+    const timeSlots = generateTimeSlots();
 
     const currentDate = dayjs();
     const [today, setToday] = useState(currentDate);
@@ -119,7 +141,7 @@ export default function CreateAppointment() {
                                                     : "",
                                             )}
                                             onClick={() => {
-                                                selectDate(date);
+                                                setSelectDate(date);
                                             }}
                                         >
                                             {date.date()}
@@ -131,13 +153,14 @@ export default function CreateAppointment() {
                     </div>
                 </div>
 
-                <div className="pt-4 space-y-5">
+                <div className="pt-4 space-y-5 h-auto">
                     <div>
                         <h2 className="text-xl font-semibold text-gray-900">
                             Select Hour
                         </h2>
                     </div>
-                    <div className="grid w-full h-56 grid-cols-3 place-content-between ">
+                    {}
+                    <div className="grid w-full h-96 grid-cols-3 place-content-between ">
                         {timeSlot.map((timeunit, index) => {
                             return (
                                 <div
@@ -162,10 +185,28 @@ export default function CreateAppointment() {
                         })}
                     </div>
                 </div>
+                <div>
+                    <p>You selected {selectDate.toDate().toString()}</p>
+                </div>
             </div>
         </DashLayout>
     );
 }
+
+const generateTimeSlots = () => {
+    const startTime = dayjs("09:30", "HH:mm");
+    const endTime = dayjs("17:30", "HH:mm");
+
+    const timeSlots = [];
+
+    let currentTime = startTime;
+    while (currentTime.isBefore(endTime)) {
+        timeSlots.push(currentTime.format("HH:mm"));
+        currentTime = currentTime.add(30, "minute"); // Add 30 minutes
+    }
+
+    return timeSlots;
+};
 
 const generateDate = (month = dayjs().month(), year = dayjs().year()) => {
     const firstDateOfMonth = dayjs().year(year).month(month).startOf("month");

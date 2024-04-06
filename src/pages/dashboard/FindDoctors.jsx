@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import DoctorCard from "../../components/DoctorCard";
 import MedicalCenterCard from "../../components/MedicalCenterCard";
 import CategoryCard from "../../components/CategoryCard";
+import { Link } from "react-router-dom";
 
 import { AppContext } from "../../context/AppContext";
 import { getCategories } from "../../api/dashboard/getCategory";
 import { getPhysiciansDetails } from "../../api/dashboard/getPhysicians";
 import { getMedicalCentersDetails } from "../../api/dashboard/getMedicalCenters";
+import DashLayout from "../../layouts/DashLayout";
 
 const FindDoctors = () => {
     const { accessToken } = useContext(AppContext);
@@ -67,84 +69,98 @@ const FindDoctors = () => {
               );
 
     return (
-        <div className="max-w-screen mx-auto p-6 sm:p-5 md:p-10">
-            {/* Category buttons */}
-            <div className="flex justify-center mb-4 flex-wrap gap-4">
-                {/* "All" button */}
-                <CategoryCard
-                    name="All"
-                    index={null}
-                    activeButton={activeButton}
-                    handleButtonClick={handleAllButtonClick}
-                />
-
-                {/* Render category buttons */}
-                {categories.map((category, index) => (
+        <DashLayout>
+            <div className="max-w-screen mx-auto p-6 sm:p-5 md:p-10">
+                {/* Category buttons */}
+                <div className="flex justify-center mb-4 flex-wrap gap-4">
+                    {/* "All" button */}
                     <CategoryCard
-                        key={index}
-                        name={
-                            category.name.charAt(0).toUpperCase() +
-                            category.name.slice(1)
-                        } // Proper case
-                        index={index}
+                        name="All"
+                        index={null}
                         activeButton={activeButton}
-                        handleButtonClick={handleButtonClick}
-                        className={`category-button ${activeButton === index ? "clicked" : ""}`}
-                        onClick={() => handleButtonClick(index)}
+                        handleButtonClick={handleAllButtonClick}
                     />
-                ))}
-            </div>
 
-            {/* Render doctor cards */}
-            <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 gap-4">
-                {filteredPhysicians.map((physician, index) => (
-                    <DoctorCard
-                        key={index}
-                        name={`${physician.firstName} ${physician.middleName ? physician.middleName + " " : ""}${physician.lastName}`}
-                        specialty={physician.speciality}
-                        hospital={physician.medicalCenterName}
-                        location={`${physician.street}, ${physician.city}, ${physician.state}`}
-                        rating={physician.rating || 0}
-                        reviews={physician.reviewCount || 0}
-                        imageSrc={physician.imageUrl}
-                        isFavorite={isFavorite}
-                        onFavoriteClick={handleFavoriteClick}
-                    />
-                ))}
-            </div>
-
-            {/* Nearby Medical Centers */}
-            <div className="flex justify-between mt-6">
-                <div>
-                    <p className="font-roboto text-lg font-bold mb-2">
-                        Nearby Medical Centers
-                    </p>
+                    {/* Render category buttons */}
+                    {categories.map((category, index) => (
+                        <CategoryCard
+                            key={index}
+                            name={
+                                category.name.charAt(0).toUpperCase() +
+                                category.name.slice(1)
+                            } // Proper case
+                            index={index}
+                            activeButton={activeButton}
+                            handleButtonClick={handleButtonClick}
+                            className={`category-button ${
+                                activeButton === index ? "clicked" : ""
+                            }`}
+                            onClick={() => handleButtonClick(index)}
+                        />
+                    ))}
                 </div>
-                <div>
-                    <p className="font-roboto text-lg font-bold mb-2">
-                        See All
-                    </p>
+
+                {/* Render doctor cards */}
+                <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 gap-4">
+                    {filteredPhysicians.map((physician, index) => (
+                        <Link
+                            key={index}
+                            to={`/dashboard/physician/${physician.physicianId}`} // Use `to` for routing
+                        >
+                            <DoctorCard
+                                key={index}
+                                physicianId={physician.physicianId}
+                                name={`${physician.firstName} ${
+                                    physician.middleName
+                                        ? physician.middleName + " "
+                                        : ""
+                                }${physician.lastName}`}
+                                specialty={physician.speciality}
+                                hospital={physician.medicalCenterName}
+                                location={`${physician.street}, ${physician.city}, ${physician.state}`}
+                                rating={physician.rating || 0}
+                                reviews={physician.reviewCount || 0}
+                                imageSrc={physician.imageUrl}
+                                isFavorite={isFavorite}
+                                onFavoriteClick={handleFavoriteClick}
+                            />
+                        </Link>
+                    ))}
+                </div>
+
+                {/* Nearby Medical Centers */}
+                <div className="flex justify-between mt-6">
+                    <div>
+                        <p className="font-roboto text-lg font-bold mb-2">
+                            Nearby Medical Centers
+                        </p>
+                    </div>
+                    <div>
+                        <p className="font-roboto text-lg font-bold mb-2">
+                            See All
+                        </p>
+                    </div>
+                </div>
+
+                {/* Render medical center cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    {filteredMedicalCenters.map((medicalCenter, index) => (
+                        <MedicalCenterCard
+                            key={index}
+                            name={medicalCenter.name}
+                            location={`${medicalCenter.city}, ${medicalCenter.state}`}
+                            rating={medicalCenter.rating || 0}
+                            reviews={medicalCenter.reviewCount || 0}
+                            imageSrc={medicalCenter.imageUrl}
+                            distance={medicalCenter.distance}
+                            categories={medicalCenter.categories}
+                            isFavorite={isFavorite}
+                            onFavoriteClick={handleFavoriteClick}
+                        />
+                    ))}
                 </div>
             </div>
-
-            {/* Render medical center cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                {filteredMedicalCenters.map((medicalCenter, index) => (
-                    <MedicalCenterCard
-                        key={index}
-                        name={medicalCenter.name}
-                        location={`${medicalCenter.city}, ${medicalCenter.state}`}
-                        rating={medicalCenter.rating || 0}
-                        reviews={medicalCenter.reviewCount || 0}
-                        imageSrc={medicalCenter.imageUrl}
-                        distance={medicalCenter.distance}
-                        categories={medicalCenter.categories}
-                        isFavorite={isFavorite}
-                        onFavoriteClick={handleFavoriteClick}
-                    />
-                ))}
-            </div>
-        </div>
+        </DashLayout>
     );
 };
 

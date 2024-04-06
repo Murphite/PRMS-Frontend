@@ -5,6 +5,7 @@ import profileImg from "../assets/images/profile-2user.png";
 import medalImg from "../assets/images/medal.png";
 import starImg from "../assets/images/Star.png";
 import messagesImg from "../assets/images/messages.png";
+import { Link } from "react-router-dom";
 
 const PhysicianCard = ({
     name,
@@ -17,6 +18,7 @@ const PhysicianCard = ({
     yearsOfExperience,
     averageRating,
     reviewCount,
+    physicianUserId,
 }) => {
     return (
         <div className="overflow-hidden w-[37.5rem] h-[19.94rem]">
@@ -84,9 +86,11 @@ const PhysicianCard = ({
                     <p className="text-xs">reviews</p>
                 </div>
             </div>
-            <button className="w-[21.4rem] h-[3rem] mt-4 ml-32 text-center bg-[#009688] text-white rounded-3xl">
-                Book Appointment
-            </button>
+            <Link to={`/dashboard/create-appointment/${physicianUserId}`}>
+                <button className="w-[21.4rem] h-[3rem] mt-4 ml-32 text-center bg-[#009688] text-white rounded-3xl">
+                    Book Appointment
+                </button>
+            </Link>
         </div>
     );
 };

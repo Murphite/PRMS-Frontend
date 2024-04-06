@@ -40,11 +40,11 @@ export default function Router() {
             <Route path="/dashboard/patients" element={<PatientsList />} />
             <Route path="/dashboard/patients/new" element={<CreatePatient />} />
             <Route
-                path="/dashboard/create-appointment"
+                path="/dashboard/create-appointment/:id"
                 element={<CreateAppointment />}
             />
             <Route
-                path="/dashboard/physician/:physicianId"
+                path="/dashboard/physician/:id"
                 element={<PhysicianDetails />}
             />
             <Route path="/dashboard/physician" element={<FindDoctors />} />

@@ -9,6 +9,7 @@ import FilledFavoriteIcon from "../assets/vectors/find-doc-vectors/favorite-fill
 import LineIcon from "../assets/vectors/find-doc-vectors/Line.svg";
 
 const DoctorCard = ({
+    physicianId,
     name,
     specialty,
     hospital,
