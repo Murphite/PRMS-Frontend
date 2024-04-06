@@ -20,39 +20,18 @@ const CreatePatient = () => {
             state: "",
             country: "",
         },
-        medication: "",
-        dosage: "",
-        frequency: "",
         weight: "",
         height: "",
         bloodGroup: "",
-        heightMeasurement: "",
-        weightMeasurement: "",
-
-        primaryCarePhysician: "",
+        medications: [],
+        medicalDetails: [],
+        primaryCarePhysicianName: "",
         primaryCarePhysicianEmail: "",
-        primaryCarePhysicianPhoneNumber: "",
-        diabetes: false,
-        asthma: false,
-        hypertension: false,
-        other: "",
-        otherName: "",
-        otherRelationship: "",
-        healthHabits: "",
-        alcoholFrequency: "",
-        alcoholDuration: "",
-        physicianCountry: "",
-        otherCountry: "",
-        otherPhoneNumber: "",
+        primaryCarePhysicianPhoneNo: "",
+        emergencyContactPhoneNo: "",
+        emergencyContactName: "",
+        emergencyContactRelationship: "",
     });
-
-    console.log(data);
-
-    const [medication, setMedication] = useState({});
-
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -186,14 +165,14 @@ const CreatePatient = () => {
                     {formStage === 2 && (
                         <CreatePatientForm2
                             formData={data}
-                            setFormData={handleChange}
+                            setFormData={setData}
                             setStage={setFormStage}
                         />
                     )}
                     {formStage === 3 && (
                         <CreatePatientForm3
                             formData={data}
-                            setFormData={handleChange}
+                            setFormData={setData}
                             setStage={setFormStage}
                         />
                     )}

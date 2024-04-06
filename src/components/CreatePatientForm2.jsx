@@ -1,24 +1,50 @@
 import { useState, useEffect } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import flag from "../../../PRMS-FE/src/assets/images/Group@3x.png";
 
-import { IoIosArrowDown } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 import CustomInput from "./Input";
+import { SelectItem } from "@nextui-org/react";
+import { Select } from "@nextui-org/react";
+
+const bloodGroup = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
-    const navigate = useNavigate();
-    const Height = ["CM", "M"];
-    const [heightDropDown, setHeightDropDown] = useState(false);
-    const [height, setHeight] = useState("");
+    const [medication, setMedication] = useState({
+        name: "",
+        dosage: "",
+        frequency: "",
+    });
 
-    const Weight = ["Kg", "G"];
-    const [weightDropDown, setWeightDropDown] = useState(false);
-    const [weight, setWeight] = useState("");
+    const setMedicationData = (e) => {
+        e.preventDefault();
 
-    const BloodGroup = ["O+", "O", "A+", "A-", "B+", "B-", "AB+", "AB-"];
-    const [BGDropDown, setBGDropDown] = useState(false);
-    const [bloodgroup, setBloodGroup] = useState("");
+        setMedication((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    useEffect(() => {
+        setFormData((prevState) => ({
+            ...prevState,
+            medications: [medication],
+        }));
+    }, [medication]);
+
+    const handleChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const [diabetes, setDiabetes] = useState(false);
+    const [hypertension, setHypertension] = useState(false);
+    const [asthma, setAsthma] = useState(false);
+    const [otherDisease, setOtherDisease] = useState(false);
+    const [otherDiseaseValue, setOtherDiseaseValue] = useState("");
+
+    const smoking = ["Non-Smoker", "Former Smoker", "Current Smoker"];
+    const [selectedSmoke, setSelectedSmoke] = useState("");
 
     const Alcohol = [
         "Everyday",
@@ -28,54 +54,34 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
     ];
     const [AlcoholDropDown, setAlcoholDropDown] = useState(false);
     const [alcohol, setAlcoholGroup] = useState("");
-    const [alcoholText, setAlcoholText] = useState("");
-
-    const [physicianCountry, setPhysicianCountry] = useState("");
-    const [showCountry, setShowCountry] = useState(false);
-    const [selectCountry, setSelectCountry] = useState(flag);
-    const [countryFlags, setCountryFlag] = useState([]);
-    async function getCountryFlags() {
-        const response = await fetch("https://restcountries.com/v3.1/all");
-        const data = await response.json();
-
-        if (response.ok) {
-            setCountryFlag(data);
-        }
-    }
-    useEffect(() => {
-        getCountryFlags();
-    }, []);
-
-    const smoking = [" Non-Smoker", "Former Smoker", "Current Smoker"];
-    const [selectedSmoke, setSelectedSmoke] = useState("");
-    // function handleSmokselect(smoking) {
-    //     setSelectedSmoke(smoking);
-    // }
-
     const alcoholFrequency = ["Never", "Occasionally"];
     const [selectedalcoholFrequency, setalcoholFrequency] = useState("");
-    //     useState(alcoholFrequency);
-    // function handlealcoholFrequency(alcoholFrequency) {
-    //     setalcoholFrequency(alcoholFrequency);
-    // }
 
-    const [diabetes, setDiabetes] = useState(false);
-    const [hypertension, setHypertension] = useState(false);
-    const [asthma, setAsthma] = useState(false);
-    const [otherDisease, setOtherDisease] = useState(false);
+    const handleMedicalCondition = () => {
+        const medicalConditions = [];
+
+        if (diabetes)
+            medicalConditions.push({ value: "diabetes", medicalDetailsType: 0 });
+        if (hypertension)
+            medicalConditions.push({ value: "hypertension", medicalDetailsType: 0 });
+        if (asthma)
+            medicalConditions.push({ value: "asthma", medicalDetailsType: 0 });
+        if (otherDisease)
+            medicalConditions.push({ value: otherDiseaseValue, medicalDetailsType: 0 });
+        if (selectedSmoke !== "")
+            medicalConditions.push({ value: selectedSmoke, medicalDetailsType: 1 });
+        if (selectedalcoholFrequency !== "")
+            medicalConditions.push({ value: selectedalcoholFrequency, medicalDetailsType: 2 });
+
+        setFormData(prevState => ({ ...prevState, medicalDetails: medicalConditions }));
+    };
+
+    useEffect(() => {
+        handleMedicalCondition();
+    }, [diabetes, hypertension, asthma, otherDiseaseValue, selectedSmoke, selectedalcoholFrequency]);
+
 
     function nextForm() {
-        formData.bloodGroup = bloodgroup;
-        formData.diabetes = diabetes;
-        formData.asthma = asthma;
-        formData.hypertension = hypertension;
-        formData.heightMeasurement = height;
-        formData.weightMeasurement = weight;
-        formData.healthHabits = selectedSmoke;
-        formData.alcoholFrequency = selectedalcoholFrequency;
-        formData.Alcohol = alcohol;
-        formData.physicianCountry = physicianCountry;
-
         setStage(3);
     }
 
@@ -89,28 +95,25 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                 <CustomInput
                     label="Medication"
                     type="text"
-                    name="medication"
-                    value={formData.medication}
-                    onChange={setFormData}
+                    name="name"
+                    value={medication.name}
+                    onChange={setMedicationData}
                 />
-
                 <CustomInput
                     label="Dosage"
                     type="text"
                     name="dosage"
-                    value={formData.dosage}
-                    onChange={setFormData}
+                    value={medication.dosage}
+                    onChange={setMedicationData}
                 />
-
                 <CustomInput
                     label="Frequency"
                     placeholder="Before and after meals"
                     type="text"
                     name="frequency"
-                    value={formData.frequency}
-                    onChange={setFormData}
+                    value={medication.frequency}
+                    onChange={setMedicationData}
                 />
-
                 <p className="text-sm text-gray-700">HEALTH PROFILE</p>
                 <div className="flex w-full space-x-2 ">
                     <div className="flex w-1/2 space-x-2 ">
@@ -120,7 +123,7 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                             type="text"
                             name="height"
                             value={formData.height}
-                            onChange={setFormData}
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -131,41 +134,58 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                             type="text"
                             name="weight"
                             value={formData.weight}
-                            onChange={setFormData}
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
 
-                <CustomInput
-                    type="text"
-                    label="Blood Group"
-                    value={bloodgroup}
-                    required
-                />
+                <Select
+                    size="md"
+                    color="success"
+                    label="Select an animal"
+                    classNames={{
+                        select: ["text-black"],
+                        selectWrapper: [
+                            "border-solid",
+                            "border",
+                            "rounded-md",
+                            "border-teal-500",
+                            "focus:outline-none",
+                        ],
+                    }}
+                    onChange={(e) => setFormData((prevState) => ({
+                        ...prevState,
+                        bloodGroup: bloodGroup.indexOf(e.target.value),
+                    }))}
+                >
+                    {bloodGroup.map((group, i) => (
+                        <SelectItem key={group} value={i}>
+                            {group}
+                        </SelectItem>
+                    ))}
+                </Select>
 
                 <p className="text-sm text-gray-700"> PRIMARY CARE PHYSICIAN</p>
                 <CustomInput
                     label="Primary Care Physician Name"
                     type="text"
-                    name="primaryCarePhysician"
-                    value={formData.primaryCarePhysician}
-                    onChange={setFormData}
+                    name="primaryCarePhysicianName"
+                    value={formData.primaryCarePhysicianName}
+                    onChange={handleChange}
                 />
-
                 <CustomInput
                     label="Primary Care Physician Email"
-                    type="text"
+                    type="email"
                     name="primaryCarePhysicianEmail"
                     value={formData.primaryCarePhysicianEmail}
-                    onChange={setFormData}
+                    onChange={handleChange}
                 />
-
                 <CustomInput
                     label="Primary Care Physician Phone Number"
                     type="text"
-                    name="primaryCarePhysicianPhoneNumber"
-                    value={formData.primaryCarePhysicianPhoneNumber}
-                    onChange={setFormData}
+                    name="primaryCarePhysicianPhoneNo"
+                    value={formData.primaryCarePhysicianPhoneNo}
+                    onChange={handleChange}
                 />
 
                 <p className="">any current or past medical conditions?</p>
@@ -177,7 +197,6 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                                 onClick={() => setDiabetes(false)}
                                 name="diabetes"
                                 value={formData.diabetes}
-                                onChange={setFormData}
                             >
                                 <svg
                                     width="125"
@@ -254,7 +273,6 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                                 onClick={() => setDiabetes(true)}
                                 name="diabetes"
                                 value={formData.diabetes}
-                                onChange={setFormData}
                             >
                                 <svg
                                     width="125"
@@ -635,7 +653,6 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                         )}
                     </div>
                 </div>
-
                 <div className="flex pt-2 space-x-2 ">
                     {otherDisease ? (
                         <div
@@ -756,25 +773,20 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                     )}
 
                     {otherDisease && (
-                        <div className=" relative bg-teal-100 bg-opacity-50 w-full rounded-lg  h-[3rem] mt-16 border border-solid border-teal-600 focus:outline-none px-5">
-                            <label className="block text-teal-500 ">
-                                Type your other disease
-                            </label>
-                            <CustomInput
-                                className="w-full bg-transparent focus:outline-none"
-                                placeholder="e.g Ulcer"
-                                name="other"
-                                value={formData.other}
-                                onChange={setFormData}
-                            />
-                        </div>
+                        <CustomInput
+                            className="w-full bg-transparent focus:outline-none"
+                            placeholder="e.g Ulcer"
+                            name="other"
+                            value={formData.other}
+                            onChange={setFormData}
+                        />
                     )}
                 </div>
-
                 <p className="mt-3 ">HEALTH HABITS</p>
                 <div className="flex w-full space-x-3 ">
                     {smoking.map((x) => (
                         <button
+                            key={x}
                             className={` ${
                                 selectedSmoke === x
                                     ? " bg-[#009688] text-white h-[3.5rem] w-[10rem] border border-solid  border-gray-400 hover:bg-teal-600 rounded-lg mx-3"
@@ -784,16 +796,15 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                             name="healthHabits"
                         >
                             {x}
-                                
                         </button>
                     ))}
                 </div>
-
                 <p className="mt-3 ">Alcohol Consumption</p>
                 <div className="flex w-full mt-2 space-x-3 ">
                     <div className="flex w-full space-x-3 ">
                         {alcoholFrequency.map((x) => (
                             <button
+                                key={x}
                                 className={` ${
                                     selectedalcoholFrequency === x
                                         ? " bg-[#009688] text-white h-[3.5rem] w-[10rem] border border-solid  border-gray-400 hover:bg-teal-600 rounded-lg mx-"
@@ -803,7 +814,7 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                                 name="alcoholFrequency"
                             >
                                 {x}
-                                    
+
                             </button>
                         ))}
                     </div>
@@ -825,10 +836,10 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                                 required
                                 className={`placeholder:text-black p-[8px 24px] rounded-[8px] outline-none w-[7rem] pt-5 
                                             ${
-                                                alcohol
-                                                    ? "bg-teal-600 text-white  "
-                                                    : "bg-transparent text-black"
-                                            }
+                                    alcohol
+                                        ? "bg-teal-600 text-white  "
+                                        : "bg-transparent text-black"
+                                }
                                             `}
                             />
 

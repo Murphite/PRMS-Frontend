@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
-import flag from "../../../PRMS-FE/src/assets/images/Group@3x.png";
-import { IoIosArrowDown } from "react-icons/io";
+import { useState,  } from "react";
+
 import { Checkbox } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
 import CustomInput from "./Input";
 
 const CreatePatientForm3 = ({ formData, setFormData, setStage }) => {
     const [submit, setContinue] = useState(false);
     const [toggleOn, setToggleOn] = useState(false);
-    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
 
     function backForm() {
         setStage(2);
@@ -18,25 +22,25 @@ const CreatePatientForm3 = ({ formData, setFormData, setStage }) => {
             <CustomInput
                 label="Emergency Contact Name"
                 type="text"
-                name="otherName"
-                value={formData.otherName}
-                onChange={setFormData}
+                name="emergencyContactName"
+                value={formData.emergencyContactName}
+                onChange={handleChange}
             />
 
             <CustomInput
                 label="Emergency Contact Relationship"
                 type="text"
-                name="otherRelationship"
-                value={formData.otherRelationship}
-                onChange={setFormData}
+                name="emergencyContactRelationship"
+                value={formData.emergencyContactRelationship}
+                onChange={handleChange}
             />
 
             <CustomInput
                 label="Emergency Contact Phone Number"
-                onChange={setFormData}
-                value={formData.otherPhoneNumber}
+                onChange={handleChange}
+                value={formData.emergencyContactPhoneNo}
                 type="text"
-                name="otherPhoneNumber"
+                name="emergencyContactPhoneNo"
             />
 
             <p className="mt-4 text-sm text-gray-700"> CONSENT AND AGREEMENT</p>
