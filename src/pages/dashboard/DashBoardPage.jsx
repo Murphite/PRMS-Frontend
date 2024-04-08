@@ -1,24 +1,50 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Carousel from "../../components/CarouselComponents";
-import { getCategories } from "../../api/dashboard";
+import {
+    getCategories,
+    getMedicalCenters,
+    getPhysicians,
+} from "../../api/dashboard";
 import DashLayout from "../../layouts/DashLayout";
+import { AppContext } from "./../../context/AppContext";
 
 const DashBoardPage = () => {
     const [categories, setCategories] = useState([]);
+    const { accessToken } = useContext(AppContext);
+
+    async function fetchCategories() {
+        try {
+            const res = await getCategories();
+            setCategories(res.data);
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    }
+
+    async function fetchPhysicians() {
+        try {
+            const res = await getPhysicians(accessToken);
+            console.log(res.data);
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    }
+
+    async function fetchMedicalCenters() {
+        try {
+            const res = await getMedicalCenters(accessToken);
+            console.log(res.data);
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    }
 
     useEffect(() => {
-        async function fetchCategories() {
-            try {
-                const res = await getCategories();
-                setCategories(res.data);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        }
-
         fetchCategories();
+        fetchMedicalCenters();
+        fetchPhysicians();
     }, []);
 
     return (
