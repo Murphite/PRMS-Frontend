@@ -61,25 +61,49 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
         const medicalConditions = [];
 
         if (diabetes)
-            medicalConditions.push({ value: "diabetes", medicalDetailsType: 0 });
+            medicalConditions.push({
+                value: "diabetes",
+                medicalDetailsType: 0,
+            });
         if (hypertension)
-            medicalConditions.push({ value: "hypertension", medicalDetailsType: 0 });
+            medicalConditions.push({
+                value: "hypertension",
+                medicalDetailsType: 0,
+            });
         if (asthma)
             medicalConditions.push({ value: "asthma", medicalDetailsType: 0 });
         if (otherDisease)
-            medicalConditions.push({ value: otherDiseaseValue, medicalDetailsType: 0 });
+            medicalConditions.push({
+                value: otherDiseaseValue,
+                medicalDetailsType: 0,
+            });
         if (selectedSmoke !== "")
-            medicalConditions.push({ value: selectedSmoke, medicalDetailsType: 1 });
+            medicalConditions.push({
+                value: selectedSmoke,
+                medicalDetailsType: 1,
+            });
         if (selectedalcoholFrequency !== "")
-            medicalConditions.push({ value: selectedalcoholFrequency, medicalDetailsType: 2 });
+            medicalConditions.push({
+                value: selectedalcoholFrequency,
+                medicalDetailsType: 2,
+            });
 
-        setFormData(prevState => ({ ...prevState, medicalDetails: medicalConditions }));
+        setFormData((prevState) => ({
+            ...prevState,
+            medicalDetails: medicalConditions,
+        }));
     };
 
     useEffect(() => {
         handleMedicalCondition();
-    }, [diabetes, hypertension, asthma, otherDiseaseValue, selectedSmoke, selectedalcoholFrequency]);
-
+    }, [
+        diabetes,
+        hypertension,
+        asthma,
+        otherDiseaseValue,
+        selectedSmoke,
+        selectedalcoholFrequency,
+    ]);
 
     function nextForm() {
         setStage(3);
@@ -142,7 +166,7 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                 <Select
                     size="md"
                     color="success"
-                    label="Select an animal"
+                    label="Select your blood group"
                     classNames={{
                         select: ["text-black"],
                         selectWrapper: [
@@ -153,10 +177,12 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                             "focus:outline-none",
                         ],
                     }}
-                    onChange={(e) => setFormData((prevState) => ({
-                        ...prevState,
-                        bloodGroup: bloodGroup.indexOf(e.target.value),
-                    }))}
+                    onChange={(e) =>
+                        setFormData((prevState) => ({
+                            ...prevState,
+                            bloodGroup: bloodGroup.indexOf(e.target.value),
+                        }))
+                    }
                 >
                     {bloodGroup.map((group, i) => (
                         <SelectItem key={group} value={i}>
@@ -169,22 +195,22 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                 <CustomInput
                     label="Primary Care Physician Name"
                     type="text"
-                    name="primaryCarePhysicianName"
-                    value={formData.primaryCarePhysicianName}
+                    name="primaryPhysicianName"
+                    value={formData.primaryPhysicianName}
                     onChange={handleChange}
                 />
                 <CustomInput
                     label="Primary Care Physician Email"
                     type="email"
-                    name="primaryCarePhysicianEmail"
-                    value={formData.primaryCarePhysicianEmail}
+                    name="primaryPhysicianEmail"
+                    value={formData.primaryPhysicianEmail}
                     onChange={handleChange}
                 />
                 <CustomInput
                     label="Primary Care Physician Phone Number"
                     type="text"
-                    name="primaryCarePhysicianPhoneNo"
-                    value={formData.primaryCarePhysicianPhoneNo}
+                    name="primaryPhysicianPhoneNo"
+                    value={formData.primaryPhysicianPhoneNo}
                     onChange={handleChange}
                 />
 
@@ -814,7 +840,6 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                                 name="alcoholFrequency"
                             >
                                 {x}
-
                             </button>
                         ))}
                     </div>
@@ -836,10 +861,10 @@ const CreatePatientForm2 = ({ formData, setFormData, setStage }) => {
                                 required
                                 className={`placeholder:text-black p-[8px 24px] rounded-[8px] outline-none w-[7rem] pt-5 
                                             ${
-                                    alcohol
-                                        ? "bg-teal-600 text-white  "
-                                        : "bg-transparent text-black"
-                                }
+                                                alcohol
+                                                    ? "bg-teal-600 text-white  "
+                                                    : "bg-transparent text-black"
+                                            }
                                             `}
                             />
 

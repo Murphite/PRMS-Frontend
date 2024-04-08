@@ -1,4 +1,4 @@
-import { useState,  } from "react";
+import { useState } from "react";
 
 import { Checkbox } from "@nextui-org/react";
 import CustomInput from "./Input";

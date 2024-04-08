@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import CreatePatientForm1 from "../../components/CreatePatientForm1";
 import CreatePatientForm2 from "../../components/CreatePatientForm2";
 import CreatePatientForm3 from "../../components/CreatePatientForm3";
 import Container from "../../components/Container";
+import { createNewPatient } from "../../api/patient";
+import { AppContext } from "./../../context/AppContext";
 
 const CreatePatient = () => {
+    const { accessToken } = useContext(AppContext);
+    const navigate = useNavigate();
     const [formStage, setFormStage] = useState(1);
     const [data, setData] = useState({
         firstName: "",
@@ -25,17 +30,27 @@ const CreatePatient = () => {
         bloodGroup: "",
         medications: [],
         medicalDetails: [],
-        primaryCarePhysicianName: "",
-        primaryCarePhysicianEmail: "",
-        primaryCarePhysicianPhoneNo: "",
+        primaryPhysicianName: "",
+        primaryPhysicianEmail: "",
+        primaryPhysicianPhoneNo: "",
         emergencyContactPhoneNo: "",
         emergencyContactName: "",
         emergencyContactRelationship: "",
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(data);
+
+        try {
+            const res = await createNewPatient(accessToken, data);
+            console.log(res);
+
+            if (res.isSuccessful) {
+                navigate("/dashboard");
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
