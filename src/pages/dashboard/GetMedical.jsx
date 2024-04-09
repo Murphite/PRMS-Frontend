@@ -31,7 +31,7 @@ const GetMedical = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="w-full max-w-screen-lg mx-auto mt-24">
+            <div className="w-full max-w-screen-lg mt-24 mx-5">
 
                 <div className="mt-[1rem] ">
                     <p className="font-bold cursor-pointer ml-5 text-2xl">Prescribed Medications History</p>
