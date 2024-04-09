@@ -51,7 +51,7 @@ export default function Router() {
             <Route path="/dashboard/physician" element={<FindDoctors />} />
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
-           <Route path= "/get" element={<GetMedical/>} />
+           <Route path= "/patientMedicalHistory" element={<GetMedical/>} />
         </Routes>
     );
 }

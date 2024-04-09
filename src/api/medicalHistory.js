@@ -1,11 +1,19 @@
 import { axiosApi } from "./apiService";
 
-export const getMedicationHistory = async () => {
+export const getMedicationHistory = async (token) => {
     try {
-        const response = await axiosApi.get(`#`);
-        return response.data;
-    } catch (error) {
+        const res = await axiosApi.get(`/patient/medication`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        if (res.data){
+            console.log(res.data, " ttt")
+            return res.data.data.data.pageItems
+        }
         
-        throw error; 
+    } catch (error) {
+        console.log("Error fetching medication history:", error);
+        throw error;
     }
 };
