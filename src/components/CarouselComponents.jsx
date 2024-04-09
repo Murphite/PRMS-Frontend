@@ -37,23 +37,23 @@ const CarouselComponents = () => {
     return (
         <div className="mx-auto">
             <Slider {...settings}>
-                <div className="flex justify-center w-full">
-                    <div className="w-[44rem]">
+                <div className="flex ">
+                    <div className="w-[44rem] mx-auto">
                         <img className="" src="src/assets/vectors/caro1.svg" />
                     </div>
                 </div>
-                <div className="flex justify-center w-full">
-                    <div className="w-[44rem]">
+                <div className="flex">
+                    <div className="w-[44rem] mx-auto">
                         <img className="" src="src/assets/vectors/caro2.svg" />
                     </div>
                 </div>
-                <div className="flex justify-center w-full">
-                    <div className="w-[44rem]">
+                <div className="flex ">
+                    <div className="w-[44rem] mx-auto">
                         <img className="" src="src/assets/vectors/caro3.svg" />
                     </div>
                 </div>
-                <div className="flex justify-center w-full">
-                    <div className="w-[44rem]">
+                <div className="flex ">
+                    <div className="w-[44rem] mx-auto">
                         <img className="" src="src/assets/vectors/caro4.svg" />
                     </div>
                 </div>
