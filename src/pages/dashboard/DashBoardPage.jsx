@@ -30,7 +30,6 @@ const DashBoardPage = () => {
         try {
             const res = await getPhysicians(accessToken);
             setPhysicians(res.data.pageItems);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching categories:", error);
         }
@@ -40,7 +39,6 @@ const DashBoardPage = () => {
         try {
             const res = await getMedicalCenters(accessToken);
             setMedicalCentres(res.data.pageItems);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching categories:", error);
         }
@@ -51,6 +49,8 @@ const DashBoardPage = () => {
         fetchMedicalCenters();
         fetchPhysicians();
     }, []);
+
+    // console.log(medicalCentres);
 
     return (
         <DashLayout>
@@ -68,7 +68,7 @@ const DashBoardPage = () => {
                                 key={category.id}
                             >
                                 <img src={category.imageUrl} />
-                                <p className="mt-1 capitalize ">
+                                <p className="mt-1 text-sm capitalize">
                                     {category.name}
                                 </p>
                             </div>
@@ -90,16 +90,16 @@ const DashBoardPage = () => {
                     </div>
                 </div>
 
-                <div className=" mt-14">
-                    <div className="flex justify-between">
+                <div className="mt-14">
+                    <div className="flex justify-between mb-4">
                         <p className="font-bold ">Nearby Medical Centre</p>
                         <p className="text-gray-500 cursor-pointer">see all</p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4  md:grid-cols-3">
-                        {physicians &&
-                            physicians.length > 0 &&
-                            physicians.map((medicalCenter, index) => (
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2">
+                        {medicalCentres &&
+                            medicalCentres.length > 0 &&
+                            medicalCentres.map((medicalCenter, index) => (
                                 <MedicalCenterCard
                                     key={index}
                                     name={medicalCenter.name}
@@ -117,25 +117,32 @@ const DashBoardPage = () => {
                 </div>
 
                 <div className=" mt-14">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between mb-4">
                         <p className="font-bold ">Nearby Physicians</p>
                         <p className="text-gray-500 cursor-pointer">see all</p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4  md:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2">
                         {physicians &&
                             physicians.length > 0 &&
-                            physicians.map((physic, index) => (
-                                <div key={index}>
-                                    <div className=" flex w-52 space-x-1">
-                                        <img src={physic.imageUrl} />
-                                        <div className=" space-x-1">
-                                            <p className=" ">{physic.title}</p>
-                                            <p>
-                                                {`${physic.firstName}, ${physic.lastName}`}
-                                            </p>
-                                            <p>{physic.speciality}</p>
-                                        </div>
+                            physicians.map((physician, index) => (
+                                <div
+                                    key={index}
+                                    className="flex items-center space-x-2"
+                                >
+                                    <img
+                                        className="object-cover object-center w-16 rounded-lg aspect-square"
+                                        src={physician.imageUrl}
+                                    />
+                                    <div className="">
+                                        <p className="font-semibold">
+                                            {physician.title}{" "}
+                                            {physician.firstName},{" "}
+                                            {physician.lastName}
+                                        </p>
+                                        <p className="text-gray-500">
+                                            {physician.speciality}
+                                        </p>
                                     </div>
                                 </div>
                             ))}

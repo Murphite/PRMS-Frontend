@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -9,8 +10,10 @@ import FavImg from "../assets/images/lovely.png";
 import ProfImg from "../assets/images/profile.png";
 import Logimg from "../assets/images/logout.png";
 import HomeImg from "../assets/images/Health.png";
+import { AppContext } from "../context/AppContext";
 
 const Sidebar = () => {
+    const { setAccessToken } = useContext(AppContext);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -29,19 +32,20 @@ const Sidebar = () => {
                 comp: "/dashboard/physician",
                 icon: DocImg,
             },
-            { id: 4, title: "Map", comp: "Map", icon: MapImg },
-            { id: 5, title: "Favorite", comp: "Favorite", icon: FavImg },
+            // { id: 4, title: "Map", comp: "Map", icon: MapImg },
+            // { id: 5, title: "Favorite", comp: "Favorite", icon: FavImg },
         ],
         [{ id: 6, title: "Profile", comp: "Profile", icon: ProfImg }],
     ];
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
+        setAccessToken("");
         navigate("/");
     };
 
     return (
-        <aside className="w-64 h-screen p-4 overflow-y-auto bg-white">
+        <aside className="fixed z-50 w-64 h-screen p-4 overflow-y-auto bg-white">
             <Link
                 to="/"
                 className="block px-2 pb-4 mb-6 border-b-2 border-b-gray-200"
@@ -69,7 +73,7 @@ const Sidebar = () => {
                 })}
 
                 <p className="text-gray-400 text-md">Others</p>
-                {links[1].map((items) => {
+                {/* {links[1].map((items) => {
                     return (
                         <Link
                             key={items.id}
@@ -84,7 +88,7 @@ const Sidebar = () => {
                             <p>{items.title}</p>
                         </Link>
                     );
-                })}
+                })} */}
 
                 <span
                     onClick={handleLogout}
