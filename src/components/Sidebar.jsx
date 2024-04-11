@@ -16,7 +16,6 @@ const Sidebar = () => {
     const { setAccessToken } = useContext(AppContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const { setAccessToken } = useContext(AppContext);
 
     const links = [
         [

@@ -15,11 +15,11 @@ import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
 import DashBoardPage from "../pages/dashboard/dashBoardPage";
-import AdminSidebar from "../components/AdminSidebar";
 import GetMedical from "../pages/dashboard/GetMedical";
 import FindDoctors from "../pages/dashboard/FindDoctors";
-import DashBoardPage from "../pages/dashboard/DashBoardPage";
 import PhysicianDetails from "../pages/dashboard/PhysicianDetails";
+
+import AdminDashboard from "../pages/admin/Index";
 
 export default function Router() {
     return (
@@ -34,11 +34,10 @@ export default function Router() {
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/email-verification" element={<EmailVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/signup" element={<RegularSignUp />} />
-            <Route
+            {/* <Route
                 path="/confirm-email"
                 element={<EmailVerificationStatus />}
-            />
+            /> */}
             <Route path="/login" element={<RegularLogin />} />
             <Route path="/dashboard" element={<DashBoardPage />} />
             <Route path="/dashboard/patients" element={<PatientsList />} />
@@ -52,11 +51,11 @@ export default function Router() {
                 element={<PhysicianDetails />}
             />
             <Route path="/dashboard/physician" element={<FindDoctors />} />
+            <Route path="/patientMedicalHistory" element={<GetMedical />} />
 
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/patient" element={<ViewPatient />} />
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
-            <Route path="/dashboard" element={<DashBoardPage />} />
-            <Route path="/admin/dashboard/" element={<AdminSidebar />} />
-           <Route path= "/patientMedicalHistory" element={<GetMedical/>} />
         </Routes>
     );
 }
