@@ -9,6 +9,7 @@ import { login } from "../../api/auth";
 import CustomInput from "../../components/Input";
 import Container from "../../components/Container";
 import ShowErrorList from "../../components/ShowErrorList";
+import { jwtDecode } from "jwt-decode";
 
 const RegularLogin = () => {
     const [passwordType, setPasswordType] = useState("password");
@@ -38,7 +39,9 @@ const RegularLogin = () => {
         }
 
         setAccessToken(res.data.token);
-        navigate("/dashboard");
+        const decodedToken = jwtDecode(res.data.token);
+        if (decodedToken.role === "ADMIN") navigate("/admin");
+        else navigate("/dashboard");
     };
 
     return (
