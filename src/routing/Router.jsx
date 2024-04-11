@@ -20,7 +20,7 @@ import FindDoctors from "../pages/dashboard/FindDoctors";
 import PhysicianDetails from "../pages/dashboard/PhysicianDetails";
 
 import AdminDashboard from "../pages/admin/Index";
-import Patients from "../pages/admin/Patients";
+import Appointments from "../pages/admin/Appointments";
 
 export default function Router() {
     return (
@@ -54,8 +54,8 @@ export default function Router() {
             <Route path="/patientMedicalHistory" element={<GetMedical />} />
 
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/appointments" element={<Appointments />} />
             <Route path="/admin/patients" element={<PatientsList />} />
-            {/* <Route path="/admin/patients" element={<Patients />} /> */}
             <Route path="/admin/patients/:id" element={<ViewPatient />} />
         </Routes>
     );

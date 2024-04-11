@@ -1,6 +1,7 @@
 import SearchIcon from "../assets/vectors/search-normal.svg";
 import LocationIcon from "../assets/vectors/location.svg";
 import NotificationIcon from "../assets/vectors/Notification.svg";
+import ProfileIcon from "../assets/vectors/profile.svg";
 import {
     Navbar,
     NavbarBrand,
@@ -46,13 +47,7 @@ export default function DashNavbar() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: "10px",
-                }}
-            >
+            <NavbarContent justify="end">
                 {/* <img src={NotificationIcon} alt="Notification Icon" /> */}
 
                 <Dropdown placement="bottom-end">
@@ -62,8 +57,7 @@ export default function DashNavbar() {
                             className="transition-transform"
                             color="secondary"
                             name={decodedToken.name}
-                            size="sm"
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            src={ProfileIcon}
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
