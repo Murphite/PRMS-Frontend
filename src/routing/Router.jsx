@@ -14,6 +14,8 @@ import RegularLogin from "../pages/auth/RegularLogin";
 import CreatePatient from "../pages/dashboard/CreatePatient";
 import CreateAppointment from "../pages/dashboard/CreateAppointment";
 import ViewPatient from "../pages/admin/ViewPatient";
+import DashBoardPage from "../pages/dashboard/dashBoardPage";
+import AdminSidebar from "../components/AdminSidebar";
 import GetMedical from "../pages/dashboard/GetMedical";
 import FindDoctors from "../pages/dashboard/FindDoctors";
 import DashBoardPage from "../pages/dashboard/DashBoardPage";
@@ -32,11 +34,12 @@ export default function Router() {
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/email-verification" element={<EmailVerification />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/signup" element={<RegularSignUp />} />
             <Route
                 path="/confirm-email"
                 element={<EmailVerificationStatus />}
             />
-
+            <Route path="/login" element={<RegularLogin />} />
             <Route path="/dashboard" element={<DashBoardPage />} />
             <Route path="/dashboard/patients" element={<PatientsList />} />
             <Route path="/dashboard/patients/new" element={<CreatePatient />} />
@@ -51,6 +54,8 @@ export default function Router() {
             <Route path="/dashboard/physician" element={<FindDoctors />} />
 
             <Route path="/admin/patient/:id" element={<ViewPatient />} />
+            <Route path="/dashboard" element={<DashBoardPage />} />
+            <Route path="/admin/dashboard/" element={<AdminSidebar />} />
            <Route path= "/patientMedicalHistory" element={<GetMedical/>} />
         </Routes>
     );
