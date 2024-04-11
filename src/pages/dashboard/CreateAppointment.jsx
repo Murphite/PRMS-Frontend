@@ -1,10 +1,9 @@
-// import dayjs from "dayjs";
+import dayjs from "dayjs";
 import { useState } from "react";
-import Sidebar from "../../components/Sidebar";
+
 import nextIcon from "../../assets/vectors/nextBlackIcon.svg";
 import previousIcon from "../../assets/vectors/previousBlackIcon.svg";
-import NavBar from "../../components/NavBarLogIn";
-import Container from "../../components/Container";
+import DashLayout from "../../layouts/DashLayout";
 
 export default function CreateAppointment() {
     const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
@@ -51,130 +50,120 @@ export default function CreateAppointment() {
     const [selectDate, setSelectDate] = useState(currentDate);
 
     return (
-        <section className="max-w-[1280px] mr-auto pr-6">
-            <div className="flex flex-row">
-                <div className="basis-1/4">
-                    <Sidebar />
-                </div>
-                <div className=" basis-3/4  h-80 space-y-6 ">
-                    <NavBar />
-                    <h1 className="text-xl text-gray-900 font-semibold">
-                        Select Date
-                    </h1>
-                    <div className=" space-y-5 shadow-xl bg-gray-50 py-5 rounded-xl">
-                        <div className="grid grid-cols-2 ">
-                            <div className=" sm:pl-5 lg:pl-14">
-                                <h2 className=" font-semibold">
-                                    {months[today.month()]} {today.year()}
-                                </h2>
-                            </div>
-                            <div className="flex flex-row justify-self-end lg:pr-14 lg:h-full">
-                                <img
-                                    src={previousIcon}
-                                    alt=""
-                                    className=" cursor-pointer"
-                                    onClick={() => {
-                                        setToday(
-                                            today.month(today.month() - 1),
-                                        );
-                                    }}
-                                />
-                                <img
-                                    src={nextIcon}
-                                    alt=""
-                                    className=" cursor-pointer"
-                                    onClick={() => {
-                                        setToday(
-                                            today.month(today.month() + 1),
-                                        );
-                                    }}
-                                />
-                            </div>
+        <DashLayout>
+            <div className="w-full space-y-6 h-80">
+                <h1 className="text-xl font-semibold text-gray-900">
+                    Select Date
+                </h1>
+                <div className="py-5 space-y-5 shadow-xl bg-gray-50 rounded-xl">
+                    <div className="grid grid-cols-2 ">
+                        <div className=" sm:pl-5 lg:pl-14">
+                            <h2 className="font-semibold ">
+                                {months[today.month()]} {today.year()}
+                            </h2>
                         </div>
-
-                        <div className="grid grid-cols-7 ">
-                            {days.map((day, index) => {
-                                return (
-                                    <h3
-                                        key={index}
-                                        className="font-bold text-gray-500 grid place-content-center"
-                                    >
-                                        {day}
-                                    </h3>
-                                );
-                            })}
-                        </div>
-                        <div className=" h-60 grid grid-cols-7">
-                            {generateDate(today.month(), today.year()).map(
-                                (
-                                    { date, currentMonth, today, isWorkingDay },
-                                    index,
-                                ) => {
-                                    return (
-                                        <div
-                                            key={index}
-                                            className=" border-t grid place-content-center"
-                                        >
-                                            <p
-                                                className={cn(
-                                                    currentMonth && isWorkingDay
-                                                        ? "font-bold"
-                                                        : "text-gray-400",
-                                                    today
-                                                        ? "bg-teal-600 text-white"
-                                                        : "",
-                                                    "h-9 w-9 grid place-content-center rounded-lg",
-                                                    currentMonth && isWorkingDay
-                                                        ? "hover:bg-teal-400 hover:text-white transition-all cursor-pointer"
-                                                        : "",
-                                                )}
-                                                onClick={() => {
-                                                    selectDate(date);
-                                                }}
-                                            >
-                                                {date.date()}
-                                            </p>
-                                        </div>
-                                    );
-                                },
-                            )}
+                        <div className="flex flex-row justify-self-end lg:pr-14 lg:h-full">
+                            <img
+                                src={previousIcon}
+                                alt=""
+                                className="cursor-pointer "
+                                onClick={() => {
+                                    setToday(today.month(today.month() - 1));
+                                }}
+                            />
+                            <img
+                                src={nextIcon}
+                                alt=""
+                                className="cursor-pointer "
+                                onClick={() => {
+                                    setToday(today.month(today.month() + 1));
+                                }}
+                            />
                         </div>
                     </div>
 
-                    <div className="space-y-5 pt-4">
-                        <div>
-                            <h2 className="text-xl text-gray-900 font-semibold">
-                                Select Hour
-                            </h2>
-                        </div>
-                        <div className="grid grid-cols-3 place-content-between h-56 w-full ">
-                            {timeSlot.map((timeunit, index) => {
+                    <div className="grid grid-cols-7 ">
+                        {days.map((day, index) => {
+                            return (
+                                <h3
+                                    key={index}
+                                    className="grid font-bold text-gray-500 place-content-center"
+                                >
+                                    {day}
+                                </h3>
+                            );
+                        })}
+                    </div>
+                    <div className="grid grid-cols-7 h-60">
+                        {generateDate(today.month(), today.year()).map(
+                            (
+                                { date, currentMonth, today, isWorkingDay },
+                                index,
+                            ) => {
                                 return (
                                     <div
                                         key={index}
-                                        className=" grid place-content-start pb-4"
+                                        className="grid border-t place-content-center"
                                     >
-                                        <h3
+                                        <p
                                             className={cn(
-                                                timeunit
-                                                    ? " bg-gray-100 text-gray-800"
+                                                currentMonth && isWorkingDay
+                                                    ? "font-bold"
+                                                    : "text-gray-400",
+                                                today
+                                                    ? "bg-teal-600 text-white"
                                                     : "",
-                                                "h-11 w-28 grid place-content-center rounded-lg",
-                                                // currentMonth && isWorkingDay
-                                                //     ? "hover:bg-teal-400 hover:text-white transition-all cursor-pointer"
-                                                //     : "",
+                                                "h-9 w-9 grid place-content-center rounded-lg",
+                                                currentMonth && isWorkingDay
+                                                    ? "hover:bg-teal-400 hover:text-white transition-all cursor-pointer"
+                                                    : "",
                                             )}
+                                            onClick={() => {
+                                                selectDate(date);
+                                            }}
                                         >
-                                            {timeunit}
-                                        </h3>
+                                            {date.date()}
+                                        </p>
                                     </div>
                                 );
-                            })}
-                        </div>
+                            },
+                        )}
+                    </div>
+                </div>
+
+                <div className="pt-4 space-y-5">
+                    <div>
+                        <h2 className="text-xl font-semibold text-gray-900">
+                            Select Hour
+                        </h2>
+                    </div>
+                    <div className="grid w-full h-56 grid-cols-3 place-content-between ">
+                        {timeSlot.map((timeunit, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className="grid pb-4 place-content-start"
+                                >
+                                    <h3
+                                        className={cn(
+                                            timeunit
+                                                ? " bg-gray-100 text-gray-800"
+                                                : "",
+                                            "h-11 w-28 grid place-content-center rounded-lg",
+                                            // currentMonth && isWorkingDay
+                                            //     ? "hover:bg-teal-400 hover:text-white transition-all cursor-pointer"
+                                            //     : "",
+                                        )}
+                                    >
+                                        {timeunit}
+                                    </h3>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
-        </section>
+        </DashLayout>
     );
 }
 
