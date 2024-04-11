@@ -8,7 +8,6 @@ export const getPhysiciansDetails = async (token) => {
             },
         });
 
-        console.log(res?.data);
         return res.data;
     } catch (error) {
         return error;

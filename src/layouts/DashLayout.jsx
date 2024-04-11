@@ -8,8 +8,10 @@ const DashLayout = ({ children }) => {
             <Sidebar />
 
             <div className="w-full">
-                <Navbar />
-                <div className="mt-6">
+                <div className="ml-64">
+                    <Navbar />
+                </div>
+                <div className="my-6 ml-64">
                     <Container>{children}</Container>
                 </div>
             </div>

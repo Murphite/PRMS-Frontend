@@ -32,13 +32,13 @@ const DoctorCard = ({
                     <img
                         src={FilledStarIcon}
                         alt="Star Icon"
-                        className="w-4 h-auto absolute left-0 top-0"
+                        className="absolute top-0 left-0 w-4 h-auto"
                         style={{ width: `${Math.floor(rating)}0%` }}
                     />
                     <img
                         src={HalfFilledStarIcon}
                         alt="Half Filled Star Icon"
-                        className="w-4 h-auto absolute left-0 top-0"
+                        className="absolute top-0 left-0 w-4 h-auto"
                         style={{
                             width: "50%",
                             marginLeft: `${Math.floor(rating)}0%`,
@@ -58,57 +58,51 @@ const DoctorCard = ({
     };
 
     return (
-        <div className="block bg-white shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface p-4 rounded-lg">
-            <div
-                className="flex border-white shadow-lg p-3 border-6 rounded-lg"
-                style={{ position: "relative" }}
-            >
-                <div className="flex flex-col items-center justify-center min-w-[10px] lg:w-1/5 md:w-1/4 mr-4">
-                    <div className="image">
-                        <img
-                            className="w-full h-auto mb-1"
-                            src={imageSrc}
-                            alt="Doctor"
-                        />
-                    </div>
+        <div
+            className="relative flex p-3 bg-white border-white rounded-lg shadow border-6 text-surface"
+            style={{ position: "relative" }}
+        >
+            <div className="flex items-center justify-center w-1/3 mr-4">
+                <div className="image">
                     <img
-                        src={isFavorite ? FilledFavoriteIcon : FavoriteIcon}
-                        alt="Favorite Icon"
-                        onClick={handleFavoriteClick}
-                        className="absolute top-2 right-2 cursor-pointer z-10"
+                        className="object-cover object-center w-full rounded-lg aspect-square "
+                        src={imageSrc}
+                        alt="Doctor"
                     />
                 </div>
+                <img
+                    src={isFavorite ? FilledFavoriteIcon : FavoriteIcon}
+                    alt="Favorite Icon"
+                    onClick={handleFavoriteClick}
+                    className="absolute z-10 cursor-pointer top-4 right-4"
+                />
+            </div>
 
-                <div className="lg:w-4/5 md:w-3/4 flex flex-col leading-9">
-                    <p className="font-inter text-lg font-bold mb-2 doctor-name text-sm md:text-base lg:text-lg">
-                        {name}
+            <div className="flex flex-col leading-9">
+                <p className="font-bold font-inter doctor-name">{name}</p>
+                <hr />
+                <p className="mt-2 text-sm font-normal font-roboto">
+                    {specialty}
+                </p>
+                <div className="flex items-center">
+                    <img src={HospitalIcon} alt="Hospital Icon" />
+                    <p className="text-sm font-normal font-roboto ms-2 whitespace-nowrap">
+                        {hospital}
                     </p>
-                    <hr />
-                    <p className="font-roboto font-normal text-base mt-2 text-sm md:text-base lg:text-lg">
-                        {specialty}
+                </div>
+                <div className="flex items-center">
+                    <img src={LocationIcon} alt="Location Icon" />
+                    <p className="text-sm font-normal whitespace-normal font-roboto ms-2">
+                        {location}
                     </p>
-                    <div className="flex items-center">
-                        <img src={HospitalIcon} alt="Hospital Icon" />
-                        <p className="font-roboto font-normal text-base ms-2 whitespace-nowrap text-sm md:text-base lg:text-lg">
-                            {hospital}
-                        </p>
-                    </div>
-                    <div className="flex items-center">
-                        <img src={LocationIcon} alt="Location Icon" />
-                        <p className="font-roboto font-normal text-base ms-2 whitespace-normal text-sm md:text-base lg:text-lg">
-                            {location}
-                        </p>
-                    </div>
-                    <div className="flex items-center">
-                        {renderRatingIcon()}
-                        <p className="font-roboto font-normal text-base ms-2 text-sm md:text-base lg:text-lg">
-                            {rating}
-                        </p>
-                        <img className="ms-3" src={LineIcon} alt="Line Icon" />
-                        <p className="font-roboto font-normal text-base flex ms-2 whitespace-nowrap text-sm md:text-base lg:text-lg">
-                            {reviews}
-                        </p>
-                    </div>
+                </div>
+                <div className="flex items-center">
+                    {renderRatingIcon()}
+                    <p className="font-normal font-roboto ms-2">{rating}</p>
+                    <img className="ms-3" src={LineIcon} alt="Line Icon" />
+                    <p className="flex text-sm font-normal font-roboto ms-2 whitespace-nowrap">
+                        {reviews}
+                    </p>
                 </div>
             </div>
         </div>

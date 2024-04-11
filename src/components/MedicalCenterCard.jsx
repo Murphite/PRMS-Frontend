@@ -55,21 +55,13 @@ const MedicalCenterCard = ({
     };
 
     return (
-        <div className="rounded overflow-hidden shadow-lg flex flex-col relative">
-            <img
-                className="w-full"
-                src={isValidURL(imageSrc) ? imageSrc : NoImageAvailable}
-                alt={
-                    isValidURL(imageSrc)
-                        ? "Medical Center"
-                        : "No Image Available"
-                }
-            />
+        <div className="relative flex flex-col overflow-hidden shadow rounded-xl">
+            <img className="w-full" src={imageSrc} />
             {/* Use fallback image if imageSrc is not available */}
             <a href="#!" id="favoriteButton" onClick={handleFavoriteClick}>
                 <div
                     id="favoriteIcon"
-                    className="text-sm absolute top-0 right-0 bg-gray-300 px-4 text-gray-200  h-12 w-12 flex items-center justify-center mt-3 mr-3 hover:bg-white hover:text-gray-600 transition duration-500 ease-in-out"
+                    className="absolute top-0 right-0 flex items-center justify-center w-12 h-12 px-4 mt-3 mr-3 text-sm text-gray-200 transition duration-500 ease-in-out bg-gray-300 hover:bg-white hover:text-gray-600"
                     style={{
                         borderRadius: "100%",
                         border: "1px solid transparent",
@@ -83,18 +75,18 @@ const MedicalCenterCard = ({
                     />
                 </div>
             </a>
-            <div className="px-6 py-4 mb-auto">
+            <div className="px-3 py-4 mb-auto">
                 <div className="flex items-center justify-between">
-                    <p className="font-inter text-lg font-bold mb-2">{name}</p>
+                    <p className="mb-2 text-lg font-bold font-inter">{name}</p>
                 </div>
                 <div className="flex items-center">
                     <img src={LocationIcon} alt="Location Icon" />
-                    <p className="font-roboto font-normal text-base ms-2 whitespace-nowrap">
+                    <p className="text-base font-normal font-roboto ms-1 whitespace-nowrap">
                         {location}
                     </p>
                 </div>
                 <div className="flex items-center">
-                    <p className="font-roboto font-normal text-base whitespace-nowrap">
+                    <p className="text-base font-normal font-roboto whitespace-nowrap">
                         {rating} &nbsp;
                     </p>
                     {[...Array(5)].map((_, index) => (
@@ -109,7 +101,7 @@ const MedicalCenterCard = ({
                             className="w-4 h-auto"
                         />
                     ))}
-                    <p className="ms-3 font-roboto font-normal text-base whitespace-nowrap">
+                    <p className="text-base font-normal ms-3 font-roboto whitespace-nowrap">
                         ({reviews} Reviews)
                     </p>
                 </div>
@@ -121,14 +113,14 @@ const MedicalCenterCard = ({
                     >
                         <div className="flex items-center">
                             <img src={RoutingIcon} alt="Routing Icon" />
-                            <p className="font-roboto font-normal text-base ms-2 whitespace-nowrap">
+                            <p className="text-sm font-normal font-roboto ms-1 whitespace-nowrap">
                                 {convertToKilometers(distance)} km/
                                 {calculateTime(distance)} min
                             </p>
                         </div>
                         <div className="flex items-center">
                             <img src={HospitalIcon} alt="Hospital Icon" />
-                            <p className="font-roboto font-normal text-base ms-2 whitespace-nowrap">
+                            <p className="text-sm font-normal font-roboto ms-1 whitespace-nowrap">
                                 {categories && categories.length > 1
                                     ? properCase(categories[1])
                                     : ""}
