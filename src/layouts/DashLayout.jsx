@@ -4,7 +4,7 @@ import Container from "../components/Container";
 
 const DashLayout = ({ children }) => {
     return (
-        <div className="flex w-full bg-gray-100">
+        <div className="flex w-full min-h-screen bg-gray-50">
             <Sidebar />
 
             <div className="w-full">

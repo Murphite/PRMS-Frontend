@@ -8,7 +8,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import PasswordReset from "../pages/auth/PasswordReset";
 import EmailVerification from "../pages/auth/EmailVerification";
 import ResetPassword from "../pages/auth/ResetPassword";
-import PatientsList from "../pages/dashboard/PatientsList";
+import PatientsList from "../pages/admin/PatientsList";
 import EmailVerificationStatus from "../pages/auth/EmailVerificationStatus";
 import RegularLogin from "../pages/auth/RegularLogin";
 import CreatePatient from "../pages/dashboard/CreatePatient";
@@ -20,6 +20,7 @@ import FindDoctors from "../pages/dashboard/FindDoctors";
 import PhysicianDetails from "../pages/dashboard/PhysicianDetails";
 
 import AdminDashboard from "../pages/admin/Index";
+import Patients from "../pages/admin/Patients";
 
 export default function Router() {
     return (
@@ -40,8 +41,7 @@ export default function Router() {
             /> */}
             <Route path="/login" element={<RegularLogin />} />
             <Route path="/dashboard" element={<DashBoardPage />} />
-            <Route path="/dashboard/patients" element={<PatientsList />} />
-            <Route path="/dashboard/patients/new" element={<CreatePatient />} />
+            {/* <Route path="/dashboard/patients/new" element={<CreatePatient />} /> */}
             <Route
                 path="/dashboard/create-appointment"
                 element={<CreateAppointment />}
@@ -54,8 +54,9 @@ export default function Router() {
             <Route path="/patientMedicalHistory" element={<GetMedical />} />
 
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/patient" element={<ViewPatient />} />
-            <Route path="/admin/patient/:id" element={<ViewPatient />} />
+            <Route path="/admin/patients" element={<PatientsList />} />
+            {/* <Route path="/admin/patients" element={<Patients />} /> */}
+            <Route path="/admin/patients/:id" element={<ViewPatient />} />
         </Routes>
     );
 }

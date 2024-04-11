@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../components/Container";
 import PatientCard from "../../components/PatientCard";
-import DashLayout from "./../../layouts/DashLayout";
 
 import note from "../../assets/vectors/note.svg";
 import plus from "../../assets/vectors/plus.svg";
@@ -13,12 +12,12 @@ import { getPatientDetails } from "../../api/admin/patient";
 import { AppContext } from "../../context/AppContext";
 import { createPrescription } from "../../api/prescription";
 import ShowErrorList from "../../components/ShowErrorList";
+import AdminLayout from "../../layouts/AdminLayout";
 
 const ViewPatient = () => {
     const { id } = useParams();
     const { accessToken } = useContext(AppContext);
     const [patient, setPatient] = useState(null);
-    // const [categories, setCategories] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [data, setData] = useState({
         name: "",
@@ -36,27 +35,7 @@ const ViewPatient = () => {
             setPatient(res.data);
         }
 
-        // async function fetchCategories() {
-        //     // var res = await getCategories();
-        //     // setCategories(res.data);
-        //     setTimeout(() => {
-        //         setCategories([
-        //             {
-        //                 id: "3453",
-        //                 name: "General",
-        //                 img: "https://randomuser.me/api/portraits",
-        //             },
-        //             {
-        //                 id: "344234",
-        //                 name: "Dentistry",
-        //                 img: "https://randomuser.me/api/portraits",
-        //             },
-        //         ]);
-        //     }, 2000);
-        // }
-
         fetchPatient();
-        // fetchCategories();
     }, []);
 
     const handleChange = (e) => {
@@ -79,44 +58,39 @@ const ViewPatient = () => {
     };
 
     return (
-        <DashLayout>
+        <AdminLayout>
             <Container>
-                {/* <div className="flex">
-                    {categories.length > 0 &&
-                        categories.map((category) => (
-                            <div key={category.id}></div>
-                        ))}
-                </div> */}
-
                 {patient !== null ? (
                     <div className="pb-8">
                         <div className="flex justify-center mt-12">
-                            <PatientCard
-                                date={patient.appointmentDate}
-                                startTime={patient.appointmentStartTime}
-                                endTime={patient.appointmentEndTime}
-                                userImg={patient.image}
-                                fullName={patient.fullName}
-                                email={patient.email}
-                                noOfVisits={patient.noOfVisits}
-                            />
+                            <div className="w-96">
+                                <PatientCard
+                                    date={patient.appointmentDate}
+                                    startTime={patient.appointmentStartTime}
+                                    endTime={patient.appointmentEndTime}
+                                    userImg={patient.image}
+                                    fullName={patient.fullName}
+                                    email={patient.email}
+                                    noOfVisits={patient.noOfVisits}
+                                />
+                            </div>
                         </div>
 
-                        <div className="mt-6 flex justify-center w-full">
-                            <div className="w-full lg:w-[50rem] rounded-lg shadow-lg overflow-hidden bg-white px-5 pt-2 pb-5 grid grid-cols-2">
-                                <div>
-                                    <div className="flex mb-2 items-center">
+                        <div className="flex justify-center mt-6 mr-24">
+                            <div className="grid w-full grid-cols-2 gap-5">
+                                <div className="p-5 overflow-hidden bg-white rounded-lg shadow">
+                                    <div className="flex items-center mb-2">
                                         <img
                                             className="w-5"
                                             src={patientProfile}
                                             alt=""
                                         />
-                                        <p className="uppercase font-medium text-xs ml-2">
+                                        <p className="ml-2 text-sm font-medium uppercase">
                                             patient information
                                         </p>
                                     </div>
 
-                                    <div className="mt-2 text-xs space-y-1">
+                                    <div className="mt-2 space-y-1 text-sm">
                                         <div className="flex">
                                             <p className="mr-1 text-gray-400">
                                                 Name:{" "}
@@ -154,19 +128,19 @@ const ViewPatient = () => {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div className="flex mb-2 items-center">
+                                <div className="p-5 overflow-hidden bg-white rounded-lg shadow">
+                                    <div className="flex items-center mb-2">
                                         <img
                                             className="w-5"
                                             src={healthProfile}
                                             alt=""
                                         />
-                                        <p className="uppercase font-medium text-xs ml-2">
+                                        <p className="ml-2 text-sm font-medium uppercase">
                                             Health Profile
                                         </p>
                                     </div>
 
-                                    <div className="mt-2 text-xs space-y-1">
+                                    <div className="mt-2 space-y-1 text-sm">
                                         <div className="flex">
                                             <p className="mr-1 text-gray-400">
                                                 Height:{" "}
@@ -193,24 +167,20 @@ const ViewPatient = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div className="mt-6 flex justify-center w-full">
-                            <div className="w-full lg:w-[50rem] rounded-lg shadow-lg overflow-hidden bg-white px-5 pt-2 pb-5 grid grid-cols-2">
-                                <div>
-                                    <div className="flex mb-2 items-center">
+                                <div className="p-5 overflow-hidden bg-white rounded-lg shadow">
+                                    <div className="flex items-center mb-2">
                                         <img
                                             className="w-5"
                                             src={calendar}
                                             alt=""
                                         />
-                                        <p className="uppercase font-medium text-xs ml-2">
+                                        <p className="ml-2 text-sm font-medium uppercase">
                                             Next Appointment
                                         </p>
                                     </div>
 
-                                    <div className="mt-2 text-xs space-y-1">
+                                    <div className="mt-2 space-y-1 text-sm">
                                         <div className="flex">
                                             <p className="mr-1 text-gray-400">
                                                 Date:{" "}
@@ -247,19 +217,19 @@ const ViewPatient = () => {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div className="flex mb-2 items-center">
+                                <div className="p-5 overflow-hidden bg-white rounded-lg shadow">
+                                    <div className="flex items-center mb-2">
                                         <img
                                             className="w-5"
                                             src={note}
                                             alt=""
                                         />
-                                        <p className="uppercase font-medium text-xs ml-2">
+                                        <p className="ml-2 text-sm font-medium uppercase">
                                             Medical History
                                         </p>
                                     </div>
 
-                                    <div className="mt-2 text-xs space-y-1">
+                                    <div className="mt-2 space-y-1 text-sm">
                                         <div className="flex">
                                             <p className="mr-1 text-gray-400">
                                                 Primary Care Physician:{" "}
@@ -297,9 +267,13 @@ const ViewPatient = () => {
                             </div>
                         </div>
 
+                        {/* <div className="flex justify-center w-full mt-6">
+                            <div className="w-full lg:w-[50rem] rounded-lg shadow-lg overflow-hidden bg-white px-5 pt-2 pb-5 grid grid-cols-2"></div>
+                        </div> */}
+
                         <div className="flex justify-end mt-5">
                             <button
-                                className="flex items-center text-sm"
+                                className="flex items-center text-base"
                                 onClick={() =>
                                     setShowForm((prevState) => !prevState)
                                 }
@@ -324,7 +298,7 @@ const ViewPatient = () => {
                                 <form className="mt-2" onSubmit={submit}>
                                     <div className="mb-2">
                                         <label
-                                            className="block text-sm mb-1"
+                                            className="block mb-1 text-base"
                                             htmlFor="name"
                                         >
                                             {/* <img src={ } alt="" /> */}
@@ -334,7 +308,7 @@ const ViewPatient = () => {
                                             id="name"
                                             name="name"
                                             type="text"
-                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            className="block w-full px-3 py-1 text-base border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
                                             value={data.name}
                                             onChange={handleChange}
                                             required
@@ -342,7 +316,7 @@ const ViewPatient = () => {
                                     </div>
                                     <div className="mb-2">
                                         <label
-                                            className="block text-sm mb-1"
+                                            className="block mb-1 text-base"
                                             htmlFor="dosage"
                                         >
                                             {/* <img src={ } alt="" /> */}
@@ -352,14 +326,14 @@ const ViewPatient = () => {
                                             id="dosage"
                                             name="dosage"
                                             type="text"
-                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            className="block w-full px-3 py-1 text-base border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
                                             value={data.dosage}
                                             onChange={handleChange}
                                         />
                                     </div>
                                     <div className="mb-2">
                                         <label
-                                            className="block text-sm mb-1"
+                                            className="block mb-1 text-base"
                                             htmlFor="diagnosis"
                                         >
                                             {/* <img src={ } alt="" /> */}
@@ -369,14 +343,14 @@ const ViewPatient = () => {
                                             id="diagnosis"
                                             name="diagnosis"
                                             type="text"
-                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            className="block w-full px-3 py-1 text-base border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
                                             value={data.diagnosis}
                                             onChange={handleChange}
                                         />
                                     </div>
                                     <div className="mb-2">
                                         <label
-                                            className="block text-sm mb-1"
+                                            className="block mb-1 text-base"
                                             htmlFor="frequency"
                                         >
                                             {/* <img src={ } alt="" /> */}
@@ -386,7 +360,7 @@ const ViewPatient = () => {
                                             id="frequency"
                                             name="frequency"
                                             type="text"
-                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            className="block w-full px-3 py-1 text-base border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
                                             value={data.frequency}
                                             onChange={handleChange}
                                             required
@@ -394,7 +368,7 @@ const ViewPatient = () => {
                                     </div>
                                     <div className="mb-2">
                                         <label
-                                            className="block text-sm mb-1"
+                                            className="block mb-1 text-base"
                                             htmlFor="duration"
                                         >
                                             {/* <img src={ } alt="" /> */}
@@ -404,7 +378,7 @@ const ViewPatient = () => {
                                             id="duration"
                                             name="duration"
                                             type="text"
-                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            className="block w-full px-3 py-1 text-base border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
                                             value={data.duration}
                                             onChange={handleChange}
                                             required
@@ -412,7 +386,7 @@ const ViewPatient = () => {
                                     </div>
                                     <div className="mb-2">
                                         <label
-                                            className="block text-sm mb-1"
+                                            className="block mb-1 text-base"
                                             htmlFor="instruction"
                                         >
                                             {/* <img src={ } alt="" /> */}
@@ -423,7 +397,7 @@ const ViewPatient = () => {
                                             id="instruction"
                                             name="instruction"
                                             type="text"
-                                            className="block w-full px-3 py-1 text-sm border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
+                                            className="block w-full px-3 py-1 text-base border border-teal-100 rounded-md shadow-sm focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 focus:outline-none"
                                             value={data.instruction}
                                             onChange={handleChange}
                                             required
@@ -433,7 +407,7 @@ const ViewPatient = () => {
                                     <div className="flex justify-end">
                                         <button
                                             type="submit"
-                                            className="bg-teal-500 px-3 inline-flex items-center text-white py-2 rounded-md"
+                                            className="inline-flex items-center px-3 py-2 text-white bg-teal-500 rounded-md"
                                         >
                                             Add Prescription
                                         </button>
@@ -446,7 +420,7 @@ const ViewPatient = () => {
                     <div>Loading...</div>
                 )}
             </Container>
-        </DashLayout>
+        </AdminLayout>
     );
 };
 
