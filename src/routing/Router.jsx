@@ -21,6 +21,7 @@ import PhysicianDetails from "../pages/dashboard/PhysicianDetails";
 
 import AdminDashboard from "../pages/admin/Index";
 import Appointments from "../pages/admin/Appointments";
+import Appointment from "../pages/dashboard/Appointment";
 
 export default function Router() {
     return (
@@ -57,6 +58,7 @@ export default function Router() {
             <Route path="/admin/appointments" element={<Appointments />} />
             <Route path="/admin/patients" element={<PatientsList />} />
             <Route path="/admin/patients/:id" element={<ViewPatient />} />
+            <Route path="/appointments" element={<Appointment/>} />
         </Routes>
     );
 }

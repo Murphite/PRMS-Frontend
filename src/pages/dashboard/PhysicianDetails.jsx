@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPhysicianDetails } from "../../api/physician";
+import { getPhysicianDetails } from "../../api/physicians";
 import { AppContext } from "../../context/AppContext";
 import Container from "../../components/Container";
 import DashLayout from "../../layouts/DashLayout";
@@ -18,6 +18,7 @@ const PhysicianDetails = () => {
         async function fetchPhysician() {
             const res = await getPhysicianDetails(accessToken, id);
             setPhysician(res.data);
+            console.log(res.data);
         }
         fetchPhysician();
     }, []);
