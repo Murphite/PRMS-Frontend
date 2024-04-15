@@ -1,60 +1,15 @@
 import { axiosApi } from "../apiService";
 
-export const Physicianz = async (token) => {
+export const getAppointments = async (token, status = "") => {
     try {
-        const res = await axiosApi.get(`/patient/appointment`, {
+        let url = "/patient/appointment";
+        if (status !== "") url = `${url}?status=${status}`;
+
+        const res = await axiosApi.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-
-        return res.data;
-    } catch (error) {
-        return error;
-    }
-};
-
-export const Upcoming = async (token) => {
-    try {
-        const res = await axiosApi.get(`/patient/appointment?status=upcoming`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        return res.data;
-    } catch (error) {
-        return error;
-    }
-};
-
-export const Cancelled = async (token) => {
-    try {
-        const res = await axiosApi.get(
-            `/patient/appointment?status=cancelled`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            },
-        );
-
-        return res.data;
-    } catch (error) {
-        return error;
-    }
-};
-
-export const Completed = async (token) => {
-    try {
-        const res = await axiosApi.get(
-            `/patient/appointment?status=completed`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            },
-        );
 
         return res.data;
     } catch (error) {
