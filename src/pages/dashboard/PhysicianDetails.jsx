@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getPhysicianDetails } from "../../api/physician";
 import { AppContext } from "../../context/AppContext";
 import Container from "../../components/Container";
@@ -9,14 +9,14 @@ import ReviewerPhoto from "../../assets/images/Reviewer1.png";
 import Rating from "../../assets/vectors/rating.svg";
 
 const PhysicianDetails = () => {
-    const { id } = useParams();
+    const { physicianId } = useParams();
     const { accessToken } = useContext(AppContext);
     const [physician, setPhysician] = useState(null);
     // const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         async function fetchPhysician() {
-            const res = await getPhysicianDetails(accessToken, id);
+            const res = await getPhysicianDetails(accessToken, physicianId);
             setPhysician(res.data);
         }
         fetchPhysician();
@@ -27,7 +27,7 @@ const PhysicianDetails = () => {
             <Container>
                 {physician !== null ? (
                     <div>
-                        <div className="flex justify-center mt-12">
+                        <div className="flex flex-col items-center justify-center mt-12">
                             <PhysicianCard
                                 title={physician.title}
                                 name={physician.name}
@@ -42,6 +42,12 @@ const PhysicianDetails = () => {
                                 averageRating={physician.averageRating}
                                 reviewCount={physician.reviewCount}
                             />
+                            <Link
+                                to={`/dashboard/physician/${physician.physicianUserId}/create-appointment`}
+                                className="w-[21.4rem] py-3 mt-12 block text-center bg-[#009688] text-white rounded-3xl"
+                            >
+                                Book Appointment
+                            </Link>
                         </div>
                         <div className="flex flex-col justify-center mt-4 ml-14 w-full">
                             <p className="font-semibold w-[5.44rem] overflow-hidden">

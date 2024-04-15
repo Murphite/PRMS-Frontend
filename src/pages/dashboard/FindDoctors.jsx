@@ -103,7 +103,9 @@ const FindDoctors = () => {
                 <div className="grid grid-cols-1 grid-rows-1 gap-4 md:grid-cols-2">
                     {filteredPhysicians.map((physician, index) => (
                         <DoctorCard
+                            physicianId={physician.physicianId}
                             key={index}
+                            title={physician.title}
                             name={`${physician.firstName} ${
                                 physician.middleName
                                     ? physician.middleName + " "

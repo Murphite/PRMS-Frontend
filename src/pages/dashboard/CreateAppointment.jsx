@@ -1,11 +1,37 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import nextIcon from "../../assets/vectors/nextBlackIcon.svg";
 import previousIcon from "../../assets/vectors/previousBlackIcon.svg";
 import DashLayout from "../../layouts/DashLayout";
+import { useParams } from "react-router-dom";
+import { getAppointments } from "../../api/dashboard/appointments";
+import { AppContext } from "../../context/AppContext";
 
 export default function CreateAppointment() {
+    const { physicianUserId } = useParams();
+    const { accessToken } = useContext(AppContext);
+
+    const currentDate = dayjs();
+    const [today, setToday] = useState(currentDate);
+
+    const [selectDate, setSelectDate] = useState(currentDate);
+
+    useEffect(() => {
+        async function fetchData() {
+            const res = await getAppointments(
+                accessToken,
+                physicianUserId,
+                selectDate.startOf("day").format("YYYY-MM-DD hh:mm:ss"),
+                selectDate.endOf("day").format("YYYY-MM-DD hh:mm:ss"),
+            );
+
+            console.log(res);
+        }
+
+        fetchData();
+    }, [physicianUserId, selectDate]);
+
     const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
     const months = [
@@ -43,11 +69,6 @@ export default function CreateAppointment() {
         "05.00 PM",
         "05.30 PM",
     ];
-
-    const currentDate = dayjs();
-    const [today, setToday] = useState(currentDate);
-
-    const [selectDate, setSelectDate] = useState(currentDate);
 
     return (
         <DashLayout>
@@ -119,7 +140,7 @@ export default function CreateAppointment() {
                                                     : "",
                                             )}
                                             onClick={() => {
-                                                selectDate(date);
+                                                setSelectDate(date);
                                             }}
                                         >
                                             {date.date()}
