@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { getAppointments } from "../../api/dashboard/appointment";
 import DashLayout from "../../layouts/DashLayout";
+import { useNavigate } from "react-router-dom";
 
 const Appointment = () => {
     const { accessToken } = useContext(AppContext);
     const [physicians, setPhysicians] = useState([]);
     const [status, setStatus] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchData() {
@@ -17,6 +19,9 @@ const Appointment = () => {
         fetchData();
     }, [status]);
 
+    const handleClick = () => {
+        navigate("/dashboard/create-appointment");
+  };
     return (
         <DashLayout>
             <div className=" flex mt-4 space-x-3 cursor-pointer ">
@@ -79,7 +84,7 @@ const Appointment = () => {
                                     {" "}
                                     Cancel
                                 </p>
-                                <p className=" bg-teal-500 text-white rounded-full w-[14rem] h-[2rem]  cursor-pointer text-center py-1  ">
+                                <p className=" bg-teal-500 text-white rounded-full w-[14rem] h-[2rem]  cursor-pointer text-center py-1  " onClick={handleClick}>
                                     {" "}
                                     Reschedule
                                 </p>
