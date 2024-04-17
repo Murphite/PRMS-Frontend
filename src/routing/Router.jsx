@@ -41,7 +41,7 @@ export default function Router() {
             /> */}
             <Route path="/login" element={<RegularLogin />} />
             <Route path="/dashboard" element={<DashBoardPage />} />
-            {/* <Route path="/dashboard/patients/new" element={<CreatePatient />} /> */}
+             <Route path="/dashboard/patients/new" element={<CreatePatient />} />
             <Route
                 path="/dashboard/physician/:physicianUserId/create-appointment"
                 element={<CreateAppointment />}

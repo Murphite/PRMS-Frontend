@@ -77,16 +77,10 @@ const DashBoardPage = () => {
 
                 <div className="flex mt-10 ml-32 space-x-10 ">
                     <div className="cursor-pointer ">
-                        {/* <img
+                        <img
                             src="src/assets/vectors/Frame 1000001042.svg"
                             onClick={"#"}
-                        /> */}
-                        <Link to="/dashboard/patients/new">
-                            <img
-                                src="src/assets/vectors/Frame 1000001042.svg"
-                                alt="Descriptive image alt text" // Add descriptive alt text for accessibility
-                            />
-                        </Link>
+                        />
                     </div>
                     <div className="cursor-pointer ">
                         <img

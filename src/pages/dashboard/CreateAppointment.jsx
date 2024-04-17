@@ -29,7 +29,7 @@ export default function CreateAppointment() {
             console.log(res);
         }
 
-        fetchData();
+        // fetchData();
     }, [physicianUserId, selectDate]);
 
     const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];

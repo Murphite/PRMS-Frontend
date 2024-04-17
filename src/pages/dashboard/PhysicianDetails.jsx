@@ -49,7 +49,7 @@ const PhysicianDetails = () => {
                                 Book Appointment
                             </Link>
                         </div>
-                        <div className="flex flex-col justify-center mt-4 ml-14 w-full">
+                        <div className="flex flex-col justify-center w-full mt-4 ml-14">
                             <p className="font-semibold w-[5.44rem] overflow-hidden">
                                 About me
                             </p>
@@ -57,7 +57,7 @@ const PhysicianDetails = () => {
                                 {physician.about}
                             </p>
                         </div>
-                        <div className="flex flex-col justify-center mt-4 ml-14 w-full">
+                        <div className="flex flex-col justify-center w-full mt-4 ml-14">
                             <p className="font-semibold w-[7.82rem] overflow-hidden">
                                 Working Time
                             </p>
@@ -65,14 +65,14 @@ const PhysicianDetails = () => {
                                 {physician.workingTime}
                             </p>
                         </div>
-                        <div className="flex flex-col justify-center mt-4 ml-14 w-full">
-                            <div className="overflow-hidden flex flex-row">
+                        <div className="flex flex-col justify-center w-full mt-4 ml-14">
+                            <div className="flex flex-row overflow-hidden">
                                 <p className="font-semibold">Reviews</p>
                                 <p className="ml-[51.5rem] overflow-hidden">
                                     See All
                                 </p>
                             </div>
-                            <div className="overflow-hidden flex flex-row mt-2">
+                            <div className="flex flex-row mt-2 overflow-hidden">
                                 <div>
                                     <img src={ReviewerPhoto} alt="" />
                                 </div>
@@ -80,7 +80,7 @@ const PhysicianDetails = () => {
                                     <p className="mt-1 font-medium">
                                         Emily Anderson
                                     </p>
-                                    <div className="pt-2 flex flex-row">
+                                    <div className="flex flex-row pt-2">
                                         <p className="text-xs">
                                             {physician.Rating}
                                         </p>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import CreatePatientForm1 from "../../components/CreatePatientForm1";
@@ -7,11 +7,13 @@ import CreatePatientForm3 from "../../components/CreatePatientForm3";
 import Container from "../../components/Container";
 import { createNewPatient } from "../../api/patient";
 import { AppContext } from "./../../context/AppContext";
+import { getUserDetails } from "../../api/user";
 
 const CreatePatient = () => {
     const { accessToken } = useContext(AppContext);
     const navigate = useNavigate();
     const [formStage, setFormStage] = useState(1);
+
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -37,6 +39,28 @@ const CreatePatient = () => {
         emergencyContactName: "",
         emergencyContactRelationship: "",
     });
+
+    useEffect(() => {
+        async function fetchData() {
+            const res = await getUserDetails(accessToken);
+
+            setData((prevState) => ({
+                ...prevState,
+                firstName: res.data.firstName,
+                lastName: res.data.lastName,
+                email: res.data.email,
+                address: {
+                    ...prevState.address,
+                    street: res.data.address.street,
+                    city: res.data.address.city,
+                    state: res.data.address.state,
+                    country: res.data.address.country,
+                },
+            }));
+        }
+
+        fetchData();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -38,9 +38,12 @@ const RegularLogin = () => {
             return;
         }
 
+        console.log(res.data);
         setAccessToken(res.data.token);
         const decodedToken = jwtDecode(res.data.token);
         if (decodedToken.role === "ADMIN") navigate("/admin");
+        else if (decodedToken.role === "USER" && res.data.patientId === null)
+            navigate("/dashboard/patients/new");
         else navigate("/dashboard");
     };
 
