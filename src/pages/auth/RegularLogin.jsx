@@ -38,14 +38,17 @@ const RegularLogin = () => {
             return;
         }
 
+        console.log(res.data);
         setAccessToken(res.data.token);
         const decodedToken = jwtDecode(res.data.token);
         if (decodedToken.role === "ADMIN") navigate("/admin");
+        else if (decodedToken.role === "USER" && res.data.patientId === null)
+            navigate("/dashboard/patients/new");
         else navigate("/dashboard");
     };
 
     return (
-        <div className="flex flex-col h-screen space-y-5 lg:flex-row">
+        <div className="flex flex-col space-y-5 lg:flex-row">
             <div className=" flex flex-col w-full  space-y-6 bg-[#009688] p-5 lg:space-y-36 lg:flex-col-reverse lg:w-1/2 items-center justify-center h-full">
                 <div className="flex flex-col items-center m  ">
                     <img
