@@ -29,7 +29,7 @@ export default function Router() {
             <Route path="/" element={<Index />} />
 
             <Route path="/login" element={<RegularLogin />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/signup" element={<Register />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin-signup" element={<AdminSignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -45,7 +45,7 @@ export default function Router() {
             {/* <Route path="/dashboard/patients/new" element={<CreatePatient />} /> */}
             <Route path="/dashboard/appointment" element={<Appointment />} />
             <Route
-                path="/dashboard/create-appointment"
+                path="/dashboard/physician/:physicianUserId/create-appointment"
                 element={<CreateAppointment />}
             />
             <Route
@@ -59,6 +59,7 @@ export default function Router() {
             <Route path="/admin/appointments" element={<Appointments />} />
             <Route path="/admin/patients" element={<PatientsList />} />
             <Route path="/admin/patients/:id" element={<ViewPatient />} />
+            <Route path="/dashboard/appointments" element={<Appointment />} />
         </Routes>
     );
 }

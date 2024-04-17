@@ -47,18 +47,18 @@ const RegularLogin = () => {
     return (
         <div className="flex flex-col h-screen space-y-5 lg:flex-row">
             <div className=" flex flex-col w-full  space-y-6 bg-[#009688] p-5 lg:space-y-36 lg:flex-col-reverse lg:w-1/2 items-center justify-center h-full">
-                <div className="flex flex-col items-center ">
+                <div className="flex flex-col items-center m  ">
                     <img
                         src={adminimage}
                         alt="images of doctors"
-                        className="max-w-52 lg:max-w-full lg:pt-12 lg:pb-32"
+                        className="  w-[32rem]"
                     />
                 </div>
-                <div className="flex flex-col items-center space-y-4 text-gray-100 md:max-w-lg">
-                    <h2 className="text-2xl font-bold text-center lg:text-4xl">
+                <div className="flex flex-col items-center text-gray-100 md:max-w-lg mb-10">
+                    <h2 className="text-2xl font-bold text-center lg:text-4xl ">
                         Start Your Wellness Journey!
                     </h2>
-                    <p className="text-center">
+                    <p className="text-center mb-14">
                         Ready for a healthier and happier you? Join us now!
                         Create your account for personalized health insights,
                         activity tracking, nutrition guidance, mental wellness

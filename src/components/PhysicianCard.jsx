@@ -19,7 +19,7 @@ const PhysicianCard = ({
     reviewCount,
 }) => {
     return (
-        <div className="overflow-hidden w-[37.5rem] h-[19.94rem]">
+        <div className="overflow-hidden w-[37.5rem]">
             <div className="bg-white flex flex-row w-[37.5rem] rounded-lg shadow-lg pt-2 pb-2">
                 <img
                     className="w-[6.94rem] aspect-square object-cover ml-2"
@@ -32,7 +32,7 @@ const PhysicianCard = ({
                             <p>{title}</p>
                             <p>{name}</p>
                         </div>
-                        <img className="ml-[20.5rem]" src={loveImg} alt="" />
+                        {/* <img className="ml-[20.5rem]" src={loveImg} alt="" /> */}
                     </div>
                     <div></div>
                     <div className="mt-3">
@@ -84,9 +84,6 @@ const PhysicianCard = ({
                     <p className="text-xs">reviews</p>
                 </div>
             </div>
-            <button className="w-[21.4rem] h-[3rem] mt-4 ml-32 text-center bg-[#009688] text-white rounded-3xl">
-                Book Appointment
-            </button>
         </div>
     );
 };

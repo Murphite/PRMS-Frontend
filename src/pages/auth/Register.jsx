@@ -102,7 +102,7 @@ export default function Register() {
             return;
         }
 
-        navigate("/dashboard");
+        navigate("/login");
     };
 
     return (

@@ -20,7 +20,7 @@ const Appointment = () => {
     }, [status]);
 
     const handleClick = () => {
-        navigate("/dashboard/create-appointment");
+        navigate("/dashboard/physician/:physicianUserId/create-appointment");
   };
     return (
         <DashLayout>
@@ -49,49 +49,53 @@ const Appointment = () => {
                 </p>
             </div>
             <div className=" grid grid-cols-1 grid-rows-1 gap-4 md:grid-cols-2 w-[67rem] mt-10 space-x-4">
-                {physicians &&
-                    physicians.length > 0 &&
-                    physicians.map((physician, index) => (
-                        <div
-                            key={index}
-                            className=" items-center  space-x-3  rounded-lg border "
-                        >
-                            <div className="flex space-x-2  ">
-                                <img
-                                    className="object-cover object-center w-32 rounded-lg aspect-square"
-                                    src={physician.physicianImageUrl}
-                                />
-                                <div className=" mt-3">
-                                    <p className="font-semibold">
-                                        {physician.name}
-                                    </p>
-                                    <p className="text-gray-500 mt-1">
-                                        {physician.physicianMedicalCenter}
-                                    </p>
-                                    <p className="text-gray-500 mt-1">
-                                        {physician.physicianSpeciality}
-                                    </p>
-                                    <p className="text-gray-500 mt-1">
-                                        {physician.physicianAddress}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className=" flex mt-5 space-x-5 justify-center">
-                                <p
-                                    className=" relative bg-gray-200 text-teal-500 rounded-full w-[14rem] h-[2rem]  cursor-pointer text-center justify-center py-1"
-                                    onClick={"#"}
-                                >
-                                    {" "}
-                                    Cancel
-                                </p>
-                                <p className=" bg-teal-500 text-white rounded-full w-[14rem] h-[2rem]  cursor-pointer text-center py-1  " onClick={handleClick}>
-                                    {" "}
-                                    Reschedule
-                                </p>
-                            </div>
-                        </div>
-                    ))}
+            
+    {physicians && physicians.length > 0 ? (
+        physicians.map((physician, index) => (
+            <div
+                key={index}
+                className=" items-center  space-x-3  rounded-lg border "
+            >
+                <div className="flex space-x-2  ">
+                    <img
+                        className="object-cover object-center w-32 rounded-lg aspect-square"
+                        src={physician.physicianImageUrl}
+                    />
+                    <div className=" mt-3">
+                        <p className="font-semibold">
+                            {physician.name}
+                        </p>
+                        <p className="text-gray-500 mt-1">
+                            {physician.physicianMedicalCenter}
+                        </p>
+                        <p className="text-gray-500 mt-1">
+                            {physician.physicianSpeciality}
+                        </p>
+                        <p className="text-gray-500 mt-1">
+                            {physician.physicianAddress}
+                        </p>
+                    </div>
+                </div>
+                <div className=" flex mt-5 space-x-5 justify-center">
+                    <p
+                        className=" relative bg-gray-200 text-teal-500 rounded-full w-[14rem] h-[2rem]  cursor-pointer text-center justify-center py-1"
+                        onClick={"#"}
+                    >
+                        {" "}
+                        Cancel
+                    </p>
+                    <p className=" bg-teal-500 text-white rounded-full w-[14rem] h-[2rem]  cursor-pointer text-center py-1  " onClick={handleClick}>
+                        {" "}
+                        Reschedule
+                    </p>
+                </div>
             </div>
+        ))
+    ) : (
+        <p className=" text-3xl">No appointment yet</p>
+    )}
+</div>
+
         </DashLayout>
     );
 };

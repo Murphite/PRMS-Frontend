@@ -7,9 +7,12 @@ import EmptyStarIcon from "../assets/vectors/find-doc-vectors/EmptyStarIcon.jpg"
 import FavoriteIcon from "../assets/vectors/find-doc-vectors/favorite.svg";
 import FilledFavoriteIcon from "../assets/vectors/find-doc-vectors/favorite-filled.svg";
 import LineIcon from "../assets/vectors/find-doc-vectors/Line.svg";
+import { Link } from "react-router-dom";
 
 const DoctorCard = ({
+    physicianId,
     name,
+    title,
     specialty,
     hospital,
     location,
@@ -58,7 +61,8 @@ const DoctorCard = ({
     };
 
     return (
-        <div
+        <Link
+            to={`/dashboard/physician/${physicianId}`}
             className="relative flex p-3 bg-white border-white rounded-lg shadow border-6 text-surface"
             style={{ position: "relative" }}
         >
@@ -79,7 +83,9 @@ const DoctorCard = ({
             </div>
 
             <div className="flex flex-col leading-9">
-                <p className="font-bold font-inter doctor-name">{name}</p>
+                <p className="font-bold font-inter doctor-name">
+                    {title} {name}
+                </p>
                 <hr />
                 <p className="mt-2 text-sm font-normal font-roboto">
                     {specialty}
@@ -105,7 +111,7 @@ const DoctorCard = ({
                     </p>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
