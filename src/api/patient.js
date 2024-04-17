@@ -1,8 +1,8 @@
 import { axiosApi } from "../api/apiService";
 
-export const getSinglePhysicianDetails = async (token, physicianId) => {
+export const createNewPatient = async (token, data) => {
     try {
-        const res = await axiosApi.get(`/physician/${physicianId}`, {
+        const res = await axiosApi.post(`/patient`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

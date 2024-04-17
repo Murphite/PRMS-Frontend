@@ -106,7 +106,7 @@ export default function Register() {
     };
 
     return (
-        <div className="flex flex-col h-screen space-y-5 lg:flex-row">
+        <div className="flex flex-col space-y-5 lg:flex-row">
             <div className=" flex flex-col w-full  space-y-6 bg-[#009688] p-5 lg:space-y-36 lg:flex-col-reverse lg:w-1/2 items-center justify-center h-full">
                 <div className="flex flex-col items-center ">
                     <img

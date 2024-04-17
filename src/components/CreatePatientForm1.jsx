@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
-import flag from "../../../PRMS-FE/src/assets/images/Group@3x.png";
-import { IoIosArrowDown } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import CustomInput from "./Input";
 
 const CreatePatientForm1 = ({ formData, setFormData, setStage }) => {
-    const [country, setCountry] = useState("");
     const genders = ["Male", "Female", "Others"];
     const [gender, setGender] = useState("");
 
@@ -31,16 +28,9 @@ const CreatePatientForm1 = ({ formData, setFormData, setStage }) => {
         }));
     };
 
-    function handleFormSubmit(e) {
-        e.preventDefault();
-    }
-
     function nextForm() {
-        formData.gender = gender;
-        formData.country = country;
         setStage(2);
     }
-    const navigate = useNavigate();
 
     return (
         <div className="">

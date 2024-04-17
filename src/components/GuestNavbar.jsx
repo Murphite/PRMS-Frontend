@@ -174,7 +174,7 @@ export default function GuestNavbar() {
                         </NavbarItem>
 
                         <NavbarItem>
-                            <Link to="/signup">
+                            <Link to="/register">
                                 <Button
                                     radius="full"
                                     className="text-white shadow-lg bg-gradient-to-tr"

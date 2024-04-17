@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import CreatePatientForm1 from "../../components/CreatePatientForm1";
 import CreatePatientForm2 from "../../components/CreatePatientForm2";
 import CreatePatientForm3 from "../../components/CreatePatientForm3";
 import Container from "../../components/Container";
+import { createNewPatient } from "../../api/patient";
+import { AppContext } from "./../../context/AppContext";
 
 const CreatePatient = () => {
+    const { accessToken } = useContext(AppContext);
+    const navigate = useNavigate();
     const [formStage, setFormStage] = useState(1);
     const [data, setData] = useState({
         firstName: "",
@@ -20,43 +25,32 @@ const CreatePatient = () => {
             state: "",
             country: "",
         },
-        medication: "",
-        dosage: "",
-        frequency: "",
         weight: "",
         height: "",
         bloodGroup: "",
-        heightMeasurement: "",
-        weightMeasurement: "",
-
-        primaryCarePhysician: "",
-        primaryCarePhysicianEmail: "",
-        primaryCarePhysicianPhoneNumber: "",
-        diabetes: false,
-        asthma: false,
-        hypertension: false,
-        other: "",
-        otherName: "",
-        otherRelationship: "",
-        healthHabits: "",
-        alcoholFrequency: "",
-        alcoholDuration: "",
-        physicianCountry: "",
-        otherCountry: "",
-        otherPhoneNumber: "",
+        medications: [],
+        medicalDetails: [],
+        primaryPhysicianName: "",
+        primaryPhysicianEmail: "",
+        primaryPhysicianPhoneNo: "",
+        emergencyContactPhoneNo: "",
+        emergencyContactName: "",
+        emergencyContactRelationship: "",
     });
 
-    console.log(data);
-
-    const [medication, setMedication] = useState({});
-
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(data);
+
+        try {
+            const res = await createNewPatient(accessToken, data);
+            console.log(res);
+
+            if (res.isSuccessful) {
+                navigate("/dashboard");
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -186,14 +180,14 @@ const CreatePatient = () => {
                     {formStage === 2 && (
                         <CreatePatientForm2
                             formData={data}
-                            setFormData={handleChange}
+                            setFormData={setData}
                             setStage={setFormStage}
                         />
                     )}
                     {formStage === 3 && (
                         <CreatePatientForm3
                             formData={data}
-                            setFormData={handleChange}
+                            setFormData={setData}
                             setStage={setFormStage}
                         />
                     )}
