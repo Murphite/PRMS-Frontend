@@ -42,11 +42,12 @@ export default function Router() {
             /> */}
             <Route path="/login" element={<RegularLogin />} />
             <Route path="/dashboard" element={<DashBoardPage />} />
-             <Route path="/dashboard/patients/new" element={<CreatePatient />} />
+            <Route path="/dashboard/patients/new" element={<CreatePatient />} />
             <Route
                 path="/dashboard/physician/:physicianUserId/create-appointment"
                 element={<CreateAppointment />}
             />
+            <Route path="/dashboard/appointments" element={<Appointment />} />
             <Route
                 path="/dashboard/physician/:physicianId"
                 element={<PhysicianDetails />}
@@ -58,7 +59,6 @@ export default function Router() {
             <Route path="/admin/appointments" element={<Appointments />} />
             <Route path="/admin/patients" element={<PatientsList />} />
             <Route path="/admin/patients/:id" element={<ViewPatient />} />
-            <Route path="/dashboard/appointments" element={<Appointment />} />
         </Routes>
     );
 }

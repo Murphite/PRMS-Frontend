@@ -18,7 +18,6 @@ const PhysicianDetails = () => {
         async function fetchPhysician() {
             const res = await getPhysicianDetails(accessToken, physicianId);
             setPhysician(res.data);
-            console.log(res.data);
         }
         fetchPhysician();
     }, []);

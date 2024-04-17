@@ -1,24 +1,26 @@
 import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
- 
+
 import nextIcon from "../../assets/vectors/nextBlackIcon.svg";
 import previousIcon from "../../assets/vectors/previousBlackIcon.svg";
 import DashLayout from "../../layouts/DashLayout";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAppointments } from "../../api/dashboard/appointments";
 import { AppContext } from "../../context/AppContext";
- 
+import { createAppointment } from "../../api/dashboard/appointment";
+
 export default function CreateAppointment() {
     const { physicianUserId } = useParams();
     const { accessToken } = useContext(AppContext);
- 
+    const navigate = useNavigate();
+
     const currentDate = dayjs();
     const [today, setToday] = useState(currentDate);
- 
+
     const [selectDate, setSelectDate] = useState(currentDate);
- 
+
     const [selectTime, setSelectTime] = useState("");
- 
+
     useEffect(() => {
         async function fetchData() {
             const res = await getAppointments(
@@ -27,15 +29,15 @@ export default function CreateAppointment() {
                 selectDate.startOf("day").format("YYYY-MM-DD hh:mm:ss"),
                 selectDate.endOf("day").format("YYYY-MM-DD hh:mm:ss"),
             );
- 
+
             console.log(res);
         }
- 
-        fetchData();
+
+        // fetchData();
     }, [physicianUserId, selectDate]);
- 
+
     const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
- 
+
     const months = [
         "January",
         "February",
@@ -50,7 +52,7 @@ export default function CreateAppointment() {
         "November",
         "December",
     ];
- 
+
     const timeSlot = [
         "09:00 AM",
         "09:30 AM",
@@ -71,10 +73,37 @@ export default function CreateAppointment() {
         "05:00 PM",
         "05:30 PM",
     ];
- 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const [time, period] = selectTime.split(" ");
+        const [hours, minutes] = time.split(":");
+        let date = new Date();
+        let hoursAdjusted =
+            period.toUpperCase() === "PM"
+                ? parseInt(hours) + 12
+                : parseInt(hours);
+        date.setUTCDate(selectDate.date());
+        date.setHours(hoursAdjusted);
+        date.setMinutes(parseInt(minutes));
+
+        const data = {
+            physicianUserId,
+            date: date,
+        };
+        const res = await createAppointment(accessToken, data);
+
+        if (res.IsSuccessful) {
+            alert("Appointment created successfully");
+
+            navigate("/dashboard/appointments");
+        }
+    };
+
     return (
         <DashLayout>
-            <div className="w-full space-y-6 h-auto">
+            <div className="w-full h-auto mb-6 space-y-6">
                 <h1 className="text-xl font-semibold text-gray-900">
                     Select Date
                 </h1>
@@ -104,7 +133,7 @@ export default function CreateAppointment() {
                             />
                         </div>
                     </div>
- 
+
                     <div className="grid grid-cols-7 ">
                         {days.map((day, index) => {
                             return (
@@ -117,7 +146,7 @@ export default function CreateAppointment() {
                             );
                         })}
                     </div>
- 
+
                     <div className="grid grid-cols-7 h-60">
                         {generateDate(today.month(), today.year()).map(
                             (
@@ -171,7 +200,7 @@ export default function CreateAppointment() {
                         )}
                     </div>
                 </div>
- 
+
                 <div className="pt-4 space-y-5">
                     <div>
                         <h2 className="text-xl font-semibold text-gray-900">
@@ -210,21 +239,34 @@ export default function CreateAppointment() {
                         {selectTime}
                     </p>
                 </div>
+
+                {selectTime !== "" && (
+                    <div className="flex justify-center">
+                        <form onSubmit={handleSubmit}>
+                            <button
+                                className="bg-[#009688] py-2 px-8 w-full text-white rounded-full font-[roboto]"
+                                type="submit"
+                            >
+                                Create Appointment
+                            </button>
+                        </form>
+                    </div>
+                )}
             </div>
         </DashLayout>
     );
 }
- 
+
 const generateDate = (month = dayjs().month(), year = dayjs().year()) => {
     const firstDateOfMonth = dayjs().year(year).month(month).startOf("month");
     const lastDateOfMonth = dayjs().year(year).month(month).endOf("month");
- 
+
     const arrayOfDate = [];
- 
+
     // create prefix date
     for (let i = 0; i < firstDateOfMonth.day(); i++) {
         const date = firstDateOfMonth.day(i);
- 
+
         arrayOfDate.push({
             currentMonth: false,
             date,
@@ -232,17 +274,17 @@ const generateDate = (month = dayjs().month(), year = dayjs().year()) => {
             isPast: date.isBefore(dayjs().subtract(1, "day")), // Exclude today
         });
     }
- 
+
     // generate current date
     let remainingDatesInMonth =
         lastDateOfMonth.date() - firstDateOfMonth.date() + 1; // Total dates in the current month
- 
+
     let currentRow = 0;
- 
+
     for (let i = firstDateOfMonth.date(); remainingDatesInMonth > 0; i++) {
         const currentDay = firstDateOfMonth.date(i);
         const isWorkingDay = currentDay.day() !== 0 && currentDay.day() !== 6; // Check if weekday (not Saturday or Sunday)
- 
+
         arrayOfDate.push({
             currentMonth: true,
             date: currentDay,
@@ -253,7 +295,7 @@ const generateDate = (month = dayjs().month(), year = dayjs().year()) => {
             // Today is selectable, past dates are disabled
             isPast: currentDay.isBefore(dayjs().subtract(1, "day")), // Exclude today
         });
- 
+
         // Check if we need to move to the next row after adding this date
         if (arrayOfDate.length % 7 === 0 || i === lastDateOfMonth.date()) {
             remainingDatesInMonth -= Math.min(
@@ -263,7 +305,7 @@ const generateDate = (month = dayjs().month(), year = dayjs().year()) => {
             currentRow++;
         }
     }
- 
+
     // Add padding dates if needed
     const remainingCells = 35 - arrayOfDate.length; // Total cells needed for 7 x 5 grid
     if (remainingCells > 0) {
@@ -277,10 +319,10 @@ const generateDate = (month = dayjs().month(), year = dayjs().year()) => {
             });
         }
     }
- 
+
     return arrayOfDate;
 };
- 
+
 function cn(...classes) {
     return classes.filter(Boolean).join(" ");
 }

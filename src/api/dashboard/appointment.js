@@ -39,9 +39,13 @@ export const getSelectedPhysicianAppointmentList = async (
     }
 };
 
-export const createAppointment = async (data) => {
+export const createAppointment = async (token, data) => {
     try {
-        const res = await axiosApi.post(`/appointment`, data);
+        const res = await axiosApi.post(`/appointment`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
         return res.data;
     } catch (error) {
